@@ -1,13 +1,24 @@
 package com.lingar.SocialEvents.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import com.lingar.SocialEvents.entities.EventMultipleProperty;
+import com.lingar.SocialEvents.entities.EventProperty2;
+import com.lingar.SocialEvents.entities.SocialEvent;
+
 @Component
-public class DatabaseLoader2 implements CommandLineRunner {
+public class DatabaseLoader1 implements CommandLineRunner {
 
 	private final SocialEventRepository repository2;
 	
 	//First get the repository2 of the CRUD
 	@Autowired
-	public DatabaseLoader2(SocialEventRepository repository22) {
+	public DatabaseLoader1(SocialEventRepository repository22) {
 		this.repository2 = repository22;
 		
 	}
@@ -20,8 +31,8 @@ public class DatabaseLoader2 implements CommandLineRunner {
 		
 		//String[] myArray = {"I", "AM", "LINGAR"};
 		
-		//List<String> myArray2 = new ArrayList<String>();
-		//myArray2.add("One");myArray2.add("Two");myArray2.add("Three");
+		List<String> myArray2 = new ArrayList<String>();
+		myArray2.add("One");myArray2.add("Two");myArray2.add("Three");
 		System.out.println("checks ... the general area of dataLoader .  ");
 		
 		//this.repository2.save(new SocialEvent("Crazy Party ", 0, 120, "a" , myArray2));
@@ -29,7 +40,15 @@ public class DatabaseLoader2 implements CommandLineRunner {
 		//EventProperties evProps = new EventProperties(EventPropertiesGenerator.generateList());
 		
 		//this.repository2.save(new SocialEvent("New party " , "amm", 5, 22,  new EventProperties(EventPropertiesGenerator.generateList())));
-		this.repository2.save(new SocialEvent2("trying1", 18, 36 , "Some more word " ));
+		this.repository2.save(new SocialEvent("trying2", 18, 36 , "Some more word ", myArray2 ));
+		
+		SocialEvent sc = new SocialEvent("trying2", 18, 36 , "Some more word ", myArray2 );
+		EventProperty2 ev2 = new EventProperty2("Other entity ");
+		EventMultipleProperty evMu2 = new EventMultipleProperty("ohter entity ");
+		//sc.setEventProperty2(ev2);
+		sc.setEventProperty2(evMu2);
+		this.repository2.save(sc);
+
 		
 		//this.repository2.save(new SocialEvent("Lesson ", 33, 40, "b" , myArray2)); 
 		//myArray2.add("Happy");

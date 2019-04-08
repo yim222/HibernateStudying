@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
@@ -27,16 +29,26 @@ public class SocialEvent {
 	private @Id @GeneratedValue Long socialEventId;
 	private String description, moreValue;
 	private int fromAge, toAge;
+	//String newStr = "I am new ";
+	String newStr32 = "I am new ";
 	//@ElementCollection(targetClass=EventProperty.class)
 	
 	//@OneToOne(cascade=CascadeType.ALL)
 	//@ManyToOne(cascade=CascadeType.ALL)
-	//private EventProperty eventProperty = new EventProperty("something");
+	
+	//@ManyToOne
+	@JoinColumn(name = "eventProperty_id")
+	@Embedded
+	private EventProperty eventProperty = new EventProperty("something");
+	
+	@OneToOne(cascade = CascadeType.ALL)//Here it's nested Entity/Object / 
+	//It's OneToOne because if not it's need to be some sort of collection. U need to do a casade because if not hibernate won't save it. 
+	private EventProperty2 eventProperty2 = new EventProperty2("something entity");
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> myArray; 
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	private EventProperties eventProps;
+	//@OneToOne(cascade=CascadeType.ALL)
+	//private EventProperties eventProps;
 	
 	private @Version @JsonIgnore Long version;
 
@@ -44,13 +56,13 @@ public class SocialEvent {
 
 	private SocialEvent() {}
 	
-	public SocialEvent(String description, String moreValue, int fromAge, int toAge, EventProperties eventProps) {
+	public SocialEvent(String description, String moreValue, int fromAge, int toAge) {
 		super();
 		this.description = description;
 		this.moreValue = moreValue;
 		this.fromAge = fromAge;
 		this.toAge = toAge;
-		this.eventProps = eventProps;
+		
 		
 	}
 
@@ -84,7 +96,7 @@ public class SocialEvent {
 	public String toString() {
 		return "SocialEvent [socialEventId=" + socialEventId + ", description=" + description + ", moreValue="
 				+ moreValue + ", fromAge=" + fromAge + ", toAge=" + toAge + ", myArray=" + myArray + ", eventProps="
-				+ eventProps + ", version=" + version + "]";
+				 + ", version=" + version + "]";
 	}
 	
 	
