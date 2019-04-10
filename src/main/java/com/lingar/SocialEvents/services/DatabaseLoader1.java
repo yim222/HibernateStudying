@@ -66,7 +66,7 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		dbData1 =  singlePropNameRepository.findById(1L);
 		SinglePropName singlePropName4 = dbData1.get();
 		SinglePropValue singlePropValueEl2 = new SinglePropValue(singlePropName4, "Holon" );
-		singlePropValueRepository.save(singlePropValueEl1);singlePropValueRepository.save(singlePropValueEl2);
+		//singlePropValueRepository.save(singlePropValueEl1);singlePropValueRepository.save(singlePropValueEl2);
 		singleValuesList.add(singlePropValueEl1);
 		singleValuesList.add(singlePropValueEl2);
 		
