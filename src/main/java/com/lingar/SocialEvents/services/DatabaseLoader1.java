@@ -9,11 +9,16 @@ import org.springframework.stereotype.Component;
 
 import com.lingar.SocialEvents.entities.EventMultipleProperty;
 import com.lingar.SocialEvents.entities.EventProperty2;
+import com.lingar.SocialEvents.entities.SinglePropName;
+import com.lingar.SocialEvents.entities.SinglePropValue;
 import com.lingar.SocialEvents.entities.SocialEvent;
 
 @Component
 public class DatabaseLoader1 implements CommandLineRunner {
-
+	
+	
+	
+	
 	private final SocialEventRepository repository2;
 	
 	//First get the repository2 of the CRUD
@@ -42,12 +47,35 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		//this.repository2.save(new SocialEvent("New party " , "amm", 5, 22,  new EventProperties(EventPropertiesGenerator.generateList())));
 		this.repository2.save(new SocialEvent("trying2", 18, 36 , "Some more word ", myArray2 ));
 		
-		SocialEvent sc = new SocialEvent("trying2", 18, 36 , "Some more word ", myArray2 );
+		SocialEvent sc = new SocialEvent("trying444", 18, 36 , "Some more word ", myArray2 );
 		EventProperty2 ev2 = new EventProperty2("Other entity ");
 		EventMultipleProperty evMu2 = new EventMultipleProperty("ohter entity ");
 		//sc.setEventProperty2(ev2);
 		sc.setEventProperty2(evMu2);
+		sc.setDescription("new event ");
+		SinglePropName spn = new SinglePropName("Name");
+		
+		SinglePropValue spv = new SinglePropValue();
+		spv.setSinglePropName(spn);
+		spv.setPropValue("My party ");
+		sc.setSinglePropValue(spv);
 		this.repository2.save(sc);
+		
+		
+		SocialEvent sc2 =  new SocialEvent("trying444", 18, 36 , "Some more word ", myArray2 );
+		sc2.setDescription("other new event ");
+		
+		
+		
+		SinglePropValue spv2 = new SinglePropValue();
+		spv2.setSinglePropName(new SinglePropName("address"));// --- > this is work
+		//spv2.setSinglePropName(spn);// --- > this not work..and should work
+		spv2.setPropValue("My Trip ");
+		sc2.setSinglePropValue(spv2);
+		this.repository2.save(sc2);
+		//this.repository2.save()
+		
+		//this.repository2.save(sc);
 
 		
 		//this.repository2.save(new SocialEvent("Lesson ", 33, 40, "b" , myArray2)); 

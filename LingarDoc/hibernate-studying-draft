@@ -1,3 +1,114 @@
+From the new to old
+
+
+Lesson 2 - 
+
+- First handle from the smaller object ...+
+- do propSingle object that will do the db operations as U want. 
+
+
+maybe to :
+- try make field as seperate table  - seems not possible 
+- 
+
+
+Todos 
+
+- Open the workbench and learn how to work with that - V 
+- Plan to make The props single as entities object . 
+
+- Do object of singles props
+- Do a list inside the event
+
+
+
+
+end todos
+
+
+Ok, I am continuing . 
+
+
+Need to start the workbench . But first check if the old way working .
+
+Here is the problem. the old not working. 
+
+"Could not access the privilig". Apparently because the new insallation....
+
+Also it's define it in the started programs, But I don't want Overloading on the pc. But I don't see it in the task manager. 
+
+Ok, Have started it. 
+But don't know what version of mysql it's running, and how to define my project to that .
+
+Seems it's work. U have in the branch option to run queries. How do I can open the shell
+
+Need to understand how to work with that. How do I show the tables;
+
+https://dev.mysql.com/doc/workbench/en/wb-getting-started-tutorial-creating-a-model.html
+
+Maybe U can connect it to the db exist. 
+
+Ok , it's work U can see the db by click the scheme tabe in the bottom and on each tabel right click and select ... 
+
+https://medium.com/@tushar0618/how-to-create-er-diagram-of-a-database-in-mysql-workbench-209fbf63fd03 - that's for see it as diagram
+
+I bielive u can anaylyze too what is connect to what. (or not) But don't do it right now . 
+
+To start from the cmd u need to access it like U did with your db 
+
+https://dev.mysql.com/doc/workbench/en/wb-launching-windows.html
+
+u have a shorcut there :
+I putted it in the important tools. 
+
+But u need to join your old mysql too. 
+
+beacuse U have many tutoiral built on that. - But it's problem because now it's not work - Ok do it in another time ? Hope so
+
+
+
+It not doing auto-refresh and apparently u need a special actions for define it. 
+
+U can do commit transaction in the queries tab - But it's not helping.... 
+
+Ok let move forward. 
+
+
+15:28:13	ALTER TABLE single_props_names ADD CONSTRAINT prop_name UNIQUE (prop_name)	Error Code: 1071. Specified key was too long; max key length is 1000 bytes	0.000 sec
+
+
+Ok so it's not doing by itself the differnt from if exist or not . 
+
+And hibernate mayble make a little ease. But adding more complication. 
+
+SO In this case maybe u need to create a static final array. and from there to create the new values. 
+
+
+U here see at databaseLoader1 the problem ("this not work"). 
+I need to be able to send the same propname to many values. 
+Have tried to make it many to one - not work. 
+
+this is the google search. 
+
+And u need maybe to do a convient area to check the hibernate issues. 
+anyway now we continuing in that. Until we can do a object that contain proper Mutil and sinlgle props list, and pass it to each socialevent
+
+this is the log : 
+
+org.springframework.dao.InvalidDataAccessApiUsageException: detached entity passed to persist: com.lingar.SocialEvents.entities.SinglePropName; nested exception is org.hibernate.PersistentObjectException: detached entity passed to persist: com.lingar.SocialEvents.entities.SinglePropName 
+
+
+
+
+
+
+
+
+
+***********************************
+
+Lesson 1- 
+
 In this project we include Hibernate by pom.xml , and with Spring. 
 We config it with annotations in the code. 
 
@@ -57,7 +168,7 @@ defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/H
   BUT I want to know how to create it as seperate entity. 
   And U gonna do it on the next time. 
   
-  U here 
+  
   
   - First - pass by the old documnet and project about hibernate, and understand it. - All it unorganized and need a diving. Now it's the ordered 
   Summary. 
@@ -86,7 +197,7 @@ defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/H
    
    cannot simultaneously fetch multiple bags: [com.lingar.SocialEvents.entities.SocialEvent.myArray, com.lingar.SocialEvents.entities.EventMultipleProperty.propsList]
   
-  U here
+  
   
   Ok We success many things today. 
   Next u need to replan the DB structure, and oop way things working. 

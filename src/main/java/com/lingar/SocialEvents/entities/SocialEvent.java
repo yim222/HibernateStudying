@@ -11,7 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.Version;
+
+import org.assertj.core.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,16 +28,22 @@ import lombok.Data;
 //It cuts down on the boilerplate.
 @Entity ///@Entity(name = "sss")
 public class SocialEvent {
+	/*
+	//@OrderColumn
+	static SinglePropName[] a = {	
+			new SinglePropName("name"),
+			new SinglePropName("tel")
+	};
+	*/
+	//public static ArrayList<SinglePropName> staticList =	
+			
+			
 	
 	private @Id @GeneratedValue Long socialEventId;
 	private String description, moreValue;
 	private int fromAge, toAge;
-	//String newStr = "I am new ";
 	String newStr32 = "I am new ";
-	//@ElementCollection(targetClass=EventProperty.class)
 	
-	//@OneToOne(cascade=CascadeType.ALL)
-	//@ManyToOne(cascade=CascadeType.ALL)
 	
 	//@ManyToOne
 	@JoinColumn(name = "eventProperty_id")
@@ -47,8 +56,14 @@ public class SocialEvent {
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> myArray; 
 	
-	//@OneToOne(cascade=CascadeType.ALL)
-	//private EventProperties eventProps;
+	@OneToOne(cascade = CascadeType.ALL)
+	Car car = new Car("honda", "Izhar");
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private SinglePropValue singlePropValue = null;//new SinglePropValue("name", "lingar event");
+	
+	//@OneToOne(cascade = CascadeType.ALL)
+	//private SinglePropValue singlePropValue2 = new SinglePropValue("name2", "lingar event2");
 	
 	private @Version @JsonIgnore Long version;
 

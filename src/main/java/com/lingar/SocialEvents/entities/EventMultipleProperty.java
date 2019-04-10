@@ -22,6 +22,7 @@ public class EventMultipleProperty extends EventProperty2{
 	String[] specialValue2 = {"I am child in the array " , "I am 2 "};
 	@ElementCollection
 	private List<String> propsList = new ArrayList<String>();
+	public EventMultipleProperty(){}
 	public EventMultipleProperty(String s){
 		super (s);
 		propsList.addAll(Arrays.asList(
