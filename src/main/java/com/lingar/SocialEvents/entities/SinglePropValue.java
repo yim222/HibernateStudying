@@ -26,7 +26,7 @@ public class SinglePropValue {
     
      (cascade = CascadeType.ALL)
  */
-	@OneToOne (fetch = FetchType.EAGER, cascade =  CascadeType.ALL)
+	@OneToOne //(fetch = FetchType.EAGER, cascade =  CascadeType.ALL)
 	private SinglePropName singlePropName;
 	
 	
@@ -39,6 +39,14 @@ public class SinglePropValue {
 		this.singlePropName = new SinglePropName(propName);
 		this.propValue = propValue;
 	}
+	public SinglePropValue(SinglePropName singlePropName, String propValue) {
+		super();
+		this.singlePropName = singlePropName;
+		
+		this.propValue = propValue;
+	}
+	
+	
 	
 	
 	
