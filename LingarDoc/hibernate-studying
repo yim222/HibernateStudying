@@ -2,4 +2,17 @@ Hibernate Studying - Main
 
 Lesson 2 - 
 
-In this lesson - ...
+In this lesson - We have Study 
+
+-That If u want flexibilty with the entities flow - U need to do repositories to each of them. 
+- After U do it U don't need to do casading in the nested Entities . 
+- If u want to use entity that exist - U need to get it from the DB . 
+
+
+How to understand this ? 
+
+- See the new Repositories I did in the package. And pass on Dataloader carefully. It's not a lot. 
+- Follow the explantion there, and DONT forget to change the unique field , and also - match the ID"S if necessay  .
+
+
+:)

@@ -10,11 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.OrderColumn;
 import javax.persistence.Version;
-
-import org.assertj.core.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -64,6 +62,7 @@ public class SocialEvent {
 	
 	//@OneToOne(cascade = CascadeType.ALL)
 	//private SinglePropValue singlePropValue2 = new SinglePropValue("name2", "lingar event2");
+	//@OneToMany(cascade = CascadeType.ALL)- U can do it with that and not save before. But right now I save before. 
 	@ElementCollection
 	private List<SinglePropValue> singleValuesList = new ArrayList<>();
 
