@@ -64,6 +64,9 @@ public class SocialEvent {
 	
 	//@OneToOne(cascade = CascadeType.ALL)
 	//private SinglePropValue singlePropValue2 = new SinglePropValue("name2", "lingar event2");
+	@ElementCollection
+	private List<SinglePropValue> singleValuesList = new ArrayList<>();
+
 	
 	private @Version @JsonIgnore Long version;
 
@@ -71,12 +74,13 @@ public class SocialEvent {
 
 	private SocialEvent() {}
 	
-	public SocialEvent(String description, String moreValue, int fromAge, int toAge) {
+	public SocialEvent(String description, String moreValue, int fromAge, int toAge, List<SinglePropValue> singleValuesList) {
 		super();
 		this.description = description;
 		this.moreValue = moreValue;
 		this.fromAge = fromAge;
 		this.toAge = toAge;
+		this.singleValuesList = singleValuesList;
 		
 		
 	}
