@@ -24,3 +24,7 @@
 /.nb-gradle/
 /build/
 /node_modules/
+
+
+#application.propertiess s
+src/main/resources/application.properties
