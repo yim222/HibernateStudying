@@ -1,18 +1,22 @@
 Hibernate Studying - Main
 
-Lesson 2 - 
+Lesson 3 - 
 
-In this lesson - We have Study 
+In this lesson - 
 
--That If u want flexibilty with the entities flow - U need to do repositories to each of them. 
-- After U do it U don't need to do casading in the nested Entities . 
-- If u want to use entity that exist - U need to get it from the DB . 
+We create a service to create and pass Entities to others in organize and clean way . 
 
+- See the "entitiesService". 
 
-How to understand this ? 
+We need that singlePropName will be unique , so we create an initial entities of that. 
+Then we generate in the service a method that get Map<String, String> values of the values u want (suppose to be passed
+to a "SocialEvent") and generate from that the wanted array with the "exist" propNames entities. 
 
-- See the new Repositories I did in the package. And pass on Dataloader carefully. It's not a lot. 
-- Follow the explantion there, and DONT forget to change the unique field , and also - match the ID"S if necessay  .
+Finally we create from that in the DataLoader1 , a new Social event. 
 
+So if u want to create new SocEvent just change those row in the class and restart : 
 
-:)
+singlePropsValues.put("name", "Shirley Games");
+singlePropsValues.put("address", "Kefar Saba");
+
+- Trying to make a component server that I can use it as I want by invocation . 

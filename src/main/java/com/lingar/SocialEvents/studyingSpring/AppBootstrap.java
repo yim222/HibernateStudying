@@ -6,7 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.lingar.SocialEvents.SocialEventsTrying1Application;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class AppBootstrap {
     public static void main(String[] args) {
 		SpringApplication.run(AppBootstrap.class, args);
