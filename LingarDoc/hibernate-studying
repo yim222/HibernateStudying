@@ -1,22 +1,3 @@
 Hibernate Studying - Main
 
-Lesson 3 - 
-
-In this lesson - 
-
-We create a service to create and pass Entities to others in organize and clean way . 
-
-- See the "entitiesService". 
-
-We need that singlePropName will be unique , so we create an initial entities of that. 
-Then we generate in the service a method that get Map<String, String> values of the values u want (suppose to be passed
-to a "SocialEvent") and generate from that the wanted array with the "exist" propNames entities. 
-
-Finally we create from that in the DataLoader1 , a new Social event. 
-
-So if u want to create new SocEvent just change those row in the class and restart : 
-
-singlePropsValues.put("name", "Shirley Games");
-singlePropsValues.put("address", "Kefar Saba");
-
-- Trying to make a component server that I can use it as I want by invocation . 
+Lesson 4 -  
