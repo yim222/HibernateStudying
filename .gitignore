@@ -26,5 +26,5 @@
 /node_modules/
 
 
-#application.propertiess 
+#application.propertiess s
 src/main/resources/application.properties
