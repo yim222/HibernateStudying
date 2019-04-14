@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.lingar.SocialEvents.entities.SinglePropName;
 import com.lingar.SocialEvents.entities.SinglePropValue;
+import com.lingar.SocialEvents.entities.SocialEvent;
 
 @Service
 public class EntitiesService {
@@ -105,4 +106,13 @@ public class EntitiesService {
 		System.out.println("All Entities saved. ");
 		
 	}
+
+	public void createSocialEvent(Map<String, String> values){
+		
+		List<SinglePropValue> singlePropValues = generateSingleValuesList(values);
+		SocialEvent socialEvent = new SocialEvent("NA", "NA", 3, 4, singlePropValues);
+		socialEventRepository.save(socialEvent);
+		
+	}
+
 }

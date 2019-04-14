@@ -3,15 +3,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,6 +27,7 @@ import lombok.Data;
 @Data //A Project Lombok annotation to autogenerate getters, setters, constructors, toString, hash, equals, and other things.
 //It cuts down on the boilerplate.
 @Entity ///@Entity(name = "sss")
+@Table(name = "social_events")
 public class SocialEvent {
 	/*
 	//@OrderColumn
@@ -37,7 +40,16 @@ public class SocialEvent {
 			
 			
 	
-	private @Id @GeneratedValue Long socialEventId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)//SO the genration will be in each entity seperate 
+	private Long id;
+	/* Have tried to generate UUID but it's makes probelms. maybe in the future 
+	@Id 
+	@Column(length = 70)
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	@GeneratedValue
+	private String id;	
+	*/
 	private String description, moreValue;
 	private int fromAge, toAge;
 	String newStr32 = "I am new ";
@@ -64,22 +76,23 @@ public class SocialEvent {
 	//private SinglePropValue singlePropValue2 = new SinglePropValue("name2", "lingar event2");
 	//@OneToMany(cascade = CascadeType.ALL)- U can do it with that and not save before. But right now I save before. 
 	@ElementCollection
-	private List<SinglePropValue> singleValuesList = new ArrayList<>();
+	@CollectionTable(name="social_events_single_props_values")
+	private List<SinglePropValue> singlePropsValuesList = new ArrayList<>();
 
 	
 	private @Version @JsonIgnore Long version;
 
-	
+	 
 
 	private SocialEvent() {}
 	
-	public SocialEvent(String description, String moreValue, int fromAge, int toAge, List<SinglePropValue> singleValuesList) {
+	public SocialEvent(String description, String moreValue, int fromAge, int toAge, List<SinglePropValue> singlePropsValuesList) {
 		super();
 		this.description = description;
 		this.moreValue = moreValue;
 		this.fromAge = fromAge;
 		this.toAge = toAge;
-		this.singleValuesList = singleValuesList;
+		this.singlePropsValuesList = singlePropsValuesList;
 		
 		
 	}
@@ -110,9 +123,9 @@ public class SocialEvent {
 		this.myArray = myArray2; 
 	}
 
-	@Override
+	@Override 
 	public String toString() {
-		return "SocialEvent [socialEventId=" + socialEventId + ", description=" + description + ", moreValue="
+		return "SocialEvent [socialEventId=" + id + ", description=" + description + ", moreValue="
 				+ moreValue + ", fromAge=" + fromAge + ", toAge=" + toAge + ", myArray=" + myArray + ", eventProps="
 				 + ", version=" + version + "]";
 	}

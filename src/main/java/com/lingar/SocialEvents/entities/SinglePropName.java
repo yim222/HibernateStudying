@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,7 +15,9 @@ import lombok.Data;
 //@Embeddable
 @Table(name = "single_props_names")
 public class SinglePropName {
-	private @Id @GeneratedValue Long eventPropertyId;
+	private @Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)//SO the genration will be in each entity seperate 
+	Long id;
 	
 	
 

@@ -162,7 +162,7 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		System.out.println("singlePropName11 = \n" + singlePropName11 + "\n ???");
 		SinglePropName singlePropName12 = singlePropsMapList.get("name");
 		System.out.println("singlePropName12 = \n" + singlePropName12 + "\n ???");
-		System.out.println(singlePropName12.getEventPropertyId());
+		System.out.println(singlePropName12.getId());
 		
 		System.out.println("Now from the service : ");
 		
@@ -183,6 +183,11 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		socialEventRepository.save(socialEvent1);
 		//Check the db for seeing that.
 		
+		System.out.println("Use in the social evnent generator  : ");
+		singlePropsValues.put("name", "Trip in Pesach");
+		singlePropsValues.put("address", "Western wall");
+		
+		entitiesService.createSocialEvent(singlePropsValues);
 		
 		
 

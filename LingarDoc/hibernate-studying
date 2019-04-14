@@ -1,3 +1,7 @@
 Hibernate Studying - Main
 
 Lesson 4 -  
+
+- u can see how I changed the talbes names, and make the ID generator uniqe to each table. 
+- The UUID issue have Placed aside because it generates a lot of coming issues like save it and generate and more. 
+ 

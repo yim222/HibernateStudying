@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -15,7 +16,9 @@ import lombok.Data;
 //@Embeddable
 @Table(name = "single_props_values")
 public class SinglePropValue {
-	private @Id @GeneratedValue Long eventPropertyId;
+	private @Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)//SO the genration will be in each entity seperate 
+	Long id;
 	/*
 	 * 
 	 	cascade = {
