@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.lingar.SocialEvents.entities.MultiPropName;
+import com.lingar.SocialEvents.entities.MultiPropValue;
 import com.lingar.SocialEvents.entities.SinglePropName;
 import com.lingar.SocialEvents.entities.SinglePropValue;
 import com.lingar.SocialEvents.entities.SocialEvent;
@@ -25,13 +27,17 @@ public class DatabaseLoader1 implements CommandLineRunner {
 	private final SocialEventRepository socialEventRepository;
 	private final SinglePropNameRepository singlePropNameRepository;
 	private final SinglePropValueRepository singlePropValueRepository;
+	private final MultiPropNameRepository multiPropNameRepository;
+	private final MultiPropValueRepository multiPropValueRepository;
 	
 	
 	//First get the repository2 of the CRUD
 	@Autowired
 	public DatabaseLoader1(SocialEventRepository repository22,
 			SinglePropNameRepository singlePropNameRepository,
-			SinglePropValueRepository singlePropValueRepository
+			SinglePropValueRepository singlePropValueRepository,
+			MultiPropNameRepository multiPropNameRepository,
+			MultiPropValueRepository multiPropValueRepository
 			
 			
 			) {
@@ -39,6 +45,8 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		this.socialEventRepository = repository22;
 		this.singlePropNameRepository = singlePropNameRepository;
 		this.singlePropValueRepository = singlePropValueRepository;
+		this.multiPropNameRepository = multiPropNameRepository;
+		this.multiPropValueRepository = multiPropValueRepository;
 		
 	}
 
@@ -189,7 +197,52 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		
 		entitiesService.createSocialEvent(singlePropsValues);
 		
+		System.out.println("Trying create Multi prop");
 		
+		MultiPropName multiPropName = new MultiPropName("Event-Type");
+		List <String> multiPropValues = new ArrayList<String>();
+		multiPropValues.add("Trip");
+		multiPropValues.add("Party");
+		multiPropValues.add("Lesson");
+		multiPropNameRepository.save(multiPropName);
+		MultiPropValue multiPropValue = new MultiPropValue(multiPropName, multiPropValues);
+		multiPropValueRepository.save(multiPropValue);
+		
+		
+		//adding one more
+		
+
+		MultiPropName multiPropName2 = new MultiPropName("jewLvl");
+		List <String> multiPropValues2 = new ArrayList<String>();
+		multiPropValues2.add("Shabbat");
+		multiPropValues2.add("Later Shabbat");
+		multiPropValues2.add("type3");
+		multiPropNameRepository.save(multiPropName2);
+		MultiPropValue multiPropValue2 = new MultiPropValue(multiPropName2, multiPropValues2);
+		multiPropValueRepository.save(multiPropValue2);
+		List<MultiPropValue> someMultiProps = new ArrayList<>();
+		someMultiProps.add(multiPropValue);
+		someMultiProps.add(multiPropValue2);
+		List<SinglePropValue> singleValuesList3 = entitiesService.generateSingleValuesList(singlePropsValues);
+		SocialEvent socialEvent2 = new SocialEvent("desc","bla", 3, 4,  singleValuesList3,someMultiProps);
+		socialEventRepository.save(socialEvent2);
+		
+		
+		MultiPropName multiPropName3 = new MultiPropName("jewLvl");
+		List <String> multiPropValues3 = new ArrayList<String>();
+		multiPropValues3.add("Shabbat");
+		multiPropValues3.add("Later Shabbat");
+		multiPropValues3.add("type3");
+		multiPropNameRepository.save(multiPropName3);
+		MultiPropValue multiPropValue3 = new MultiPropValue(multiPropName3, multiPropValues3);
+		multiPropValueRepository.save(multiPropValue3);
+		List<MultiPropValue> someMultiProps2 = new ArrayList<>();
+		
+		someMultiProps2.add(multiPropValue);
+		someMultiProps2.add(multiPropValue3);
+		List<SinglePropValue> singleValuesList4 = entitiesService.generateSingleValuesList(singlePropsValues);
+		SocialEvent socialEvent3 = new SocialEvent("desc22","bla", 3, 4,  singleValuesList4,someMultiProps2);
+		//socialEventRepository.save(socialEvent3);
 
 		
 		

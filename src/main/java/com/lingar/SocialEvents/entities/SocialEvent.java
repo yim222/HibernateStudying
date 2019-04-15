@@ -78,6 +78,11 @@ public class SocialEvent {
 	@ElementCollection
 	@CollectionTable(name="social_events_single_props_values")
 	private List<SinglePropValue> singlePropsValuesList = new ArrayList<>();
+	
+	//Trying to add 2 Multi's 
+	@ElementCollection
+	@CollectionTable(name="social_events_multi_props_values")
+	private List<MultiPropValue> multiPropsValuesList = new ArrayList<>();
 
 	
 	private @Version @JsonIgnore Long version;
@@ -86,7 +91,8 @@ public class SocialEvent {
 
 	private SocialEvent() {}
 	
-	public SocialEvent(String description, String moreValue, int fromAge, int toAge, List<SinglePropValue> singlePropsValuesList) {
+	public SocialEvent(String description, String moreValue, int fromAge, int toAge, List<SinglePropValue> singlePropsValuesList
+			) {
 		super();
 		this.description = description;
 		this.moreValue = moreValue;
@@ -94,8 +100,26 @@ public class SocialEvent {
 		this.toAge = toAge;
 		this.singlePropsValuesList = singlePropsValuesList;
 		
+
+		
 		
 	}
+	
+	//constructor for the multi prop
+	public SocialEvent(String description, String moreValue, int fromAge, int toAge, List<SinglePropValue> singlePropsValuesList
+			, List<MultiPropValue> multiPropsValuesList) {
+		super();
+		this.description = description;
+		this.moreValue = moreValue;
+		this.fromAge = fromAge;
+		this.toAge = toAge;
+		this.singlePropsValuesList = singlePropsValuesList;
+		this.multiPropsValuesList = multiPropsValuesList;
+
+		
+		
+	}
+
 
 
 	public SocialEvent( String description, int fromAge, int toAge, String moreValue, List<String> myArray) {
