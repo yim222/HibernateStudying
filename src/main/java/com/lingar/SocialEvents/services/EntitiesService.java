@@ -1,14 +1,18 @@
 package com.lingar.SocialEvents.services;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lingar.SocialEvents.entities.LingarPropName;
+import com.lingar.SocialEvents.entities.LingarPropValue;
 import com.lingar.SocialEvents.entities.SinglePropName;
 import com.lingar.SocialEvents.entities.SinglePropValue;
 import com.lingar.SocialEvents.entities.SocialEvent;
@@ -18,6 +22,9 @@ public class EntitiesService {
 	private final SocialEventRepository socialEventRepository;
 	private final SinglePropNameRepository singlePropNameRepository;
 	private final SinglePropValueRepository singlePropValueRepository;
+	private final LingarPropNameRepository lingarPropNameRepository;
+	private final LingarPropValueRepository lingarPropValueRepository;
+
 	
 	//List of the contant properties
 	public final String[] SINGLE_PROPS_VALUES = {"name", "address"};
@@ -25,13 +32,17 @@ public class EntitiesService {
 	@Autowired //The default of what's happen when this is created. 
 	public EntitiesService(SocialEventRepository socialEventRepository,
 			SinglePropNameRepository singlePropNameRepository,
-			SinglePropValueRepository singlePropValueRepository
+			SinglePropValueRepository singlePropValueRepository,
+			LingarPropNameRepository lingarPropNameRepository,
+			LingarPropValueRepository lingarPropValueRepository
 			){
 		
 		System.out.println("hello I am EntitiesService");
 		this.socialEventRepository = socialEventRepository;
 		this.singlePropNameRepository = singlePropNameRepository;
 		this.singlePropValueRepository = singlePropValueRepository;
+		this.lingarPropNameRepository = lingarPropNameRepository;
+		this.lingarPropValueRepository = lingarPropValueRepository;
 		
 		
 	}
@@ -114,5 +125,59 @@ public class EntitiesService {
 		socialEventRepository.save(socialEvent);
 		
 	}
+	
+	public void trying1(){
+		
+		//A list for work on and assign the right values
+		List<LingarPropValue> lingarValuesList = new ArrayList<>();
+		List<LingarPropValue> lingarValuesList2 = new ArrayList<>();
+		
+		Set<LingarPropValue> lingarValuesSet = new HashSet<LingarPropValue>();
+		Set<LingarPropValue> lingarValuesSet2 = new HashSet<LingarPropValue>();
 
+
+		LingarPropName lingarPropName1 = new LingarPropName("EventTypeLingar");
+		lingarPropNameRepository.save(lingarPropName1);
+		LingarPropValue lingarPropValue1 = new LingarPropValue(lingarPropName1, "lingar party ");
+		LingarPropValue lingarPropValue2 = new LingarPropValue(lingarPropName1, "lingar trip ");
+		lingarValuesList.add(lingarPropValue1);
+		lingarValuesList.add(lingarPropValue2);
+		
+		lingarValuesSet.add(lingarPropValue1);
+		lingarValuesSet.add(lingarPropValue2);
+
+
+		lingarPropValueRepository.saveAll(lingarValuesList);
+		///saving to event
+		SocialEvent s1 = new SocialEvent();
+		s1.setDescription("lingar event 1");
+		//s1.setLingarValuesList(lingarValuesList);lingarValuesSet
+		s1.setLingarValuesList(lingarValuesSet);
+		socialEventRepository.save(s1);
+		
+		
+		//saving another event		
+		SocialEvent s2 = new SocialEvent();
+		s2.setDescription("lingar event 2");
+		s2.setLingarValuesList(lingarValuesSet);
+		//s2.setLingarValuesList(lingarValuesList);
+		//socialEventRepository.save(s2); - here it's make problem 
+		s2.setLingarValuesList(lingarValuesSet);
+		socialEventRepository.save(s2);
+		
+		
+		LingarPropName lingarPropName2 = new LingarPropName("AreaLingar");
+		lingarPropNameRepository.save(lingarPropName2);
+		LingarPropValue lingarPropValue3 = new LingarPropValue(lingarPropName2, "lingar north ");
+		LingarPropValue lingarPropValue4 = new LingarPropValue(lingarPropName2, "lingar south ");
+		lingarPropValueRepository.save(lingarPropValue3);
+		lingarPropValueRepository.save(lingarPropValue4);
+
+		lingarValuesSet2.add(lingarPropValue3);
+		lingarValuesSet2.add(lingarPropValue4);
+		
+		
+
+		
+	}
 }

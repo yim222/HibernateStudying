@@ -31,6 +31,9 @@ public class DatabaseLoader1 implements CommandLineRunner {
 	private final MultiPropNameRepository multiPropNameRepository;
 	private final MultiPropValueRepository multiPropValueRepository;
 	private final MultiPropLvl2ValueRepository multiPropLvl2ValueRepository;
+	private final LingarPropNameRepository lingarPropNameRepository;
+	private final LingarPropValueRepository lingarPropValueRepository;
+
 	
 	//First get the repository2 of the CRUD
 	@Autowired
@@ -39,7 +42,9 @@ public class DatabaseLoader1 implements CommandLineRunner {
 			SinglePropValueRepository singlePropValueRepository,
 			MultiPropNameRepository multiPropNameRepository,
 			MultiPropValueRepository multiPropValueRepository,
-			MultiPropLvl2ValueRepository multiPropLvl2ValueRepository
+			MultiPropLvl2ValueRepository multiPropLvl2ValueRepository,
+			LingarPropNameRepository lingarPropNameRepository,
+			LingarPropValueRepository lingarPropValueRepository
 			
 			) {
 		//We create Repositoris to each entity - if U want a full control on the using. 
@@ -49,6 +54,8 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		this.multiPropNameRepository = multiPropNameRepository;
 		this.multiPropValueRepository = multiPropValueRepository;
 		this.multiPropLvl2ValueRepository = multiPropLvl2ValueRepository;
+		this.lingarPropNameRepository = lingarPropNameRepository;
+		this.lingarPropValueRepository = lingarPropValueRepository;
 		
 	}
 
@@ -138,7 +145,9 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		
 		EntitiesService entitiesService = new EntitiesService(socialEventRepository,
 				singlePropNameRepository,
-				singlePropValueRepository);
+				singlePropValueRepository,
+				lingarPropNameRepository,
+				lingarPropValueRepository);
 		
 		
 		System.out.println("Trying to create Initial Data \n It's to run just once So I am comment it for now (u can do a condition) ");
@@ -328,7 +337,7 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		//lvl2Values.add(new MultiPropLvl2Value("kkk"));
 		//lvl2Values.add(new MultiPropLvl2Value("jjj"));
 
-		
+		entitiesService.trying1();
 		
 
 

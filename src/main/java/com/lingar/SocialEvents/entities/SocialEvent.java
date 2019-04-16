@@ -1,6 +1,8 @@
 package com.lingar.SocialEvents.entities;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -9,9 +11,9 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -78,6 +80,13 @@ public class SocialEvent {
 	@ElementCollection
 	@CollectionTable(name="social_events_single_props_values")
 	private List<SinglePropValue> singlePropsValuesList = new ArrayList<>();
+	
+	@ManyToMany//trying to solve the problem 
+	//@ElementCollection
+	//@CollectionTable(name="social_events_lingar_values222" ,  joinColumns=@JoinColumn(name="lingar_id")   ) //This is the problem that's not need to be unique 
+	//List<LingarPropValue> lingarValuesList = new ArrayList<>();
+	Set<LingarPropValue> lingarValuesList = new HashSet<LingarPropValue>();
+
 	
 	//Trying to add 2 Multi's 
 	@ElementCollection
