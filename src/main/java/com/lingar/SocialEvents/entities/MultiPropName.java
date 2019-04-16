@@ -16,7 +16,7 @@ import lombok.Data;
 @Table(name = "multi_props_names")
 public class MultiPropName {
 	private @Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)//SO the genration will be in each entity seperate 
+	@GeneratedValue//(strategy = GenerationType.IDENTITY)//SO the genration will be in each entity seperate 
 	Long id;
 	
 	

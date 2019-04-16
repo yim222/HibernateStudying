@@ -17,7 +17,7 @@ import lombok.Data;
 @Table(name = "single_props_values")
 public class SinglePropValue {
 	private @Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)//SO the genration will be in each entity seperate 
+	@GeneratedValue//(strategy = GenerationType.IDENTITY)//SO the genration will be in each entity seperate 
 	Long id;
 	/*
 	 * 

@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.lingar.SocialEvents.entities.MultiPropLvl1Value;
+import com.lingar.SocialEvents.entities.MultiPropLvl2Value;
 import com.lingar.SocialEvents.entities.MultiPropName;
-import com.lingar.SocialEvents.entities.MultiPropValue;
 import com.lingar.SocialEvents.entities.SinglePropName;
 import com.lingar.SocialEvents.entities.SinglePropValue;
 import com.lingar.SocialEvents.entities.SocialEvent;
@@ -29,7 +30,7 @@ public class DatabaseLoader1 implements CommandLineRunner {
 	private final SinglePropValueRepository singlePropValueRepository;
 	private final MultiPropNameRepository multiPropNameRepository;
 	private final MultiPropValueRepository multiPropValueRepository;
-	
+	private final MultiPropLvl2ValueRepository multiPropLvl2ValueRepository;
 	
 	//First get the repository2 of the CRUD
 	@Autowired
@@ -37,8 +38,8 @@ public class DatabaseLoader1 implements CommandLineRunner {
 			SinglePropNameRepository singlePropNameRepository,
 			SinglePropValueRepository singlePropValueRepository,
 			MultiPropNameRepository multiPropNameRepository,
-			MultiPropValueRepository multiPropValueRepository
-			
+			MultiPropValueRepository multiPropValueRepository,
+			MultiPropLvl2ValueRepository multiPropLvl2ValueRepository
 			
 			) {
 		//We create Repositoris to each entity - if U want a full control on the using. 
@@ -47,6 +48,7 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		this.singlePropValueRepository = singlePropValueRepository;
 		this.multiPropNameRepository = multiPropNameRepository;
 		this.multiPropValueRepository = multiPropValueRepository;
+		this.multiPropLvl2ValueRepository = multiPropLvl2ValueRepository;
 		
 	}
 
@@ -188,7 +190,7 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		SocialEvent socialEvent1 = new SocialEvent("desc","bla", 3, 4,  singleValuesList);
 		
 		//save it 
-		socialEventRepository.save(socialEvent1);
+		//socialEventRepository.save(socialEvent1);
 		//Check the db for seeing that.
 		
 		System.out.println("Use in the social evnent generator  : ");
@@ -199,13 +201,91 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		
 		System.out.println("Trying create Multi prop");
 		
+		
+		//lvl2Values.add(new MultiPropLvl2Value("kkk"));
+		//lvl2Values.add(new MultiPropLvl2Value("jjj"));
+		MultiPropName multiPropName = new MultiPropName("EventType");
+		MultiPropName multiPropName2 = new MultiPropName("area");
+		multiPropNameRepository.save(multiPropName);
+		multiPropNameRepository.save(multiPropName2);
+
+		List <String> multiPropValues = new ArrayList<String>();
+		multiPropValues.add("Trip");
+		multiPropValues.add("Party");
+		multiPropValues.add("Lesson");
+		multiPropNameRepository.save(multiPropName);
+		
+		///Create new list for the lvl2 values
+		List<MultiPropLvl2Value> lvl2Values = new ArrayList<>();
+		List<MultiPropLvl2Value> lvl2Values2 = new ArrayList<>();
+		List<MultiPropLvl2Value> lvl2Values3 = new ArrayList<>();
+
+
+		MultiPropLvl2Value ma = new MultiPropLvl2Value("kkk");
+		MultiPropLvl2Value mb = new MultiPropLvl2Value("jjj"); 
+		multiPropLvl2ValueRepository.save(ma);
+		multiPropLvl2ValueRepository.save(mb);
+		MultiPropLvl2Value mc = new MultiPropLvl2Value("ccc");
+		MultiPropLvl2Value md = new MultiPropLvl2Value("ddd"); 
+		//multiPropLvl2ValueRepository.save(ma);
+		//multiPropLvl2ValueRepository.save(mb);
+		multiPropLvl2ValueRepository.save(mc);
+		multiPropLvl2ValueRepository.save(md);
+		List<MultiPropLvl1Value> multiPropsValuesList = new ArrayList<>();
+		
+
+		
+		lvl2Values.add(ma);
+		lvl2Values.add(mb);
+		
+		lvl2Values2.add(mc);
+		lvl2Values2.add(md);
+		
+		MultiPropLvl1Value multiPropValue = new MultiPropLvl1Value(multiPropName, multiPropValues,lvl2Values);
+		MultiPropLvl1Value multiPropValue2 = new MultiPropLvl1Value(multiPropName2, multiPropValues,lvl2Values2);
+		multiPropValueRepository.save(multiPropValue);
+		multiPropValueRepository.save(multiPropValue2);
+
+		
+		
+		multiPropsValuesList.add(multiPropValue);
+		multiPropsValuesList.add(multiPropValue2);
+		
+		
+
+		//multiPropValueRepository.save(multiPropValue);
+		SocialEvent socialEvent = new SocialEvent("ttt", "sss", 5, 6, singleValuesList, multiPropsValuesList);
+		socialEventRepository.save(socialEvent);
+		
+		
+		//trying to mix different the lv2 value for more event
+		
+		lvl2Values3.add(ma);
+		lvl2Values3.add(md);
+		
+		//Need to do a new multpiproplvl1? 
+		List<MultiPropLvl1Value> multiPropsValuesList2 = new ArrayList<>();
+		MultiPropLvl1Value multiPropValue3 = new MultiPropLvl1Value(multiPropName, multiPropValues,lvl2Values3);
+		multiPropValueRepository.save(multiPropValue3);//->he problem
+		multiPropsValuesList2.add(multiPropValue3);
+
+		SocialEvent socialEvent3 = new SocialEvent();
+		//socialEvent3.setSinglePropsValuesList(singleValuesList);--> This parameter cause the duplicate problem
+		socialEvent3.setDescription("new event");
+		socialEvent3.setMultiPropsValuesList(multiPropsValuesList2);
+		socialEventRepository.save(socialEvent3);
+		
+		
+
+		
+		/*
 		MultiPropName multiPropName = new MultiPropName("Event-Type");
 		List <String> multiPropValues = new ArrayList<String>();
 		multiPropValues.add("Trip");
 		multiPropValues.add("Party");
 		multiPropValues.add("Lesson");
 		multiPropNameRepository.save(multiPropName);
-		MultiPropValue multiPropValue = new MultiPropValue(multiPropName, multiPropValues);
+		MultiPropLvl1Value multiPropValue = new MultiPropLvl1Value(multiPropName, multiPropValues);
 		multiPropValueRepository.save(multiPropValue);
 		
 		
@@ -218,9 +298,9 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		multiPropValues2.add("Later Shabbat");
 		multiPropValues2.add("type3");
 		multiPropNameRepository.save(multiPropName2);
-		MultiPropValue multiPropValue2 = new MultiPropValue(multiPropName2, multiPropValues2);
+		MultiPropLvl1Value multiPropValue2 = new MultiPropLvl1Value(multiPropName2, multiPropValues2);
 		multiPropValueRepository.save(multiPropValue2);
-		List<MultiPropValue> someMultiProps = new ArrayList<>();
+		List<MultiPropLvl1Value> someMultiProps = new ArrayList<>();
 		someMultiProps.add(multiPropValue);
 		someMultiProps.add(multiPropValue2);
 		List<SinglePropValue> singleValuesList3 = entitiesService.generateSingleValuesList(singlePropsValues);
@@ -234,15 +314,19 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		multiPropValues3.add("Later Shabbat");
 		multiPropValues3.add("type3");
 		multiPropNameRepository.save(multiPropName3);
-		MultiPropValue multiPropValue3 = new MultiPropValue(multiPropName3, multiPropValues3);
+		MultiPropLvl1Value multiPropValue3 = new MultiPropLvl1Value(multiPropName3, multiPropValues3);
 		multiPropValueRepository.save(multiPropValue3);
-		List<MultiPropValue> someMultiProps2 = new ArrayList<>();
+		List<MultiPropLvl1Value> someMultiProps2 = new ArrayList<>();
 		
 		someMultiProps2.add(multiPropValue);
 		someMultiProps2.add(multiPropValue3);
 		List<SinglePropValue> singleValuesList4 = entitiesService.generateSingleValuesList(singlePropsValues);
 		SocialEvent socialEvent3 = new SocialEvent("desc22","bla", 3, 4,  singleValuesList4,someMultiProps2);
 		//socialEventRepository.save(socialEvent3);
+		
+		*/
+		//lvl2Values.add(new MultiPropLvl2Value("kkk"));
+		//lvl2Values.add(new MultiPropLvl2Value("jjj"));
 
 		
 		

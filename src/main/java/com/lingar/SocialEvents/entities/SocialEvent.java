@@ -41,7 +41,7 @@ public class SocialEvent {
 			
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)//SO the genration will be in each entity seperate 
+	@GeneratedValue//(strategy = GenerationType.IDENTITY)//SO the genration will be in each entity seperate 
 	private Long id;
 	/* Have tried to generate UUID but it's makes probelms. maybe in the future 
 	@Id 
@@ -82,14 +82,14 @@ public class SocialEvent {
 	//Trying to add 2 Multi's 
 	@ElementCollection
 	@CollectionTable(name="social_events_multi_props_values")
-	private List<MultiPropValue> multiPropsValuesList = new ArrayList<>();
+	private List<MultiPropLvl1Value> multiPropsValuesList = new ArrayList<>();
 
 	
 	private @Version @JsonIgnore Long version;
 
 	 
 
-	private SocialEvent() {}
+	public SocialEvent() {}
 	
 	public SocialEvent(String description, String moreValue, int fromAge, int toAge, List<SinglePropValue> singlePropsValuesList
 			) {
@@ -107,7 +107,7 @@ public class SocialEvent {
 	
 	//constructor for the multi prop
 	public SocialEvent(String description, String moreValue, int fromAge, int toAge, List<SinglePropValue> singlePropsValuesList
-			, List<MultiPropValue> multiPropsValuesList) {
+			, List<MultiPropLvl1Value> multiPropsValuesList) {
 		super();
 		this.description = description;
 		this.moreValue = moreValue;
