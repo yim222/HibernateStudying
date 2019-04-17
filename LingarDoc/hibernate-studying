@@ -2,6 +2,5 @@ Hibernate Studying - Main
 
 Lesson 5 -  
 
-- Now I did the MultiValues list (lingar values). 
-The @ElementCollection was not good. It's now saving the entities and each value has its name. @ManyToMany did the work .
+...
  
