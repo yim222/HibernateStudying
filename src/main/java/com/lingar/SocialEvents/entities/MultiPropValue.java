@@ -13,27 +13,27 @@ import lombok.Data;
 @Data
 @Entity
 //@Embeddable
-@Table(name = "lingar_props_values")
-public class LingarPropValue {
+@Table(name = "multi_props_values")
+public class MultiPropValue {
 	private @Id 
 	@GeneratedValue//(strategy = GenerationType.IDENTITY)//SO the genration will be in each entity seperate 
 	Long id;
 	@OneToOne //was @oneToOne. Here is the problem ? 
-	private LingarPropName lingarPropName;
+	private MultiPropName MultiPropName;
 	
 	
 
 	
 	String propValue;
 	
-	public LingarPropValue(){}
-	public LingarPropValue(String propName, String propValue) {
-		this.lingarPropName = new LingarPropName(propName);
+	public MultiPropValue(){}
+	public MultiPropValue(String propName, String propValue) {
+		this.MultiPropName = new MultiPropName(propName);
 		this.propValue = propValue;
 	}
-	public LingarPropValue(LingarPropName lingarPropName, String propValue) {
+	public MultiPropValue(MultiPropName multiPropName, String propValue) {
 		super();
-		this.lingarPropName = lingarPropName;
+		this.MultiPropName = multiPropName;
 		
 		this.propValue = propValue;
 	}

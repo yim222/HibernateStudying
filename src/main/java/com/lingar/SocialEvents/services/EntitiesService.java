@@ -11,8 +11,8 @@ import java.util.TreeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lingar.SocialEvents.entities.LingarPropName;
-import com.lingar.SocialEvents.entities.LingarPropValue;
+import com.lingar.SocialEvents.entities.MultiPropName;
+import com.lingar.SocialEvents.entities.MultiPropValue;
 import com.lingar.SocialEvents.entities.SinglePropName;
 import com.lingar.SocialEvents.entities.SinglePropValue;
 import com.lingar.SocialEvents.entities.SocialEvent;
@@ -22,8 +22,8 @@ public class EntitiesService {
 	private final SocialEventRepository socialEventRepository;
 	private final SinglePropNameRepository singlePropNameRepository;
 	private final SinglePropValueRepository singlePropValueRepository;
-	private final LingarPropNameRepository lingarPropNameRepository;
-	private final LingarPropValueRepository lingarPropValueRepository;
+	private final MultiPropNameRepository multiPropNameRepository;
+	private final MultiPropValueRepository multiPropValueRepository;
 
 	
 	//List of the contant properties
@@ -33,16 +33,16 @@ public class EntitiesService {
 	public EntitiesService(SocialEventRepository socialEventRepository,
 			SinglePropNameRepository singlePropNameRepository,
 			SinglePropValueRepository singlePropValueRepository,
-			LingarPropNameRepository lingarPropNameRepository,
-			LingarPropValueRepository lingarPropValueRepository
+			MultiPropNameRepository multiPropNameRepository,
+			MultiPropValueRepository multiPropValueRepository
 			){
 		
 		System.out.println("hello I am EntitiesService");
 		this.socialEventRepository = socialEventRepository;
 		this.singlePropNameRepository = singlePropNameRepository;
 		this.singlePropValueRepository = singlePropValueRepository;
-		this.lingarPropNameRepository = lingarPropNameRepository;
-		this.lingarPropValueRepository = lingarPropValueRepository;
+		this.multiPropNameRepository = multiPropNameRepository;
+		this.multiPropValueRepository = multiPropValueRepository;
 		
 		
 	}
@@ -121,7 +121,8 @@ public class EntitiesService {
 	public void createSocialEvent(Map<String, String> values){
 		
 		List<SinglePropValue> singlePropValues = generateSingleValuesList(values);
-		SocialEvent socialEvent = new SocialEvent("NA", "NA", 3, 4, singlePropValues);
+		SocialEvent socialEvent = new SocialEvent();
+		socialEvent.setSinglePropsValuesList(singlePropValues);
 		socialEventRepository.save(socialEvent);
 		
 	}
@@ -129,64 +130,64 @@ public class EntitiesService {
 	public void trying1(){
 		
 		//A list for work on and assign the right values
-		List<LingarPropValue> lingarValuesList = new ArrayList<>();
-		List<LingarPropValue> lingarValuesList2 = new ArrayList<>();
+		List<MultiPropValue> multiValuesList = new ArrayList<>();
+		List<MultiPropValue> multiValuesList2 = new ArrayList<>();
 		
-		Set<LingarPropValue> lingarValuesSet = new HashSet<LingarPropValue>();
-		Set<LingarPropValue> lingarValuesSet2 = new HashSet<LingarPropValue>();
+		Set<MultiPropValue> multiValuesSet = new HashSet<MultiPropValue>();
+		Set<MultiPropValue> multiValuesSet2 = new HashSet<MultiPropValue>();
 
 
-		LingarPropName lingarPropName1 = new LingarPropName("EventTypeLingar");
-		lingarPropNameRepository.save(lingarPropName1);
-		LingarPropValue lingarPropValue1 = new LingarPropValue(lingarPropName1, "lingar party ");
-		LingarPropValue lingarPropValue2 = new LingarPropValue(lingarPropName1, "lingar trip ");
-		lingarValuesList.add(lingarPropValue1);
-		lingarValuesList.add(lingarPropValue2);
+		MultiPropName multiPropName1 = new MultiPropName("EventTypeMulti");
+		multiPropNameRepository.save(multiPropName1);
+		MultiPropValue multiPropValue1 = new MultiPropValue(multiPropName1, "multi party ");
+		MultiPropValue multiPropValue2 = new MultiPropValue(multiPropName1, "multi trip ");
+		multiValuesList.add(multiPropValue1);
+		multiValuesList.add(multiPropValue2);
 		
-		lingarValuesSet.add(lingarPropValue1);
-		lingarValuesSet.add(lingarPropValue2);
+		multiValuesSet.add(multiPropValue1);
+		multiValuesSet.add(multiPropValue2);
 
 
-		lingarPropValueRepository.saveAll(lingarValuesList);
+		multiPropValueRepository.saveAll(multiValuesList);
 		///saving to event
 		SocialEvent s1 = new SocialEvent();
-		s1.setDescription("lingar event 1");
-		//s1.setLingarValuesList(lingarValuesList);lingarValuesSet
-		s1.setLingarValuesList(lingarValuesSet);
+		s1.setLingarComment("multi event 1");
+		//s1.setMultiValuesList(multiValuesList);multiValuesSet
+		s1.setLingarValuesList(multiValuesSet);
 		socialEventRepository.save(s1);
 		
 		
 		//saving another event		
 		SocialEvent s2 = new SocialEvent();
-		s2.setDescription("lingar event 2");
-		s2.setLingarValuesList(lingarValuesSet);
-		//s2.setLingarValuesList(lingarValuesList);
+		s2.setLingarComment("multi event 2");
+		s2.setLingarValuesList(multiValuesSet);
+		//s2.setMultiValuesList(multiValuesList);
 		//socialEventRepository.save(s2); - here it's make problem 
-		s2.setLingarValuesList(lingarValuesSet);
+		s2.setLingarValuesList(multiValuesSet);
 		socialEventRepository.save(s2);
 		
 		
-		LingarPropName lingarPropName2 = new LingarPropName("AreaLingar");
-		lingarPropNameRepository.save(lingarPropName2);
-		LingarPropValue lingarPropValue3 = new LingarPropValue(lingarPropName2, "lingar north ");
-		LingarPropValue lingarPropValue4 = new LingarPropValue(lingarPropName2, "lingar south ");
-		lingarPropValueRepository.save(lingarPropValue3);
-		lingarPropValueRepository.save(lingarPropValue4);
+		MultiPropName multiPropName2 = new MultiPropName("AreaMulti");
+		multiPropNameRepository.save(multiPropName2);
+		MultiPropValue multiPropValue3 = new MultiPropValue(multiPropName2, "multi north ");
+		MultiPropValue multiPropValue4 = new MultiPropValue(multiPropName2, "multi south ");
+		multiPropValueRepository.save(multiPropValue3);
+		multiPropValueRepository.save(multiPropValue4);
 
-		lingarValuesSet2.add(lingarPropValue3);
-		lingarValuesSet2.add(lingarPropValue4);
+		multiValuesSet2.add(multiPropValue3);
+		multiValuesSet2.add(multiPropValue4);
 		
 		SocialEvent s3 = new SocialEvent();
-		s3.setDescription("lingar event 3");
-		s3.setLingarValuesList(lingarValuesSet2);
+		s3.setLingarComment("multi event 3");
+		s3.setLingarValuesList(multiValuesSet2);
 		socialEventRepository.save(s3);
 		
 		//Trying with Set of SEt
-		lingarValuesSet2.addAll(lingarValuesSet);
-		System.out.println(lingarValuesSet2);
+		multiValuesSet2.addAll(multiValuesSet);
+		System.out.println(multiValuesSet2);
 		SocialEvent s4 = new SocialEvent();
-		s4.setDescription("lingar event 4");
-		s4.setLingarValuesList(lingarValuesSet2);
+		s4.setLingarComment("multi event 4");
+		s4.setLingarValuesList(multiValuesSet2);
 		socialEventRepository.save(s4);
 	}
 }

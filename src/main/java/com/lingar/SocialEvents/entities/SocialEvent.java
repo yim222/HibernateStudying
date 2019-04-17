@@ -31,89 +31,36 @@ import lombok.Data;
 @Entity ///@Entity(name = "sss")
 @Table(name = "social_events")
 public class SocialEvent {
-	/*
-	//@OrderColumn
-	static SinglePropName[] a = {	
-			new SinglePropName("name"),
-			new SinglePropName("tel")
-	};
-	*/
-	//public static ArrayList<SinglePropName> staticList =	
-			
-			
+	
 	
 	@Id
-	@GeneratedValue//(strategy = GenerationType.IDENTITY)//SO the genration will be in each entity seperate 
+	@GeneratedValue//(strategy = GenerationType.IDENTITY)//SO the genration will be in each entity seperate - I remove it since affraid its make problem (not sure But don't have time to check)
 	private Long id;
-	/* Have tried to generate UUID but it's makes probelms. maybe in the future 
-	@Id 
-	@Column(length = 70)
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	@GeneratedValue
-	private String id;	
-	*/
-	private String description, moreValue;
-	private int fromAge, toAge;
-	String newStr32 = "I am new ";
 	
-	
-	//@ManyToOne
-	@JoinColumn(name = "eventProperty_id")
-	@Embedded
-	private EventProperty eventProperty = new EventProperty("something");
-	
-	@OneToOne(cascade = CascadeType.ALL)//Here it's nested Entity/Object / 
-	//It's OneToOne because if not it's need to be some sort of collection. U need to do a casade because if not hibernate won't save it. 
-	private EventProperty2 eventProperty2 = new EventProperty2("something entity");
-	@ElementCollection(fetch = FetchType.EAGER)
-	private List<String> myArray; 
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	Car car = new Car("honda", "Izhar");
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private SinglePropValue singlePropValue = null;//new SinglePropValue("name", "lingar event");
-	
-	//@OneToOne(cascade = CascadeType.ALL)
-	//private SinglePropValue singlePropValue2 = new SinglePropValue("name2", "lingar event2");
-	//@OneToMany(cascade = CascadeType.ALL)- U can do it with that and not save before. But right now I save before. 
+	//For my testing comment
+	private String lingarComment = "No Comment";
+	private int fromAge = 0, toAge = 120;
+		
+	//List of single props values
 	@ElementCollection
 	@CollectionTable(name="social_events_single_props_values")
 	private List<SinglePropValue> singlePropsValuesList = new ArrayList<>();
 	
+	//List(set) of Multi prop Values
 	@ManyToMany//trying to solve the problem 
-	//@ElementCollection
-	//@CollectionTable(name="social_events_lingar_values222" ,  joinColumns=@JoinColumn(name="lingar_id")   ) //This is the problem that's not need to be unique 
-	//List<LingarPropValue> lingarValuesList = new ArrayList<>();
-	Set<LingarPropValue> lingarValuesList = new HashSet<LingarPropValue>();
-	/* Trying bu leave it now
-	@ManyToMany//trying to solve the problem 
-	//@ElementCollection
-	@CollectionTable(name="social_events_lingar_all_values"  ) //This is the problem that's not need to be unique 
-	//List<LingarPropValue> lingarValuesList = new ArrayList<>();
-	
-	Set<
-	Set<LingarPropValue>
-	
-	> lingarValuesAllLists = new HashSet<Set<LingarPropValue>>();
-	*/
-	//Trying to add 2 Multi's 
-	@ElementCollection
-	@CollectionTable(name="social_events_multi_props_values")
-	private List<MultiPropLvl1Value> multiPropsValuesList = new ArrayList<>();
-
-	
+	@CollectionTable(name="social_events_multi_values")
+	private Set<MultiPropValue> lingarValuesList = new HashSet<MultiPropValue>();
+		
 	private @Version @JsonIgnore Long version;
 
 	 
 
 	public SocialEvent() {}
 	
-	public SocialEvent(String description, String moreValue, int fromAge, int toAge, List<SinglePropValue> singlePropsValuesList
+	public SocialEvent(String description,int fromAge, int toAge, List<SinglePropValue> singlePropsValuesList
 			) {
 		super();
-		this.description = description;
-		this.moreValue = moreValue;
+		this.lingarComment = description;
 		this.fromAge = fromAge;
 		this.toAge = toAge;
 		this.singlePropsValuesList = singlePropsValuesList;
@@ -122,55 +69,8 @@ public class SocialEvent {
 		
 		
 	}
+
 	
-	//constructor for the multi prop
-	public SocialEvent(String description, String moreValue, int fromAge, int toAge, List<SinglePropValue> singlePropsValuesList
-			, List<MultiPropLvl1Value> multiPropsValuesList) {
-		super();
-		this.description = description;
-		this.moreValue = moreValue;
-		this.fromAge = fromAge;
-		this.toAge = toAge;
-		this.singlePropsValuesList = singlePropsValuesList;
-		this.multiPropsValuesList = multiPropsValuesList;
-
-		
-		
-	}
-
-
-
-	public SocialEvent( String description, int fromAge, int toAge, String moreValue, List<String> myArray) {
-		
-		this.description = description;
-		this.fromAge = fromAge;
-		this.toAge = toAge;
-		this.moreValue = moreValue;
-		//eventProperty = new EventProperyMutiValues("something");
-		
-		
-		this.myArray = myArray; 
-	}
-	
-	//trying
-	public SocialEvent( String description, int fromAge, int toAge, String moreValue) {
-		
-		this.description = description;
-		this.fromAge = fromAge;
-		this.toAge = toAge;
-		this.moreValue = moreValue;
-		
-		 List<String> myArray2 = new ArrayList<String>();
-		 myArray2.add("no values");
-		this.myArray = myArray2; 
-	}
-
-	@Override 
-	public String toString() {
-		return "SocialEvent [socialEventId=" + id + ", description=" + description + ", moreValue="
-				+ moreValue + ", fromAge=" + fromAge + ", toAge=" + toAge + ", myArray=" + myArray + ", eventProps="
-				 + ", version=" + version + "]";
-	}
 	
 	
 }

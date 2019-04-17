@@ -20,14 +20,14 @@ public class MultiPropName {
 	Long id;
 	
 	
-	
-	@Column(length = 32/*, unique = true*/)//U must define length for set it Unique
-	String propName;
+
+	@Column//(length = 32, unique = true)//U must define length for set it Unique - first implement support for unique then do it unique
+	String multiName;
 	
 	public MultiPropName(){}
-	public MultiPropName(String propName) {
+	public MultiPropName(String multiName) {
 		
-		this.propName = propName;
+		this.multiName = multiName;
 	}
 
 	
