@@ -86,8 +86,17 @@ public class SocialEvent {
 	//@CollectionTable(name="social_events_lingar_values222" ,  joinColumns=@JoinColumn(name="lingar_id")   ) //This is the problem that's not need to be unique 
 	//List<LingarPropValue> lingarValuesList = new ArrayList<>();
 	Set<LingarPropValue> lingarValuesList = new HashSet<LingarPropValue>();
-
+	/* Trying bu leave it now
+	@ManyToMany//trying to solve the problem 
+	//@ElementCollection
+	@CollectionTable(name="social_events_lingar_all_values"  ) //This is the problem that's not need to be unique 
+	//List<LingarPropValue> lingarValuesList = new ArrayList<>();
 	
+	Set<
+	Set<LingarPropValue>
+	
+	> lingarValuesAllLists = new HashSet<Set<LingarPropValue>>();
+	*/
 	//Trying to add 2 Multi's 
 	@ElementCollection
 	@CollectionTable(name="social_events_multi_props_values")

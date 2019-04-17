@@ -1,7 +1,7 @@
 Hibernate Studying - Main
 
-Lesson 4 -  
+Lesson 5 -  
 
-- u can see how I changed the talbes names, and make the ID generator uniqe to each table. 
-- The UUID issue have Placed aside because it generates a lot of coming issues like save it and generate and more. 
+- Now I did the MultiValues list (lingar values). 
+The @ElementCollection was not good. It's now saving the entities and each value has its name. @ManyToMany did the work .
  

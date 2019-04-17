@@ -176,8 +176,17 @@ public class EntitiesService {
 		lingarValuesSet2.add(lingarPropValue3);
 		lingarValuesSet2.add(lingarPropValue4);
 		
+		SocialEvent s3 = new SocialEvent();
+		s3.setDescription("lingar event 3");
+		s3.setLingarValuesList(lingarValuesSet2);
+		socialEventRepository.save(s3);
 		
-
-		
+		//Trying with Set of SEt
+		lingarValuesSet2.addAll(lingarValuesSet);
+		System.out.println(lingarValuesSet2);
+		SocialEvent s4 = new SocialEvent();
+		s4.setDescription("lingar event 4");
+		s4.setLingarValuesList(lingarValuesSet2);
+		socialEventRepository.save(s4);
 	}
 }
