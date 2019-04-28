@@ -1,6 +1,7 @@
 package com.lingar.SocialEvents.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -87,7 +89,7 @@ public class EntitiesService {
 		    //Get the current value
 		    String propValue = entry.getValue();
 		    
-		    //Assign them both
+		    //Assign them both (creating the new value //in the multi u need to check if that exist also. 
 		    SinglePropValue singlePropValue = new SinglePropValue(singlePropName, propValue);
 		  //save it to database
             singlePropValueRepository.save(singlePropValue);
@@ -103,6 +105,98 @@ public class EntitiesService {
 		
 	}
 	
+	
+	//Methood for generate from Map<String, List<String> > values 
+	//for pass it to social event. 
+	public Set<MultiPropValue> generateMultiValuesList(Map<String, List<String>> values){
+		
+		System.out.println("check generateMultiValuesList");
+		
+		//Data for testing - suppose to came from parameters
+		Map<String, List<String>> values2 = new HashMap<>();
+		List<String> nestedValues2 = new ArrayList<>();
+		nestedValues2.add("multi trip");
+		nestedValues2.add("simple trip");
+		nestedValues2.add("lecture");
+				
+		//AreaMulti
+		values2.put("EventTypeMulti", nestedValues2);
+		
+		//-End of testing
+		
+		
+		//Preparation works:
+		//create Set<MultiPropValue>  multiPropValues that will contain the Values
+		Set<MultiPropValue>  multiPropValues = new HashSet<>();
+		
+		//Get all the MultiPropNames from the DB 
+		Iterator <MultiPropName> allMultiPropsNames = multiPropNameRepository.findAll().iterator();
+		
+		//Get all the MutliPropValues from the DB 
+		Iterator <MultiPropValue> allMultiPropsValues = multiPropValueRepository.findAll().iterator();
+		
+		//Create locals for using in the loop : 
+		String multiPropName ="";
+		String multiPropValue = "";
+		MultiPropName multiPropNameObj = null;
+		MultiPropValue multiPropValueObj = null;
+		
+		
+		System.out.println(multiPropNameRepository.findByMultiName("AreaMulti"));
+		System.out.println(multiPropNameRepository.existsByMultiName("AreaMulti2"));
+		
+		//Loop on the values:
+		
+		//Each entrySet (=object in the map) 
+		for (Map.Entry<String,  List<String>> element : values2.entrySet()){
+		
+			//get the key == the name of the multi prop
+			multiPropName = element.getKey();
+			//check if the key is exist as MutliPropName (basically we don't check and use an exist prop, it's for other using in the continue)
+			//If does - get it
+			if(multiPropNameRepository.existsByMultiName(multiPropName)){
+				
+				System.out.println("Getting the multiValueProp :  ");
+				multiPropNameObj = multiPropNameRepository.findByMultiName(multiPropName).get(0);
+				System.out.println(multiPropNameObj);
+
+			}
+			
+			//If not - create it and save it 
+			else{
+				System.out.println("Creating the multiValueProp :  ");
+				multiPropNameObj = new MultiPropName(multiPropName);
+				multiPropNameRepository.save(multiPropNameObj);
+				System.out.println(multiPropNameObj);
+
+			}
+			//multi_prop_name_id
+		
+			//Get all values that connected to the current prop (by id?) 
+			System.out.println("getting the prop name connected values");
+			System.out.println(multiPropValueRepository.findByMultiPropName(multiPropNameObj));
+			
+			System.out.println("getting the prop name connected values by Id");
+			System.out.println(multiPropValueRepository.findByMultiPropNameId(multiPropNameObj.getId()));
+			
+			//U here - take the returned object or not - create existsBy for checking. - not - because U need to check just the linked values not all
+			//Loop on the nested values : 
+			
+			//check if the value is exist as MutliPropValue
+			
+			//If does - get it. If not - create it. 
+		
+			//Assign it to the local multiPropValues
+			
+		//continue to loop on all
+			
+		}//End of the level 1 loop 
+		//At the end return the multiPropValues
+		
+		return null;
+	}
+	
+	/**PREPARED*/
 	//Method for creating the initial needed data 
 	//Maybe it's should be "static" but I don't want to make right now unneeded mix
 	public void createInitialData(){
@@ -117,7 +211,8 @@ public class EntitiesService {
 		System.out.println("All Entities saved. ");
 		
 	}
-
+	
+	/**PREPARED*/
 	public void createSocialEvent(Map<String, String> values){
 		
 		List<SinglePropValue> singlePropValues = generateSingleValuesList(values);

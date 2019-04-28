@@ -1,5 +1,10 @@
 Hibernate Studying - Main
 
-Lesson 6 -  
+Lesson7 -  
 
-- removed the unnecessary things, and clean the code for more clarity 
+ - Now I am creating generator for the multiprops. 
+ 
+ Requirments: 
+ Assuming that all name props exist. 
+ Assuming that value maybe exists. 
+ 

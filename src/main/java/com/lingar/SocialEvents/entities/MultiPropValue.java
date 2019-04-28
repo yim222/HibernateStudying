@@ -19,7 +19,7 @@ public class MultiPropValue {
 	@GeneratedValue//(strategy = GenerationType.IDENTITY)//SO the genration will be in each entity seperate 
 	Long id;
 	@OneToOne //was @oneToOne. Here is the problem ? 
-	private MultiPropName MultiPropName;
+	private MultiPropName multiPropName;
 	
 	
 
@@ -28,12 +28,12 @@ public class MultiPropValue {
 	
 	public MultiPropValue(){}
 	public MultiPropValue(String propName, String propValue) {
-		this.MultiPropName = new MultiPropName(propName);
+		this.multiPropName = new MultiPropName(propName);
 		this.propValue = propValue;
 	}
 	public MultiPropValue(MultiPropName multiPropName, String propValue) {
 		super();
-		this.MultiPropName = multiPropName;
+		this.multiPropName = multiPropName;
 		
 		this.propValue = propValue;
 	}
