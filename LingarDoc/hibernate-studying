@@ -1,17 +1,7 @@
 Hibernate Studying - Main
 
-Lesson7 -  
+Lesson 8 -  
 
-START OF QUERIES WITH JPA REPOSITORY
+TUTORIAL ABOUT QUERIES WITH SPRING, JPA, HIBENRATE, AND THE REPOSISTORY
 
-I did some playin with the queries, at the repositories. See them  a little, but in 
-the next lesson I am going to do an expand tutorial . 
-
-
-
- - Now I am creating generator for the multiprops. 
- 
- Requirments: 
- Assuming that all name props exist. 
- Assuming that value maybe exists. 
- 
+- I am creating new simple entity - car with owner , company, year - as date, price - as integer . 
