@@ -190,7 +190,7 @@ public class EntitiesService {
 				System.out.println("Test - checking if the propValues are exist. \n checking  " + propValue);
 				
 				//System.out.println(multiPropValueRepository.exists(propValue, multiPropNameObj.getId()));
-				System.out.println(multiPropValueRepository.existsIfBlaBla(propValue, multiPropNameObj.getId()));
+				//System.out.println(multiPropValueRepository.existsIfBlaBla(propValue, multiPropNameObj.getId()));
 				
 				if(multiPropValues1.contains(propValue)){
 					

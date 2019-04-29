@@ -24,14 +24,14 @@ public interface MultiPropValueRepository extends PagingAndSortingRepository<Mul
 			+ "AND e.propValue = :propValue"
 			+ "")
 			*/
-	
+	/* - Not working currently 
 	@Query( "select count(e)>0 from MultiPropValue e  where e.multiPropNameId = :propNameId "
 			+ "AND e.propValue = :propValue"
 			+ "")
 	
 	boolean existsIfBlaBla(@Param ("propValue" ) String propValue, @Param("propNameId") long propNameId);
 		
-	
+	*/
 
 
 }
