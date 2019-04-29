@@ -106,7 +106,7 @@ public class EntitiesService {
 	}
 	
 	
-	//Methood for generate from Map<String, List<String> > values 
+	//Methood for generate from Map<String, List<String> > values (propName, values...)
 	//for pass it to social event. 
 	public Set<MultiPropValue> generateMultiValuesList(Map<String, List<String>> values){
 		
@@ -140,6 +140,7 @@ public class EntitiesService {
 		String multiPropValue = "";
 		MultiPropName multiPropNameObj = null;
 		MultiPropValue multiPropValueObj = null;
+		Set<MultiPropValue>  multiPropValues1 = new HashSet<>();
 		
 		
 		System.out.println(multiPropNameRepository.findByMultiName("AreaMulti"));
@@ -179,8 +180,45 @@ public class EntitiesService {
 			System.out.println("getting the prop name connected values by Id");
 			System.out.println(multiPropValueRepository.findByMultiPropNameId(multiPropNameObj.getId()));
 			
-			//U here - take the returned object or not - create existsBy for checking. - not - because U need to check just the linked values not all
-			//Loop on the nested values : 
+			//get the values  currently assign to the this propName
+			multiPropValues1 = multiPropValueRepository.findByMultiPropNameId(multiPropNameObj.getId());
+			
+			//
+			//Loop on the nested values :
+			for(String propValue : element.getValue() ){
+				//check if the current value is exist . 
+				System.out.println("Test - checking if the propValues are exist. \n checking  " + propValue);
+				
+				//System.out.println(multiPropValueRepository.exists(propValue, multiPropNameObj.getId()));
+				System.out.println(multiPropValueRepository.existsIfBlaBla(propValue, multiPropNameObj.getId()));
+				
+				if(multiPropValues1.contains(propValue)){
+					
+					System.out.println(propValue + " is exist ... getting it ");
+					multiPropValueObj = multiPropValueRepository.findByPropValue(propValue);
+					System.out.println(multiPropValueObj);
+					
+					
+					//multiPropNameObj = multiPropNameRepository.findByMultiName(multiPropName).get(0);
+					System.out.println(multiPropNameObj);
+
+				}
+				
+				//If not - create it and save it 
+				else{
+					System.out.println(propValue + " isn't exist ");
+					/*
+					System.out.println("Creating the multiValueProp :  ");
+					multiPropNameObj = new MultiPropName(multiPropName);
+					multiPropNameRepository.save(multiPropNameObj);
+					System.out.println(multiPropNameObj);
+					*/
+
+				}
+			}
+			
+			
+			
 			
 			//check if the value is exist as MutliPropValue
 			
