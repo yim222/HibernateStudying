@@ -186,11 +186,14 @@ public class EntitiesService {
 			//
 			//Loop on the nested values :
 			for(String propValue : element.getValue() ){
-				//check if the current value is exist . 
-				System.out.println("Test - checking if the propValues are exist. \n checking  " + propValue);
+				//check if the current value is exist .  - U here - it's should to be true but shows false. 
+				System.out.println("Test - checking if the propValues are exist. \n checking  " + propValue + " propName id = " + multiPropNameObj.getId());
+				//System.out.println(multiPropValueRepository.existsByMultiPropNameId(1L));
+				System.out.println(multiPropValueRepository.existsByPropValue("multi trip"));
+				System.out.println(multiPropValueRepository.existsByPropValueAndMultiPropNameId(propValue, 1L));
 				
 				//System.out.println(multiPropValueRepository.exists(propValue, multiPropNameObj.getId()));
-				System.out.println(multiPropValueRepository.existsIfBlaBla(propValue, multiPropNameObj.getId()));
+				//System.out.println(multiPropValueRepository.existsIfBlaBla(propValue, multiPropNameObj.getId()));
 				
 				if(multiPropValues1.contains(propValue)){
 					
@@ -272,8 +275,8 @@ public class EntitiesService {
 
 		MultiPropName multiPropName1 = new MultiPropName("EventTypeMulti");
 		multiPropNameRepository.save(multiPropName1);
-		MultiPropValue multiPropValue1 = new MultiPropValue(multiPropName1, "multi party ");
-		MultiPropValue multiPropValue2 = new MultiPropValue(multiPropName1, "multi trip ");
+		MultiPropValue multiPropValue1 = new MultiPropValue(multiPropName1, "multi party");
+		MultiPropValue multiPropValue2 = new MultiPropValue(multiPropName1, "multi trip");
 		multiValuesList.add(multiPropValue1);
 		multiValuesList.add(multiPropValue2);
 		
@@ -302,11 +305,14 @@ public class EntitiesService {
 		
 		MultiPropName multiPropName2 = new MultiPropName("AreaMulti");
 		multiPropNameRepository.save(multiPropName2);
-		MultiPropValue multiPropValue3 = new MultiPropValue(multiPropName2, "multi north ");
-		MultiPropValue multiPropValue4 = new MultiPropValue(multiPropName2, "multi south ");
+		MultiPropValue multiPropValue3 = new MultiPropValue(multiPropName2, "multi north");
+		MultiPropValue multiPropValue4 = new MultiPropValue(multiPropName2, "multi south");
+		MultiPropValue multiPropValue5 = new MultiPropValue(multiPropName2, "check");
+
 		multiPropValueRepository.save(multiPropValue3);
 		multiPropValueRepository.save(multiPropValue4);
-
+		multiPropValueRepository.save(multiPropValue5);
+		
 		multiValuesSet2.add(multiPropValue3);
 		multiValuesSet2.add(multiPropValue4);
 		

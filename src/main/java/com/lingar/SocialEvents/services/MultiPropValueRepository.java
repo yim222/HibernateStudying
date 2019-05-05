@@ -32,6 +32,10 @@ public interface MultiPropValueRepository extends PagingAndSortingRepository<Mul
 	boolean existsIfBlaBla(@Param ("propValue" ) String propValue, @Param("propNameId") long propNameId);
 		*/
 	
+	boolean existsByPropValueAndMultiPropNameId(String propValue, long multiPropNameId);
+	boolean existsByMultiPropNameId( long multiPropNameId);
+	boolean existsByPropValue(String propValues);
+
 
 
 }

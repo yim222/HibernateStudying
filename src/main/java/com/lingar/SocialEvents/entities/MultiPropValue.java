@@ -24,7 +24,7 @@ public class MultiPropValue {
 	
 
 	
-	String propValue;
+	private String propValue;
 	
 	public MultiPropValue(){}
 	public MultiPropValue(String propName, String propValue) {

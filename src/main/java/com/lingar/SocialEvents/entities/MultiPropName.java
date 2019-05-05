@@ -22,7 +22,7 @@ public class MultiPropName {
 	
 
 	@Column//(length = 32, unique = true)//U must define length for set it Unique - first implement support for unique then do it unique
-	String multiName;
+	private String multiName;
 	
 	public MultiPropName(){}
 	public MultiPropName(String multiName) {

@@ -2,6 +2,61 @@ Hibernate Studying - Main
 
 Lesson 8 -  
 
+part 1 - is about derived queries methods
+part 2 - is about manually defined named queries 
+
 TUTORIAL ABOUT QUERIES WITH SPRING, JPA, HIBENRATE, AND THE REPOSISTORY
 
+important resources*********************************
+
+List of keywords - https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
+Repository keyword vs SQL - https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repository-query-keywords
+Repository Returned type - https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repository-query-return-types
+
+
+*******************************
 - I am creating new simple entity - car with owner , company, year - as date, price - as integer . 
+
+Trying to study that :
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.repositories
+
+- If u want to take just some of the methods of the CRUD repo u can do it in that way : 
+
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.definition-tuning
+
+2 TYPES OF QUERIES IN SPRING - DATA : 
+
+1- Derived Query, is query that U define the signature in the interface (they derived from the repository definition)
+2- Manual Query is query that U write by your self (and use @Query for get it active ) 
+
+or as described in the guide : 
+
+By deriving the query from the method name directly.
+
+By using a manually defined query.
+
+*** 
+By default the Repository proxy use in strategy that look for declared manually Query and if not found it's look for method name-based query. 
+U can change it to be that or that by changing the configuration : 
+
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.details
+
+U can see here 
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-lookup-strategies
+
+***
+
+Named method queries : 
+
+To the "By" word have a lot of meaning. It's the start of the criteria. as U can see here : 
+
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-creation
+
+-- here is the list of the optional parameters
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
+
+
+
+-- here https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.java-config
+and above and below he is talking a lot about configuration. It's for sure need to be know. But for
+now it's happen automatically in this project. Not sure exactly how. 
