@@ -182,5 +182,8 @@ public interface CarRepository extends PagingAndSortingRepository<Car, UUID>{
 	                                 @Param("man1") String otherMan1);
 	
 	//	@Query(value = "SELECT * FROM Car WHERE manufacture = ?1 OR manufacture = ?2 ",
+	
+	//@Query("select c from Car c where c.owner = :ownery or c.manufacture = :manu")- WOn't work in regual running 
+	//List<Car> withoutParamsAnnotationSpring4(String manu, String ownery);
 
 }

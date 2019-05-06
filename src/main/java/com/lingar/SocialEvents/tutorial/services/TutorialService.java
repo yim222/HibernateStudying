@@ -502,5 +502,7 @@ public class TutorialService {
 		
 		System.out.println("he is saying that in spring 4 + not need to use @Params . I am trying to check it with other branch\n "
 				+ "And in general it's good to practice those section of creation of project and modification . ");
+		System.out.println("It's not work - U need to send the Javac flg paramter. An issue to study... ");
+		//System.out.println("Without params ? " + carRepo.withoutParamsAnnotationSpring4("Honda", "Izik"));
 	}
 }
