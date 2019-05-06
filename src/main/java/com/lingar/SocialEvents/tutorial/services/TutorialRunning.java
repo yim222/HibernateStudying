@@ -11,11 +11,14 @@ public class TutorialRunning implements CommandLineRunner {
 
 	private CarRepository carRepo;
 	private MultiPropValueRepository multiValueRepo;
+	private PointRepository pointRepo;
 	@Autowired
-	public TutorialRunning(CarRepository carRepo,MultiPropValueRepository multiValueRepo ){
+	public TutorialRunning(CarRepository carRepo,MultiPropValueRepository multiValueRepo,
+			PointRepository pointRepo){
 		
 		this.carRepo = carRepo;
 		this.multiValueRepo = multiValueRepo;
+		this.pointRepo = pointRepo;
 	}
 	
 	@Override
@@ -26,7 +29,7 @@ public class TutorialRunning implements CommandLineRunner {
 		System.out.println( "\n**************************************************\nU can learn from here many things \n "
 				+ "***********************************************\n" );
 		
-		TutorialService tService = new TutorialService(carRepo);
+		TutorialService tService = new TutorialService(carRepo, pointRepo);
 		tService.creating10Cars(); // -> In each running create initial data 
 		tService.studyingPreDefinedQueries();
 		tService.studyingQueries1();

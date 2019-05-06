@@ -35,6 +35,9 @@ public class Car {
 	//This is same field to all cars . 
 	private String sameField = "same";
 	
+	//This is same field to all cars . 
+	private String changeMe = "ChangeMe";
+	
 	@Column(name = "customName")
 	private int otherName = new Random().nextInt(7);
 

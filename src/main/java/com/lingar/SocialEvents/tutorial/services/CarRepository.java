@@ -8,9 +8,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lingar.SocialEvents.tutorial.entities.Car;
 
@@ -181,6 +183,30 @@ public interface CarRepository extends PagingAndSortingRepository<Car, UUID>{
   	List<Car >withNamedParamsManufactureAndMin(@Param("price2") int otherPrice,
 	                                 @Param("man1") String otherMan1);
 	
-	//	@Query(value = "SELECT * FROM Car WHERE manufacture = ?1 OR manufacture = ?2 ",
+	//@Query("select u from #{#entityName} u where u.lastname = ?1")
+	@Query("select u from #{#entityName} u where u.price < ?1")
+	List<Car> withSpEL(int price);
+	
+	@Query(value = "Select price from Car where price < ?1 ", nativeQuery = true)
+	List<String> tryNative(int price);
+	
+	@Query(value = "Select price , owner from Car where price < ?1 ", nativeQuery = true)
+	List<String[]> tryNative2(int price);
+	
+	//Update
+	@Transactional
+	@Modifying
+	@Query("update Car u set u.changeMe = ?1 where u.price >= ?2")
+	int setFixedFirstnameFor(String changeMe, int min );
+	
+	
+	//void setOwnerFor(String owner, String other);
+	@Transactional
+	void deleteByPointId(long pointId);
+	
+	@Transactional
+	void deleteByPrice(int price);
+	
+
 
 }

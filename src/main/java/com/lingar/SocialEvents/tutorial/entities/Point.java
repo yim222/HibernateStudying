@@ -20,6 +20,7 @@ public class Point {
 
 	private int xania = new Random().nextInt(4);
 	private int yoni = new Random().nextInt(4);
+	private String word = "default word";
 	
 	
 	public Point(){

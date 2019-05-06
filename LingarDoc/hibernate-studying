@@ -62,3 +62,22 @@ https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-me
 -- here https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.java-config
 and above and below he is talking a lot about configuration. It's for sure need to be know. But for
 now it's happen automatically in this project. Not sure exactly how. 
+
+
+
+**************What already we learn here : 
+
+
+
+What i learned.
+
+Most of 4 until 4.4.5 (include) 
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-streaming
+
+But a little  of the data I passed easily without deep understanding. 
+
+
+5-section
+5.1.1+2 – dont understand and it’s ok 
+and 5.2 too. 
+until 5.3.8 include – studied 

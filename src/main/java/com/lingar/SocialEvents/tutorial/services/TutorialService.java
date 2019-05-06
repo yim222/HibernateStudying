@@ -22,9 +22,11 @@ import com.lingar.SocialEvents.tutorial.entities.Car;
 public class TutorialService {
 	
 	private CarRepository carRepo;
+	private PointRepository pointRepo;
 	@Autowired
-	public TutorialService (CarRepository carRepo){
+	public TutorialService (CarRepository carRepo, PointRepository pointRepo){
 		this.carRepo = carRepo;
+		this.pointRepo = pointRepo;
 	}
 	
 	public void creating10Cars(){
@@ -500,7 +502,45 @@ public class TutorialService {
 		
 		System.out.println(carRepo.withNamedParamsManufactureAndMin(400, "Ford"));
 		
+		
+		
 		System.out.println("he is saying that in spring 4 + not need to use @Params . I am trying to check it with other branch\n "
 				+ "And in general it's good to practice those section of creation of project and modification . ");
+		System.out.println("It's not work - U need to send the Javac flg paramter. An issue to study... ");
+		
+		System.out.println("SpEL = The Spring Expression Language (SpEL for short)\n "
+				+ " is a powerful expression language that supports querying and manipulating an object graph at runtime."
+				+ " The language syntax is similar to Unified EL but offers additional features, "
+				+ "most notably method invocation and basic string templating functionality.\n see here -  "
+				+ "https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/expressions.html");
+		int i5 = 300;
+		System.out.println("get the car with price less than " + i5 + "\n" + carRepo.withSpEL(i5));
+		System.out.println("get the only prices with price less than " + i5 + "\n" + carRepo.tryNative(i5));
+		
+		System.out.println("get the only prices and owner with price less than " + i5 + "\n" + carRepo.tryNative2(i5));
+		System.out.println("As u see in 2 fields it's don't know how to show it. Need to learn it");
+		
+		System.out.println("It's useful for if u want at the future to change the Entity name U won't need to change all the methods \n "
+				+ "For more use case see the refernece(didn't dig there https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query.spel-expressions");
+		
+		
+		System.out.println("Updating - ****** https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.modifying-queries");
+		System.out.println("***************U NEED TO ANNOTATE THE METHODS WITH @Transaction");
+		System.out.println("U can create updatin g");
+		System.out.println(carRepo.setFixedFirstnameFor("Good Car", 300));
+		
+		System.out.println("He talks about not needed in derived methods. But how do I can to update with them - don't know ");
+		
+		carRepo.deleteByPrice(200);
+		carRepo.deleteByPointId(14);
+		System.out.println("But it sound that in the @Query method it's more efficient. See the doc. ");
+		System.out.println("Great we have finish the studying for now. ");
+		int x = 10, y =8 , id =222; String word = "ppp";
+		System.out.println("trying to insert new point : \n x = " + x + " | y = " + y + " id = " + id  + " word = " + word);
+		pointRepo.makeNewPoint(id, y, x, word);
+		
+		System.out.println("U can see How I have created new point with that. ");
+		System.out.println("And with that, I am finishing this learning. in the future complete it , and do certification on that. "
+				+ "See the lesson for understanding things. ");
 	}
 }
