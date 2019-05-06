@@ -31,6 +31,7 @@ public class TutorialRunning implements CommandLineRunner {
 		tService.studyingPreDefinedQueries();
 		tService.studyingQueries1();
 		tService.studyingQueries2();
+		tService.studyingQueries3();
 		
 		
 		

@@ -9,8 +9,11 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
+
 import org.springframework.stereotype.Service;
 
 import com.lingar.SocialEvents.tutorial.entities.Car;
@@ -328,7 +331,7 @@ public class TutorialService {
 	
 	
 	public void studyingQueries2(){
-		System.out.println("\n****************************STUDYING QUERIES 2 - ADVANCED ISSUES AT NAMED METHODS QUERIES**********************\n");
+		System.out.println("\n****************************STUDYING QUERIES 2 - ADVANCED ISSUES AT DERIVED NAMED METHODS QUERIES**********************\n");
 		
 
 		
@@ -426,4 +429,78 @@ public class TutorialService {
 
 	}
 	
+	
+	public void studyingQueries3(){
+		
+		System.out.println("\n****************************STUDYING QUERIES 3 - ADVANCED ISSUES AT NOT DERIVED NAMED METHODS QUERIES**********************\n");
+		
+		System.out.println("TO see the refernece of the annotation open it in eclipse by click+ctrl on that or that : \n : "
+				+ "https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Query.html");
+		System.out.println("Using JPA Named Queries - \n "
+				+ "\nwith @NamedQuery(...)"
+				+ "\nThis query is declared at top of the Car Object, and defined in the interface. \n"
+				+ "Let's check if it works. \n"
+				+ "see here - https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.named-queries ");
+		
+		System.out.println(carRepo.findByLingarMethod("Rivki"));
+		
+		System.out.println("Using @Query - \n"
+				+ "With that u can use the @query on the method that U write(define) at the interface of repository, "
+				+ "\nwithout need to define them above the entity . "
+				+ "\nSee here - https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.at-query");
+		
+		//System.out.println("Find by manufacture-  named Query " +carRepo.namedQuery1("honda"));
+		
+		System.out.println("Find by price-  named Query " +carRepo.findByPrice(501));
+		int i4 = 350;
+		System.out.println("Find all that more then " + i4);
+		System.out.println(carRepo.findBBBPrice(i4));
+		
+		System.out.println("I have problems with defining about manufacture let's check that . ");
+		
+		System.out.println("U had a syntax problem. U need to write 3 time : select n from Car n where n.foo = ?1 // the  ?1 is must be number. ") ;
+		String str1 = "i";
+
+		System.out.println("The next the first iis what ending with, and the second is what ends with. " + str1
+				+ "Don't know the differnce of the using in the %.. see inside.");
+		System.out.println(carRepo.findAllOwnersEndsWith(str1));
+		System.out.println(carRepo.findAllOwnersStartsWith(str1));
+		
+		System.out.println("The above is written with JPQL syntax. If u want to use native SQL syntax U can change the \n "
+				+ "Paramter (=flag) in the @Query. See inside the implementation of that methods.");
+		String[] manus = {"mazda","ford"};
+		System.out.println("Get with native query the owners of " + manus[0] + " Or " + manus[1] + " \nFirst just from " + manus[0]);
+		//System.out.println(carRepo.withNativeSql(manus[0], manus[1]));
+		System.out.println(carRepo.withNativeSql(manus[0]));
+		System.out.println(carRepo.withNativeSql2(manus[0], manus[1]));
+		
+		Pageable p1 = PageRequest.of(1, 2);
+		int max = 400;
+		System.out.println("For using with paging U need to define the count query flag . See the implementation of those two methods ");
+		System.out.println(carRepo.pagingWithNative(max, p1).getContent());
+		System.out.println("Don't success to do it on JPQL query wiht paging or use the suffix of .count that he is saying about");
+		
+		System.out.println("Sorting : ");
+		List<String> forSort = new ArrayList<String>();
+		forSort.add("price");
+		//forSort.add("BBB");
+		Sort sort1 = new Sort(Sort.Direction.ASC, forSort) ;
+		System.out.println("Here is how I use it with sort. This is the good way");
+		
+		System.out.println(carRepo.findByAndSort("m", sort1));
+		
+		System.out.println("And that is depracted way : ");
+		System.out.println(carRepo.findByAndSort("m", new Sort("manufacture")));
+		
+		System.out.println("There is something on as Array also. I don't do it right now - U can check it \n "
+				+ "https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.sorting");
+
+		System.out.println("The ?2 (for example) pars are based on the position in the arguments. ?1 is the first, and so on.\n "
+				+ "U can define the names , so u be able to change the order of the defined method vs the query  - without errors. ");
+		
+		System.out.println(carRepo.withNamedParamsManufactureAndMin(400, "Ford"));
+		
+		System.out.println("he is saying that in spring 4 + not need to use @Params . I am trying to check it with other branch\n "
+				+ "And in general it's good to practice those section of creation of project and modification . ");
+	}
 }

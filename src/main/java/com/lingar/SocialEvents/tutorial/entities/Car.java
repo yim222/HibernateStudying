@@ -9,12 +9,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
 
 @Data
 @Entity
+@NamedQuery(name = "Car.findByLingarMethod",
+query = "select u from Car u where u.owner = ?1")
 public class Car {
 	@Id
 	@GeneratedValue

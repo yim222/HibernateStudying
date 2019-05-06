@@ -7,7 +7,10 @@ import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 
 import com.lingar.SocialEvents.tutorial.entities.Car;
 
@@ -103,13 +106,81 @@ public interface CarRepository extends PagingAndSortingRepository<Car, UUID>{
 	
 	//List<Car> findAllByLikeByIsStartingWith(String str); //Not work too
 	
+	/**Named query = with annotations */
+	
+	
+	//This is manually named query: 
+	List<Car> findByLingarMethod(String name);
+	
+	
+	//@Query("select n from Car u where n.manufacture = ?1")//see the nEntities definition Car = /*The domain wanted*/ ?1 - it mean the parameter
+	//List<Car> namedQuery1(String manufacture);
+	// The pattern : "select x(=something like entity/ie from car ) from DomainName (=like Car) x where x.field = ?1 // I yet understand the ?1 what is that represent, 
+	//Didn't get satisfied explain til now. 
+	@Query("select u from Car u where u.price = ?1")// -position-based parameter binding, it's mean that by the position in the args it will be read
+	Car findByPrice(int price);
+	
+	
+	@Query("select u from Car u where u.price >= ?1")
+	List<Car> findBBBPrice(int price);
+	
+	@Query("select u from Car u where u.manufacture = ?2")
+	List <Car> nowItsWork(String manu);
+	
+	@Query("select u from Car u where u.owner like %?1")//if the %before the par it's take the end. and if before check if stating with. Why ? 
+  	List<Car> findAllOwnersEndsWith(String w);
+	
+	@Query("select u from Car u where u.owner like ?1%")//if the %before the par it's take the end. and if before check if stating with. Why ? 
+  	List<Car> findAllOwnersStartsWith(String w);
+	
+	/**This is with native SQL and some paramters*/
+	//@Query(value = "SELECT * FROM USERS WHERE EMAIL_ADDRESS = ?1", nativeQuery = true)- from the doc
+	//@Query(value = "SELECT * FROM Cars WHERE manufacture = ?1 OR manufacture = ?2 ",
 
+	@Query(value = "SELECT * FROM Car WHERE manufacture = ?1 ", 
+			nativeQuery = true)//U can have differences in the columns name also because
+	//In JPQL it's in camel capatalize and in the native it's with underscore separated.
+	List<Car> withNativeSql(String manu1);
 	
+	@Query(value = "SELECT * FROM Car WHERE manufacture = ?1 OR manufacture = ?2 ",
+			nativeQuery = true)//U can have differences in the columns name also because
+	//In JPQL it's in camel capatalize and in the native it's with underscore separated.
+	List<Car> withNativeSql2(String manu1, String manu2);
+	
+	//Naative With using pagination
+	@Query(value = "SELECT * FROM CAR WHERE PRICE <= ?1",
+		    countQuery = "SELECT count(*)  FROM CAR WHERE PRICE >= ?1",
+		    nativeQuery = true)
+	Page<Car> pagingWithNative(int max , Pageable pageable);
+	
+	
+	//Jpql with pagination - not work 
+	/*
+	@Query(value = "select e from Car e where e.price => ?1", 
+			countQuery = "select e.count from Car e where e.price => ?1")
+	Page<Car> pagingwithJpql(int min, Pageable pageable);
+*/
+	//Naative With using pagination
+	/*
+		@Query(value = "SELECT * FROM CAR WHERE PRICE <= ?1",
+			    countQuery = "SELECT count(*)  FROM CAR WHERE PRICE >= ?1",
+			    nativeQuery = true)
+		Page<Car> pagingWithNative2(int max , Pageable pageable);
+	*/
+	/*
+	@Query( "select e from Car e where e.price => ?1")
+	Page<Car> pagingwithJpql(int min, Pageable pageable);
+	*/
+	
+	@Query("select u from Car u where u.owner like ?1%")
+	List<Car> findByAndSort(String lastname, Sort sort);
+	
+	
+	//Query with Named params. 
+	@Query("select u from Car u where u.manufacture = :man1 or u.price >= :price2")
+  	List<Car >withNamedParamsManufactureAndMin(@Param("price2") int otherPrice,
+	                                 @Param("man1") String otherMan1);
+	
+	//	@Query(value = "SELECT * FROM Car WHERE manufacture = ?1 OR manufacture = ?2 ",
 
-	
-
-
-	
-	
-	
 }
