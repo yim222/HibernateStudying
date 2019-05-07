@@ -45,7 +45,7 @@ public class DatabaseLoader1 implements CommandLineRunner {
 
 		entitiesService.trying1(); 
 		
-		entitiesService.generateMultiValuesList(null);
+		//entitiesService.generateMultiValuesList(null);
 		
 
 

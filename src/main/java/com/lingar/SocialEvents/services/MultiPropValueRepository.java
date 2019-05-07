@@ -35,6 +35,8 @@ public interface MultiPropValueRepository extends PagingAndSortingRepository<Mul
 	boolean existsByPropValueAndMultiPropNameId(String propValue, long multiPropNameId);
 	boolean existsByMultiPropNameId( long multiPropNameId);
 	boolean existsByPropValue(String propValues);
+	
+	MultiPropValue findByPropValueAndMultiPropNameId(String propValue, long multiPropNameId);
 
 
 

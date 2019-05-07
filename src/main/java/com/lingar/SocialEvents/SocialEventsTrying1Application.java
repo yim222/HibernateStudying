@@ -2,8 +2,15 @@ package com.lingar.SocialEvents;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 
-@SpringBootApplication
+import com.lingar.SocialEvents.tutorial.services.TutorialRunning;
+
+@SpringBootApplication//(exclude=TutorialRunning.class)
+
+@ComponentScan(excludeFilters  = {@ComponentScan.Filter( // works at the end
+              type = FilterType.ASSIGNABLE_TYPE, classes = {TutorialRunning.class})})
 public class SocialEventsTrying1Application {
 
 	public static void main(String[] args) {

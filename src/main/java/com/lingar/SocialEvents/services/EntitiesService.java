@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
-import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -108,7 +108,7 @@ public class EntitiesService {
 	
 	//Methood for generate from Map<String, List<String> > values (propName, values...)
 	//for pass it to social event. 
-	public Set<MultiPropValue> generateMultiValuesList(Map<String, List<String>> values){
+	public Set<MultiPropValue> generateMultiValuesListOLD(Map<String, List<String>> values){
 		
 		System.out.println("check generateMultiValuesList");
 		
@@ -190,12 +190,12 @@ public class EntitiesService {
 				System.out.println("Test - checking if the propValues are exist. \n checking  " + propValue + " propName id = " + multiPropNameObj.getId());
 				//System.out.println(multiPropValueRepository.existsByMultiPropNameId(1L));
 				System.out.println(multiPropValueRepository.existsByPropValue("multi trip"));
-				System.out.println(multiPropValueRepository.existsByPropValueAndMultiPropNameId(propValue, 1L));
+				System.out.println(multiPropValueRepository.existsByPropValueAndMultiPropNameId(propValue, multiPropNameObj.getId()));
 				
 				//System.out.println(multiPropValueRepository.exists(propValue, multiPropNameObj.getId()));
 				//System.out.println(multiPropValueRepository.existsIfBlaBla(propValue, multiPropNameObj.getId()));
 				
-				if(multiPropValues1.contains(propValue)){
+				if(multiPropValueRepository.existsByPropValueAndMultiPropNameId(propValue, multiPropNameObj.getId())){
 					
 					System.out.println(propValue + " is exist ... getting it ");
 					multiPropValueObj = multiPropValueRepository.findByPropValue(propValue);
@@ -263,6 +263,105 @@ public class EntitiesService {
 		
 	}
 	
+	/**PREPARED*/
+	public Set<MultiPropValue> generateMultiValuesList(Map<String, List<String>> values){
+		
+		System.out.println("*****************************START - trying new generate Multi values list******************************** ");
+		/**Method explain : */
+		//U get Map with many entries that each have “propName” and “Values” – as strings 
+		//The method generates Set of MultiPropValues.
+		
+		//Mock Data for testing - suppose to came from parameters
+		Map<String, List<String>> values2 = new HashMap<>();
+		List<String> nestedValues2 = new ArrayList<>();
+		
+		//adding some props of "EventType"
+		nestedValues2.add("multi trip");
+		nestedValues2.add("simple trip");
+		nestedValues2.add("lecture");
+				
+		values2.put("EventTypeMulti", nestedValues2);
+		
+		//adding some props of "matchingIdea"
+		nestedValues2 = new ArrayList<>();
+		
+		nestedValues2.add("spontanic");
+		nestedValues2.add("Connector");
+		nestedValues2.add("Saving details");
+		
+		values2.put("matchingIdea", nestedValues2);
+		//-End of testing MOCK
+		
+		//Preparation tasks- 
+		//Create locals for using in the loop : 
+		String multiPropName ="";
+		String multiPropValue = "";
+		MultiPropName multiPropNameObj = null;
+		MultiPropValue multiPropValueObj = null;
+		Set<MultiPropValue>  multiPropValues = new HashSet<>();//TreeSet<>();
+
+		//Start work ... 
+		//Loop on all entries - each entry is propName that contain one or more connected values 
+		for (Map.Entry<String,  List<String>> elementOfValues : values.entrySet()){
+			String propNameStr = elementOfValues.getKey();
+			System.out.println("Working on the prop name : " + propNameStr);
+			
+			//Check if the propName exist – if does – get it, if not – create it. 
+			boolean propNameExists = multiPropNameRepository.existsByMultiName(propNameStr);
+			System.out.println("Is " + propNameStr + " already exists ? " + propNameExists );
+			
+			if(propNameExists){
+				System.out.println(propNameStr + " exists. Getting it - ");
+				multiPropNameObj = multiPropNameRepository.findByMultiName(propNameStr).get(0);//Should be return object - int the future
+				System.out.println(multiPropNameObj);
+			}
+			else{
+				System.out.println(propNameStr + " doesn't exist. Creating and saving it - ");
+				multiPropNameObj = new MultiPropName(propNameStr);
+				multiPropNameRepository.save(multiPropNameObj);
+				System.out.println(multiPropNameObj);
+			}
+			
+			//Loop on the inner values of the propName. 
+			System.out.println("Looping on the inner values of the " + propNameStr );
+			List<String> currentLoopValues = elementOfValues.getValue();
+			//get the id of the propNameObj for using it . 
+			long multiPropNameId = multiPropNameObj.getId();
+			for(String propValue : currentLoopValues){
+				
+				//On each – check if exist with the value and the propNameId. 
+				boolean propValueExist = multiPropValueRepository.existsByPropValueAndMultiPropNameId(propValue, multiPropNameId);
+				
+				//If does – get it with the propNameId 
+				if(propValueExist){
+					System.out.println(propValue + " is already exist. Getting it");
+					multiPropValueObj = multiPropValueRepository.findByPropValueAndMultiPropNameId(propValue, multiPropNameId);
+					System.out.println(multiPropValueObj);
+				}
+				
+				//If not – create it with the propName. 
+				else{
+					System.out.println(propValue + " isn't exist. Creating it ... ");
+					multiPropValueObj = new MultiPropValue(multiPropNameObj, propValue);
+					multiPropValueRepository.save(multiPropValueObj);
+					System.out.println(multiPropValueObj);
+				}
+				//add it to the Set of MultiPropValues. 
+				System.out.println("Adding the propValues to the list - ");
+				multiPropValues.add(multiPropValueObj);
+				System.out.println(multiPropValues);
+				
+			}
+		}
+		
+		
+		System.out.println("*****************************END - trying new generate Multi values list******************************** ");
+
+		return multiPropValues;
+		
+	}
+	
+	
 	public void trying1(){
 		
 		//A list for work on and assign the right values
@@ -328,5 +427,32 @@ public class EntitiesService {
 		s4.setLingarComment("multi event 4");
 		s4.setLingarValuesList(multiValuesSet2);
 		socialEventRepository.save(s4);
+		
+		System.out.println("Trying MultiPropValuesGenerator : ");
+		
+		//Mock Data for testing - suppose to came from parameters
+		Map<String, List<String>> values2 = new HashMap<>();
+		List<String> nestedValues2 = new ArrayList<>();
+		
+		//adding some props of "EventType"
+		nestedValues2.add("multi trip");
+		nestedValues2.add("simple trip");
+		nestedValues2.add("lecture");
+				
+		values2.put("EventTypeMulti", nestedValues2);
+		
+		//adding some props of "matchingIdea"
+		nestedValues2 = new ArrayList<>();
+		
+		nestedValues2.add("spontanic");
+		nestedValues2.add("Connector");
+		nestedValues2.add("Saving details");
+		nestedValues2.add("DANCING");
+
+		
+		values2.put("matchingIdea", nestedValues2);
+		//-End of testing MOCK
+		generateMultiValuesList(values2);
+
 	}
 }
