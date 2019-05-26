@@ -8,3 +8,7 @@ Lesson  -  8-4
 TUTORIAL ABOUT MY PROJECT QUERIES WITH SPRING, JPA, HIBENRATE, AND THE REPOSISTORY
 
 In this lesson I will mixed together the last filters, and make them order by the new date. 
+
+U can see at the SocialEventRepository how I build the filter together, and did a derived method for find by the date new, and order by the new.
+
+
