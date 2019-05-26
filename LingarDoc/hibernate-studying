@@ -2,13 +2,12 @@ Hibernate Studying - Main
 
 From now it's about part 2 
 
-Lesson  -  
+Lesson  -  8-3
 
 
 TUTORIAL ABOUT MY PROJECT QUERIES WITH SPRING, JPA, HIBENRATE, AND THE REPOSISTORY
 
-important resources*********************************
+In this lesson U can see how I defined Queries methods, in the social -event-repo 
+and test them on the Entities services . filter2 / 
 
-
-*******************************
-can I find entity that its array contain something ? let's try. 
+See that I created - one filter that filter those by multiPropsObject, one by overlap range of ages, and one between dates. 
