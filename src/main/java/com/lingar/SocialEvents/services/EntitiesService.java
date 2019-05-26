@@ -948,7 +948,7 @@ public class EntitiesService {
 		//get the events with the fiter :
 		System.out.println("************* AND those only from the the areas and by jew level keep ");
 		//resultEvents = socialEventRepository.filter9(eventTypes,jewLvls,areas);
-		resultEvents = socialEventRepository.filter10(eventTypes,jewLvls,areas);
+		resultEvents = socialEventRepository.filter10ByMultiProps(eventTypes,jewLvls,areas);
 		System.out.println(resultEvents);
 		displayEventsShort(resultEvents);
 		resultEvents = socialEventRepository.filter9(eventTypes,jewLvls,areas);
@@ -956,7 +956,7 @@ public class EntitiesService {
 		//get the events with the fiter :
 		System.out.println("************* AND with BETWEEN ");
 		//resultEvents = socialEventRepository.filter9(eventTypes,jewLvls,areas);
-		resultEvents = socialEventRepository.filter10(eventTypes,jewLvls,areas);
+		resultEvents = socialEventRepository.filter10ByMultiProps(eventTypes,jewLvls,areas);
 		System.out.println(resultEvents);
 		displayEventsShort(resultEvents);
 		resultEvents = socialEventRepository.filter12(eventTypes,jewLvls,areas);
@@ -992,7 +992,7 @@ public class EntitiesService {
 		toDate = cal.getTime();
 		
 		System.out.println("TRYING to choose the datee in range of  " + fromDate + "\n to " + toDate);
-		resultEvents = socialEventRepository.filter15(fromDate, toDate);
+		resultEvents = socialEventRepository.filter15BetweenDate(fromDate, toDate);
 		displayEventsShort(resultEvents);
 		
 		
@@ -1026,11 +1026,11 @@ public class EntitiesService {
 		
 		
 		System.out.println("First with just the multi props : ");
-		resultEvents = socialEventRepository.filter10(eventTypes, areas, jewLvls);
+		resultEvents = socialEventRepository.filter10ByMultiProps(eventTypes, areas, jewLvls);
 		displayEventsShort(resultEvents);
 		
 		System.out.println("Then with all : (ages and dates  ) ");
-		resultEvents = socialEventRepository.filter16(eventTypes, areas, jewLvls, fromAge, toAge, fromDate, toDate);
+		resultEvents = socialEventRepository.filter16Main(eventTypes, areas, jewLvls, fromAge, toAge, fromDate, toDate);
 		displayEventsShort(resultEvents);
 
 		System.out.println("not work well -AGAIN - WITH DATES!! \n now it works.");
