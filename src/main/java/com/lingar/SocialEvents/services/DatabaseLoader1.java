@@ -1,8 +1,12 @@
 package com.lingar.SocialEvents.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import com.lingar.SocialEvents.entities.SocialEvent;
 
 
 
@@ -42,10 +46,34 @@ public class DatabaseLoader1 implements CommandLineRunner {
 	public void run(String... strings) throws Exception {
 		EntitiesService entitiesService = new EntitiesService(socialEventRepository, singlePropNameRepository,
 				singlePropValueRepository, multiPropNameRepository, multiPropValueRepository);
-
-		entitiesService.trying1(); 
+		/*//Don't delete this! just comment: I pass this inside the createInitial it's more logic  
+		if (singlePropNameRepository.count()<1){
+			entitiesService.createInitialData();
+		}
+		*/
+		entitiesService.createInitialData();
 		
+		//comment - if u want
+		System.out.println("Stop the running for now... dataloader");
+		entitiesService.create10EventsMock();
+		entitiesService.displayEventsShort((List<SocialEvent>)socialEventRepository.findAll());
+		//entitiesService.draftTrying();
+		//entitiesService.tryingFilter();
+		entitiesService.tryingFilter2();//u here
+		
+		
+		
+		if(true)return;//Stop the running - comment it if u want to ignore it
+		
+		entitiesService.trying1(); 
+		entitiesService.trying2();
+		System.out.println(socialEventRepository.findAll());
+		System.out.println(multiPropNameRepository.findAll());
+		entitiesService.trying3();
 		//entitiesService.generateMultiValuesList(null);
+		
+		//System.out.println(socialEventRepository.findAll());
+
 		
 
 

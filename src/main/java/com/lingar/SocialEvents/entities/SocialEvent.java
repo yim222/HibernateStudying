@@ -1,20 +1,17 @@
 package com.lingar.SocialEvents.entities;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -39,17 +36,19 @@ public class SocialEvent {
 	
 	//For my testing comment
 	private String lingarComment = "No Comment";
-	private int fromAge = 0, toAge = 120;
+	private int fromAge = 0, toAge = 120 , hour = 0, minute = 0 ;
+	private Date date = Calendar.getInstance().getTime();
 		
 	//List of single props values
-	@ElementCollection
+	
+	@ElementCollection//-> Trying to solve something but didn't worked. (fetch = FetchType.EAGER)
 	@CollectionTable(name="social_events_single_props_values")
 	private List<SinglePropValue> singlePropsValuesList = new ArrayList<>();
 	
 	//List(set) of Multi prop Values
 	@ManyToMany//trying to solve the problem 
 	@CollectionTable(name="social_events_multi_values")
-	private Set<MultiPropValue> lingarValuesList = new HashSet<MultiPropValue>();
+	private Set<MultiPropValue> multiPropsValuesSet = new HashSet<MultiPropValue>();
 		
 	private @Version @JsonIgnore Long version;
 
@@ -68,6 +67,11 @@ public class SocialEvent {
 
 		
 		
+	}
+	public void setInts(int[] agesRange, int[] time){
+		fromAge = agesRange[0];toAge = agesRange[1];
+		hour = time[0];
+		minute = time[1];
 	}
 
 	

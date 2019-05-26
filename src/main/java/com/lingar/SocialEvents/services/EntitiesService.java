@@ -1,6 +1,8 @@
 package com.lingar.SocialEvents.services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -8,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ import com.lingar.SocialEvents.entities.MultiPropValue;
 import com.lingar.SocialEvents.entities.SinglePropName;
 import com.lingar.SocialEvents.entities.SinglePropValue;
 import com.lingar.SocialEvents.entities.SocialEvent;
+import com.lingar.SocialEvents.helper.EntitiesServiceHelper;
+import com.lingar.SocialEvents.systemConstants.DataConstants;
 
 @Service
 public class EntitiesService {
@@ -28,8 +32,10 @@ public class EntitiesService {
 	private final MultiPropValueRepository multiPropValueRepository;
 
 	
-	//List of the contant properties
-	public final String[] SINGLE_PROPS_VALUES = {"name", "address"};
+	//List of the constant properties
+	public static final String[] SINGLE_PROPS_VALUES = DataConstants.SINGLE_PROPS_VALUES;
+	public static final Map <String, List<String>> MULTI_PROPS_VALUES = DataConstants.MULTI_PROPS_VALUES ;
+
 	
 	@Autowired //The default of what's happen when this is created. 
 	public EntitiesService(SocialEventRepository socialEventRepository,
@@ -241,6 +247,20 @@ public class EntitiesService {
 	//Method for creating the initial needed data 
 	//Maybe it's should be "static" but I don't want to make right now unneeded mix
 	public void createInitialData(){
+		if (singlePropNameRepository.count()>0){
+			System.out.println("Data already exists - not need to create initial Data");
+		}
+		
+		System.out.println("Strating create initial data ... ");
+		createInitialSinglesProps();
+		createInitialmultieProps();
+		
+		System.out.println("Finishing create initial data ... ");
+
+	}
+	
+	public void createInitialSinglesProps(){
+		System.out.println("Creating initials Singles Props");
 		SinglePropName singlePropName = new SinglePropName();
 		for(String propName : SINGLE_PROPS_VALUES ){
 			
@@ -249,16 +269,68 @@ public class EntitiesService {
 			
 		}
 		
+		
 		System.out.println("All Entities saved. ");
 		
 	}
 	
-	/**PREPARED*/
-	public void createSocialEvent(Map<String, String> values){
+	public void createInitialmultieProps(){
+		System.out.println("Creating initials Multi Props");
+
+		System.out.println("The default values : ");
+		System.out.println(MULTI_PROPS_VALUES);
 		
-		List<SinglePropValue> singlePropValues = generateSingleValuesList(values);
+		for (Map.Entry<String, List<String>> e : MULTI_PROPS_VALUES.entrySet()){
+			String propName = e.getKey();
+			System.out.println("Saving multiPropName " + propName);
+			MultiPropName mProp = new MultiPropName(propName);
+			multiPropNameRepository.save(mProp);
+			
+			for(String propValue : e.getValue()){
+				System.out.println("Saving multiPropValue " + propValue+ " of " +  propName);
+				MultiPropValue mPropVal = new MultiPropValue(mProp, propValue);
+				multiPropValueRepository.save(mPropVal);
+
+			}
+			
+			
+		}
+		System.out.println("All MultiProps have saved");
+	}
+	
+	/**PREPARED*/
+	public void createSocialEvent(Map<String, String> singleValues,
+			Map<String, List<String>> multiValues,
+			String comment){
+		
+		List<SinglePropValue> singlePropValues = generateSingleValuesList(singleValues);
+		Set<MultiPropValue> multiPropValues = generateMultiValuesList( multiValues);
+
 		SocialEvent socialEvent = new SocialEvent();
 		socialEvent.setSinglePropsValuesList(singlePropValues);
+		socialEvent.setMultiPropsValuesSet(multiPropValues);
+		socialEvent.setLingarComment(comment);
+		socialEventRepository.save(socialEvent);
+		
+	}
+	
+	/**PREPARED - with all properties */
+	public void createSocialEvent(Map<String, String> singleValues,
+			Map<String, List<String>> multiValues,
+			String comment, 
+			Date date, int[] time,
+			int[] agesRange){
+		
+		List<SinglePropValue> singlePropValues = generateSingleValuesList(singleValues);
+		Set<MultiPropValue> multiPropValues = generateMultiValuesList( multiValues);
+
+		SocialEvent socialEvent = new SocialEvent();
+		socialEvent.setSinglePropsValuesList(singlePropValues);
+		socialEvent.setMultiPropsValuesSet(multiPropValues);
+		socialEvent.setLingarComment(comment);
+		socialEvent.setDate(date);
+		socialEvent.setInts(agesRange, time);
+		
 		socialEventRepository.save(socialEvent);
 		
 	}
@@ -266,7 +338,7 @@ public class EntitiesService {
 	/**PREPARED*/
 	public Set<MultiPropValue> generateMultiValuesList(Map<String, List<String>> values){
 		
-		System.out.println("*****************************START - trying new generate Multi values list******************************** ");
+		System.out.println("*****************************START - TRYING new generate Multi values list******************************** ");
 		/**Method explain : */
 		//U get Map with many entries that each have “propName” and “Values” – as strings 
 		//The method generates Set of MultiPropValues.
@@ -355,11 +427,66 @@ public class EntitiesService {
 		}
 		
 		
-		System.out.println("*****************************END - trying new generate Multi values list******************************** ");
+		System.out.println("*****************************END - TRYING new generate Multi values list******************************** ");
 
 		return multiPropValues;
 		
 	}
+	String[] a = {"eventName",
+			"isOrganizer",
+			"publisherName",
+			"address",
+			"shortDescription",
+			"longDescription",
+			"eventLink",
+			"imgUrl",
+			"price"};
+	public void create10EventsMock(){
+		System.out.println("Creating 10 event Mocks");
+		EntitiesServiceHelper.create10SocialEventMock(this);
+		
+		
+		
+	}
+	
+	public void displayEventsShort(List<SocialEvent> events){
+		//EntitiesServiceHelper.displayShortsEvents((List<SocialEvent>)socialEventRepository.findAll());
+		//List<SocialEvent> events = (List<SocialEvent>)socialEventRepository.findAll();
+		for (SocialEvent event : events){
+			System.out.println("ID = " +event.getId() + " , comment --> " + event.getLingarComment());
+			System.out.println("Event-name : " );
+			//System.out.println(event.getSinglePropsValuesList());
+			List<SinglePropValue> singlesValue = event.getSinglePropsValuesList();
+			
+			for(SinglePropValue s :singlesValue){
+				if(s.getSinglePropName().getPropName().equals("eventName")){
+					System.out.println(s.getPropValue());
+					break;
+				}
+				
+			}
+			
+			System.out.println("From age " +  event.getFromAge() + " to age : " + event.getToAge() 
+			 + "\nIn date : " + event.getDate() + "\nComment: " +  event.getLingarComment());
+			Set<MultiPropValue> multies = event.getMultiPropsValuesSet();
+			for(MultiPropValue multiProp : multies){
+				//area , jewLvlKeep, eventType
+				String name = multiProp.getMultiPropName().getMultiName();
+				if (name .equals("eventType")
+						|| name .equals("jewLvlKeep") 
+						|| name .equals("area")){
+					System.out.println(name + ": " + multiProp.getPropValue() );
+					
+				}
+				//System.out.println();
+			}
+			
+			
+			System.out.println("*********************************");
+		}
+		
+	}
+	
 	
 	
 	public void trying1(){
@@ -388,17 +515,17 @@ public class EntitiesService {
 		SocialEvent s1 = new SocialEvent();
 		s1.setLingarComment("multi event 1");
 		//s1.setMultiValuesList(multiValuesList);multiValuesSet
-		s1.setLingarValuesList(multiValuesSet);
+		s1.setMultiPropsValuesSet(multiValuesSet);
 		socialEventRepository.save(s1);
 		
 		
 		//saving another event		
 		SocialEvent s2 = new SocialEvent();
 		s2.setLingarComment("multi event 2");
-		s2.setLingarValuesList(multiValuesSet);
+		s2.setMultiPropsValuesSet(multiValuesSet);
 		//s2.setMultiValuesList(multiValuesList);
 		//socialEventRepository.save(s2); - here it's make problem 
-		s2.setLingarValuesList(multiValuesSet);
+		s2.setMultiPropsValuesSet(multiValuesSet);
 		socialEventRepository.save(s2);
 		
 		
@@ -417,18 +544,18 @@ public class EntitiesService {
 		
 		SocialEvent s3 = new SocialEvent();
 		s3.setLingarComment("multi event 3");
-		s3.setLingarValuesList(multiValuesSet2);
+		s3.setMultiPropsValuesSet(multiValuesSet2);
 		socialEventRepository.save(s3);
 		
-		//Trying with Set of SEt
+		//TRYING with Set of SEt
 		multiValuesSet2.addAll(multiValuesSet);
 		System.out.println(multiValuesSet2);
 		SocialEvent s4 = new SocialEvent();
 		s4.setLingarComment("multi event 4");
-		s4.setLingarValuesList(multiValuesSet2);
+		s4.setMultiPropsValuesSet(multiValuesSet2);
 		socialEventRepository.save(s4);
 		
-		System.out.println("Trying MultiPropValuesGenerator : ");
+		System.out.println("TRYING MultiPropValuesGenerator : ");
 		
 		//Mock Data for testing - suppose to came from parameters
 		Map<String, List<String>> values2 = new HashMap<>();
@@ -455,4 +582,446 @@ public class EntitiesService {
 		generateMultiValuesList(values2);
 
 	}
+	
+	public void trying2(){
+		System.out.println("Test the social-event Generator. \n create two events with that ... ");
+		Map<String, String> singleValues = new TreeMap<>();
+		Map<String, List<String>> multiValues = new TreeMap<>();
+		//List<String> innerValues = new ArrayList<>();
+		
+		singleValues.put("name", "great party2");
+		singleValues.put("address", "Tel Aviv");
+		System.out.println(singleValues);
+		
+		List<String> innerValues = new ArrayList<>();
+		
+		//adding some props of "EventType"
+		innerValues.add("multi trip");
+		innerValues.add("simple trip");
+		innerValues.add("lecture");
+				
+		multiValues.put("EventTypeMulti", innerValues);
+		
+		//adding some props of "matchingIdea"
+		innerValues = new ArrayList<>();
+		
+		innerValues.add("spontanic");
+		innerValues.add("Connector");
+		innerValues.add("Saving details");
+		innerValues.add("DANCING");
+
+		
+		multiValues.put("matchingIdea", innerValues);
+		
+		createSocialEvent(singleValues, multiValues, "event1");
+		
+		//creating one more
+		
+		singleValues.put("name", "Holiday trip 2");
+		singleValues.put("address", "jerusalem");
+		System.out.println(singleValues);
+		
+		innerValues.remove(2);
+		System.out.println(multiValues);
+		innerValues = new ArrayList<>();
+		
+		innerValues.add("gaming");
+		innerValues.add("Meeting");
+		multiValues.put("eventTypeMulti", innerValues);
+		createSocialEvent(singleValues, multiValues, "event2");
+		
+
+		singleValues.put("name", "Resterunt");
+		singleValues.put("address", "Holonn");
+		innerValues.remove(1);
+		innerValues.add("vaacation");
+		innerValues = new ArrayList<>();
+		
+		innerValues.add("Connector");
+		innerValues.add("Spontanic");
+		multiValues.put("matchingIdea", innerValues);
+		createSocialEvent(singleValues, multiValues, "event3");
+		
+		//System.out.println(socialEventRepository.findAll());
+		
+		
+		
+		
+
+	}
+	
+	public void trying3(){
+		
+		System.out.println("\n*****************************TRYING - 3 *******************************************\n");
+		
+		System.out.println("U can see here I get all elements (socialEvents) That have in their array (multiProps) \n "
+				+ "The provided value of possible element. ");
+		System.out.println("TRYING to find element from the multiPropValues : ");
+		String name1, value1;
+		Set<MultiPropValue> m1 = new HashSet<>();
+		name1 = "EventTypeMulti"; value1 = "multi party";
+		System.out.println("TRYING to get the prop Value : " + name1 + " - " + value1);
+		MultiPropValue m = multiPropValueRepository.findByPropValueAndMultiPropNameMultiName(value1, name1);
+		m1.add(m);
+		System.out.println(m);
+		List<SocialEvent> s1 = socialEventRepository.findByMultiPropsValuesSetIn(m);
+		System.out.println(s1);
+		
+		
+		
+		System.out.println("TRYING to find element from the multiPropValues : ");
+		
+		name1 = "matchingIdea"; value1 = "spontanic";
+		System.out.println("TRYING to get the prop Value : " + name1 + " - " + value1);
+		m = multiPropValueRepository.findByPropValueAndMultiPropNameMultiName(value1, name1);
+		System.out.println(m);
+		List<SocialEvent> s2 = socialEventRepository.findByMultiPropsValuesSetIn(m);
+		System.out.println(s2);
+		
+		System.out.println("What's happen if this property not exist ? ");
+		name1 = "not exist"; value1 = "spontanic";
+		System.out.println("TRYING to get the prop Value : " + name1 + " - " + value1);
+		m = multiPropValueRepository.findByPropValueAndMultiPropNameMultiName(value1, name1);
+		System.out.println(m);
+		//U here - greate - it's work - tomorrow try to do that with list of array . If it's work  - u close the issue of the multi. 
+		//U remain with the range and date. I assume it's work but the truth it will be very long. 
+		//Maybe try to do named Query. U need to practice it too. 
+		m1 = new HashSet<>();
+		m1.add(m);
+		Set <MultiPropValue >m3 = new HashSet<>();
+		System.out.println("adding some properties");
+		m3.add(multiPropValueRepository.findByPropValueAndMultiPropNameMultiName("multi trip", "EventTypeMulti"));
+		m3.add(multiPropValueRepository.findByPropValueAndMultiPropNameMultiName("connector", "matchingIdea"));
+		//m3.add(multiPropValueRepository.findByPropValueAndMultiPropNameMultiName("multi trip", "EventTypeMulti"));
+		System.out.println(m3);
+
+		MultiPropValue m2 = new MultiPropValue();
+		System.out.println("TRYING -2  with set of values \n" + socialEventRepository.findByMultiPropsValuesSetIn(m3));
+		System.out.println("Should return 23,28,32 only ");
+		System.out.println("But it's work with or so it's return each element that contain one of them. ");
+	}
+
+	public void draftTrying (){
+		System.out.println(   singlePropValueRepository.findBySinglePropNamePropName("eventName")    );
+		//System.out.println(   singlePropValueRepository.findBySinglePropNamePropNameAndSocialEvnetId("eventName", 41L)    );
+		System.out.println("the result of the query:");
+		System.out.println(socialEventRepository.tryQuery2("eventName", 41));
+		System.out.println("the result of the query 3:");
+		//System.out.println(socialEventRepository.tryQuery3("eventName", 41));
+
+	}
+	
+	public void tryingFilter(){
+		Map<String, List<String>> passedMultiValues = new TreeMap<String, List<String>>(EntitiesService.MULTI_PROPS_VALUES);// = new TreeMap<String, List<String>>(EntitiesService.MULTI_PROPS_VALUES);
+		//Copying MultiValues - not what u need. U need to generate List of MultiProps
+		for (Map.Entry<String, List<String>> entry : EntitiesService.MULTI_PROPS_VALUES.entrySet())
+	    {
+			passedMultiValues.put(entry.getKey(),
+	           // Or whatever List implementation you'd like here.
+	           new ArrayList<String>(entry.getValue()));
+	    }
+		
+		Map<String, List<String>> passedMultiValues2 = new TreeMap<>();
+		List<String> myList = passedMultiValues.get("eventType");
+		myList.remove(3);		myList.remove(2);		myList.remove(0);
+		passedMultiValues2.put("eventType", myList);
+		
+		/*
+		Set<MultiPropValue> list1 = new HashSet<>();
+		MultiPropName propName = new MultiPropName("eventType");
+		list1.add(new MultiPropValue(propName, "meeting"));
+		System.out.println("The filter - only meetings :");
+		
+		*/
+		
+		//generate from the values - list of MultiPropValues
+		HashSet<MultiPropValue> list2 = (HashSet<MultiPropValue>)generateMultiValuesList(passedMultiValues2);
+		List<MultiPropValue> list3 = new ArrayList<>(list2);
+		System.out.println("list2 = " + list2);
+		
+		//System.out.println(socialEventRepository.filterOne(list2));
+		//System.out.println(socialEventRepository.filterTwo(list3.get(0)));
+		List <SocialEvent> eventsList = socialEventRepository.findByMultiPropsValuesSetIn(list2);
+		System.out.println("Call to the derived method  : \n" 
+		); 
+		
+		displayEventsShort(eventsList);
+		
+		//TRYING filter 3 
+		eventsList = socialEventRepository.filter3(list3.get(0));
+		System.out.println("filter 3 - \n" );
+		displayEventsShort(eventsList);
+		
+		list3 = new ArrayList<>(list2);
+		passedMultiValues = new TreeMap<String, List<String>>(EntitiesService.MULTI_PROPS_VALUES);// = new TreeMap<String, List<String>>(EntitiesService.MULTI_PROPS_VALUES);
+		//Copying MultiValues - not what u need. U need to generate List of MultiProps
+		for (Map.Entry<String, List<String>> entry : EntitiesService.MULTI_PROPS_VALUES.entrySet())
+	    {
+			passedMultiValues.put(entry.getKey(),
+	           // Or whatever List implementation you'd like here.
+	           new ArrayList<String>(entry.getValue()));
+	    }
+		System.out.println(passedMultiValues.get("eventType"));
+		passedMultiValues.get("eventType").remove(3);passedMultiValues.get("eventType").remove(1);
+		
+		//eventsList = socialEventRepository.filter4(list3.get(0));
+		list2 = (HashSet<MultiPropValue>)generateMultiValuesList(passedMultiValues);
+		list3 = new ArrayList<>(list2);
+
+		System.out.println("filter 4 (0nly games ,or  speedate - \n" );
+		//System.out.println(" list 3 " + list3.get(index));
+		eventsList = socialEventRepository.filter4(list3);
+		displayEventsShort(eventsList);
+		
+	}
+
+	public void tryingFilter2(){
+		System.out.println("*******************TRYING filter 2 *****************************");
+		List<SocialEvent> allEvents = (List<SocialEvent>)socialEventRepository.findAll();
+		//get the initial Multi props as 3 maps
+		//copy the lists and pass them as Map
+		
+		//on event type : 
+		List<String> work = MULTI_PROPS_VALUES.get("eventType");
+		Map<String, List<String>> mapWork = new TreeMap<>();
+		mapWork.put("eventType", work);
+		List<MultiPropValue> eventTypeInitial = new ArrayList<>(generateMultiValuesList(mapWork));
+		
+		//on jewLvlKeep: 
+		 work = MULTI_PROPS_VALUES.get("jewLvlKeep");
+		mapWork = new TreeMap<>();
+		mapWork.put("jewLvlKeep", work);
+		List<MultiPropValue> jewLvlKeepInitial =  new ArrayList<>(generateMultiValuesList(mapWork));
+		
+		//on area: 
+		 work = MULTI_PROPS_VALUES.get("area");
+		mapWork = new TreeMap<>();
+		mapWork.put("area", work);
+		List<MultiPropValue> areaInitial =  new ArrayList<>(generateMultiValuesList(mapWork));
+		
+		System.out.println("The initial Lists : \nEvent type =  " + eventTypeInitial  
+				+ "\nJew Level Keep -  " + jewLvlKeepInitial 
+				+"\nAreas - " + areaInitial);
+		
+		//generate 3 list to work with and they can get initials always : 
+		List <MultiPropValue> eventTypes, jewLvls, areas;
+		List <SocialEvent> resultEvents;
+		
+		//START TEST 
+		//Those steps need to be done in each test . 
+		eventTypes = new ArrayList<>(eventTypeInitial); jewLvls = new ArrayList<>(jewLvlKeepInitial); areas= new ArrayList<>(areaInitial);
+		
+		/*
+		 * 
+		 * Here u can see how I parse the properties into string. 
+		 */
+		//List<Integer> idList = students.stream().map(Student::getId).collect(Collectors.toList());
+		List<String > properties  = areas.stream().map(MultiPropValue::getPropValue).collect(Collectors.toList());
+		//List<String> strProps = properties.stream().map(MultiPropName::getMultiName).collect(Collectors.toList());
+		System.out.println(properties);
+		
+		//eventType = [meeting, vaacation, speedate, games]
+		//jewLvlKeep = [shabbat, noShabbat]
+		//area = [jerusalem, north, south, center]
+
+		
+		
+		eventTypes.remove(3);eventTypes.remove(0);
+		System.out.println("Filter 4 with those types : "  + eventTypes);
+		
+		//get the events with the fiter :
+		resultEvents = socialEventRepository.filter4(eventTypes);
+		displayEventsShort(resultEvents);
+		
+		System.out.println("And without duplicates... : (filter 5 with DISTINCT " );
+		
+		//get the events with the fiter :
+		resultEvents = socialEventRepository.filter5(eventTypes);
+		displayEventsShort(resultEvents);
+		
+		System.out.println("And check if I fix filter two  : " + socialEventRepository.filterTwoFixed(eventTypes.get(0)));
+		
+		System.out.println("YEAH!!!!!!!!!!!!");
+		///END TEST 1
+		
+		
+		//START TEST  2
+		//Those steps need to be done in each test . 
+		System.out.println("Test 2 now I am tryng to filter with more . TRYING to find only those from the south .  ");
+		eventTypes = new ArrayList<>(eventTypeInitial); jewLvls = new ArrayList<>(jewLvlKeepInitial); areas= new ArrayList<>(areaInitial);
+		
+		//eventType = [meeting, vaacation, speedate, games]
+		//jewLvlKeep = [shabbat, noShabbat]
+		//area = [jerusalem, north, south, center]
+
+		
+		
+		eventTypes.remove(3);eventTypes.remove(0);
+		areas.remove(3);areas.remove(1);areas.remove(0);
+		System.out.println("Filter 6 with those types : "  + eventTypes +  " and those areas : \n" + areas );
+		System.out.println("Filter 5 is work -- \n1- with par1 - \n" +socialEventRepository.filter5(eventTypes) 
+		+ "\n2- with par2 - \n" +  socialEventRepository.filter5(areas) );
+		  //get the events with the fiter :
+		resultEvents = socialEventRepository.filter6(eventTypes,areas);
+
+		
+		displayEventsShort(resultEvents);
+		
+		System.out.println("TRYING filter 8");
+
+		eventTypes.remove(0);
+		System.out.println("Try again : those are the events with type " +  eventTypes.get(0).getPropValue());
+		System.out.println(eventTypes);
+
+		resultEvents = socialEventRepository.filter5(eventTypes);
+		
+		displayEventsShort(resultEvents);
+		//System.out.println(resultEvents);
+		//displayEventsShort(socialEventRepository.filter4(areas));
+		
+		System.out.println("Now I am TRYING to get only from those that in the south : "
+				);
+		resultEvents = socialEventRepository.filter8(eventTypes, areas);
+		displayEventsShort(resultEvents);
+
+		System.out.println();
+		
+		///END TEST
+		
+
+		//START TEST  3
+		//Those steps need to be done in each test . 
+		System.out.println("Test 3 checking again this :  ");
+		eventTypes = new ArrayList<>(eventTypeInitial); jewLvls = new ArrayList<>(jewLvlKeepInitial); areas= new ArrayList<>(areaInitial);
+		
+		//eventType = [meeting, vaacation, speedate, games]
+		//jewLvlKeep = [shabbat, noShabbat]
+		//area = [jerusalem, north, south, center]
+
+		System.out.println("all events : \n" );
+		displayEventsShort(allEvents);
+		eventTypes.remove(2);//eventTypes.remove(0);
+		areas.remove(2);areas.remove(1);//areas.remove(0);
+		System.out.println("Filter 8 with those types : "  + eventTypes +  "\n and those areas : \n" + areas );
+		System.out.println("Those are the events only with the eventType : ");
+		resultEvents = socialEventRepository.filter5(eventTypes);
+		displayEventsShort(resultEvents);
+
+		//get the events with the fiter :
+		System.out.println("************* AND those only from the the areas ");
+		resultEvents = socialEventRepository.filter8(eventTypes,areas);
+		displayEventsShort(resultEvents);
+		
+		System.out.println("IS WORK ?  -  YEAH!! " );
+		
+		//END of TEST 3
+		
+
+		
+		//START TEST 4
+		//Those steps need to be done in each test . 
+		System.out.println("Test 4 NOW with JewLvlKeep :  same as before but filter also by jew Level keep");
+		eventTypes = new ArrayList<>(eventTypeInitial); jewLvls = new ArrayList<>(jewLvlKeepInitial); areas= new ArrayList<>(areaInitial);
+		
+		//eventType = [meeting, vaacation, speedate, games]
+		//jewLvlKeep = [shabbat, noShabbat]
+		//area = [jerusalem, north, south, center]
+
+		System.out.println("all events : \n" );
+		displayEventsShort(allEvents);
+		eventTypes.remove(2);//eventTypes.remove(0);
+		areas.remove(3);areas.remove(0);//areas.remove(0);
+		jewLvls.remove(0);
+		System.out.println("Filter 9 with those types : "  + eventTypes +  "\n and those areas : \n" + areas  + "and that is the jew keep level\n"
+				+ jewLvls);
+		System.out.println("Those are the events only with the eventType : ");
+		resultEvents = socialEventRepository.filter5(eventTypes);
+		displayEventsShort(resultEvents);
+		
+		//get the events with the fiter :
+		System.out.println("************* AND those only from the the areas ");
+		//resultEvents = socialEventRepository.filter9(eventTypes,jewLvls,areas);
+		resultEvents = socialEventRepository.filter8(eventTypes,areas);
+		System.out.println(resultEvents);
+		displayEventsShort(resultEvents);
+		
+		//get the events with the fiter :
+		System.out.println("************* AND those only from the the areas and by jew level keep ");
+		//resultEvents = socialEventRepository.filter9(eventTypes,jewLvls,areas);
+		resultEvents = socialEventRepository.filter10(eventTypes,jewLvls,areas);
+		System.out.println(resultEvents);
+		displayEventsShort(resultEvents);
+		resultEvents = socialEventRepository.filter9(eventTypes,jewLvls,areas);
+		
+		//get the events with the fiter :
+		System.out.println("************* AND with BETWEEN ");
+		//resultEvents = socialEventRepository.filter9(eventTypes,jewLvls,areas);
+		resultEvents = socialEventRepository.filter10(eventTypes,jewLvls,areas);
+		System.out.println(resultEvents);
+		displayEventsShort(resultEvents);
+		resultEvents = socialEventRepository.filter12(eventTypes,jewLvls,areas);
+		
+		int from = 55; int to = 70;
+		
+		System.out.println("TRYING to choose the .from age between " + from + " to " + to);
+		resultEvents = socialEventRepository.filter13(from, to);
+		displayEventsShort(resultEvents);
+		
+		
+		System.out.println("TRYING to choose the with overlap range of  " + from + " to " + to);
+		resultEvents = socialEventRepository.filter14(from, to);
+		displayEventsShort(resultEvents);
+		
+		//System.out.println("IS WORK ?  -  YEAH!! " );
+		
+		//END of TEST 3
+		
+		System.out.println("TRYING to choose the with overlap range of  " + from + " to " + to);
+		resultEvents = socialEventRepository.filter14(from, to);
+		displayEventsShort(resultEvents);
+		
+		//creating dates to test
+		Date fromDate = new Date();
+		Date toDate = new Date ();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(2019, 8, 16, 0, 0);//--> from date 
+		fromDate = cal.getTime();
+		
+		cal.set(2019, 11, 26, 13, 40);//--> to date 
+		toDate = cal.getTime();
+		
+		System.out.println("TRYING to choose the datee in range of  " + fromDate + "\n to " + toDate);
+		resultEvents = socialEventRepository.filter15(fromDate, toDate);
+		displayEventsShort(resultEvents);
+		
+		
+		
+		
+
+		
+		
+
+		
+		
+		
+		if(true)return;
+		
+		/*
+		//Copying MultiValues - not what u need. U need to generate List of MultiProps
+		Map<String, List<String>> passedMultiValues = new TreeMap<>();
+		
+		for (Map.Entry<String, List<String>> entry : EntitiesService.MULTI_PROPS_VALUES.entrySet())
+	    {
+			passedMultiValues.put(entry.getKey(),
+	           // Or whatever List implementation you'd like here.
+	           new ArrayList<String>(entry.getValue()));
+	    }
+		
+		passedMultiValues.remove(")
+		*/
+		
+		
+	}
+
 }
