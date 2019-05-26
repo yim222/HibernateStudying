@@ -1040,7 +1040,14 @@ public class EntitiesService {
 		displayEventsShort(resultEvents);
 		*/
 		
-		
+		System.out.println("cal ? + \n" + cal.get(1));
+		cal =Calendar .getInstance();
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		Date currentDate = cal.getTime();
+		resultEvents = socialEventRepository.findByDateGreaterThanEqualOrderByDateAsc(currentDate);
+		displayEventsShort(resultEvents);
+
 		
 		
 		///END TEST

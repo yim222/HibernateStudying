@@ -193,6 +193,8 @@ AND
 			int fromAge, int toAge,
 			Date from , Date to);
 	
+	//Find all greater than or equal for today --- >> U need to pass the hours reset for not lose the events that have earlier hour. 
+	List<SocialEvent> findByDateGreaterThanEqualOrderByDateAsc(Date date);
 	
 	
 	

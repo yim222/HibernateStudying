@@ -198,7 +198,7 @@ public class EntitiesServiceHelper {
 		agesRange = new int[]{20, 35};//from to 
 		time = new int[] {20, 30}; //hour, minute
 		
-		cal.set(2019, 10, 26); // y-m-d
+		cal.set(2019, 3, 26); // y-m-d
 		date = cal.getTime();
 		
 		
@@ -323,7 +323,7 @@ public class EntitiesServiceHelper {
 		
 		
 		//Write your comment
-		ent.createSocialEvent(singleValues, passedMultiValues, "Mock - 2", date, time, agesRange);
+		ent.createSocialEvent(singleValues, passedMultiValues, "Mock - 5", date, time, agesRange);
 		
 		//*************End of Event Template******************///
 		
