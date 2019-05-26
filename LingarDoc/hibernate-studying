@@ -2,12 +2,9 @@ Hibernate Studying - Main
 
 From now it's about part 2 
 
-Lesson  -  8-3
+Lesson  -  8-4
 
 
 TUTORIAL ABOUT MY PROJECT QUERIES WITH SPRING, JPA, HIBENRATE, AND THE REPOSISTORY
 
-In this lesson U can see how I defined Queries methods, in the social -event-repo 
-and test them on the Entities services . filter2 / 
-
-See that I created - one filter that filter those by multiPropsObject, one by overlap range of ages, and one between dates. 
+In this lesson I will mixed together the last filters, and make them order by the new date. 

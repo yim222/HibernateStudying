@@ -1,2 +1,126 @@
 How I can use inteface without assign it a class that implement it ? 
 At the load data look. 
+unexpected token: null near line 1, column 267 [SELECT DISTINCT e from com.lingar.SocialEvents.entities.SocialEvent e join e.multiPropsValuesSet m join e.multiPropsValuesSet c join e.multiPropsValuesSet a where(( m in ?1 AND   c in ?2 AND a in ?3) AND ((e.fromAge BETWEEN ?4 AND ?5) OR (e.toAge BETWEEN ?4 AND ?5))]
+
+SELECT DISTINCT e from com.lingar.SocialEvents.entities.SocialEvent e join e.multiPropsValuesSet m join e.multiPropsValuesSet c join e.multiPropsValuesSet a where(( m in ?1 AND   c in ?2 AND a in ?3) AND ((e.fromAge BETWEEN ?4 AND ?5) OR (e.toAge BETWEEN ?4 AND ?5))]
+
+
+ID = 41 , comment --> Mock-1
+Event-name : 
+1-Lingar meeting
+From age 24 to age : 60
+In date : 2019-06-26 16:41:17.0
+Comment: Mock-1
+area: jerusalem
+eventType: vaacation
+jewLvlKeep: shabbat
+eventType: games
+*********************************
+ID = 49 , comment --> Mock - 2
+Event-name : 
+2-Singles Gaming
+From age 30 to age : 44
+In date : 2019-06-16 16:41:17.0
+Comment: Mock - 2
+eventType: meeting
+jewLvlKeep: shabbat
+area: south
+eventType: games
+*********************************
+ID = 57 , comment --> Mock - 3
+Event-name : 
+2-Dating Journey
+From age 20 to age : 35
+In date : 2019-11-26 16:41:17.0
+Comment: Mock - 3
+area: north
+eventType: meeting
+jewLvlKeep: noShabbat
+*********************************
+ID = 65 , comment --> Mock - 4
+Event-name : 
+4-Beach Dating
+From age 40 to age : 64
+In date : 2019-07-26 16:41:17.0
+Comment: Mock - 4
+jewLvlKeep: shabbat
+eventType: speedate
+area: center
+*********************************
+ID = 73 , comment --> Mock - 2
+Event-name : 
+5-Party
+From age 19 to age : 28
+In date : 2019-07-01 16:41:17.0
+Comment: Mock - 2
+eventType: vaacation
+jewLvlKeep: shabbat
+area: south
+jewLvlKeep: noShabbat
+*********************************
+ID = 81 , comment --> Mock - 6
+Event-name : 
+6-Meyzam 
+From age 19 to age : 28
+In date : 2019-10-21 16:41:17.0
+Comment: Mock - 6
+jewLvlKeep: shabbat
+area: south
+jewLvlKeep: noShabbat
+eventType: games
+*********************************
+
+//without order
+
+ID = 41 , comment --> Mock-1
+Event-name : 
+1-Lingar meeting
+From age 24 to age : 60
+In date : 2019-06-26 17:57:48.0
+Comment: Mock-1
+area: jerusalem
+eventType: vaacation
+jewLvlKeep: shabbat
+eventType: games
+*********************************
+ID = 49 , comment --> Mock - 2
+Event-name : 
+2-Singles Gaming
+From age 30 to age : 44
+In date : 2019-06-16 17:57:48.0
+Comment: Mock - 2
+eventType: meeting
+jewLvlKeep: shabbat
+area: south
+eventType: games
+*********************************
+ID = 57 , comment --> Mock - 3
+Event-name : 
+2-Dating Journey
+From age 20 to age : 35
+In date : 2019-11-26 17:57:48.0
+Comment: Mock - 3
+area: north
+eventType: meeting
+jewLvlKeep: noShabbat
+*********************************
+ID = 65 , comment --> Mock - 4
+Event-name : 
+4-Beach Dating
+From age 40 to age : 64
+In date : 2019-07-26 17:57:48.0
+Comment: Mock - 4
+jewLvlKeep: shabbat
+eventType: speedate
+area: center
+*********************************
+ID = 73 , comment --> Mock - 2
+Event-name : 
+5-Party
+From age 19 to age : 28
+In date : 2019-07-01 17:57:48.0
+Comment: Mock - 2
+eventType: vaacation
+jewLvlKeep: shabbat
+area: south
+jewLvlKeep: noShabbat

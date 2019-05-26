@@ -985,10 +985,10 @@ public class EntitiesService {
 		Date toDate = new Date ();
 		
 		Calendar cal = Calendar.getInstance();
-		cal.set(2019, 8, 16, 0, 0);//--> from date 
+		cal.set(2019, 5, 18, 0, 0);//--> from date 
 		fromDate = cal.getTime();
 		
-		cal.set(2019, 11, 26, 13, 40);//--> to date 
+		cal.set(2019, 11, 26, 23, 40);//--> to date 
 		toDate = cal.getTime();
 		
 		System.out.println("TRYING to choose the datee in range of  " + fromDate + "\n to " + toDate);
@@ -996,7 +996,54 @@ public class EntitiesService {
 		displayEventsShort(resultEvents);
 		
 		
+		//START TEST  4
+		//Those steps need to be done in each test . 
+		System.out.println("Test 4 now I am tryng to filter with all together . .  ");
+		eventTypes = new ArrayList<>(eventTypeInitial); jewLvls = new ArrayList<>(jewLvlKeepInitial); areas= new ArrayList<>(areaInitial);
 		
+		//eventType = [meeting, vaacation, speedate, games]
+		//jewLvlKeep = [shabbat, noShabbat]
+		//area = [jerusalem, north, south, center]
+
+		
+		
+		eventTypes.remove(3);//eventTypes.remove(1);//eventTypes.remove(1);
+		//areas.remove(3);areas.remove(1);areas.remove(0);
+		//jewLvls.remove(1);
+		
+		int fromAge = 20 ; int toAge = 120;
+		cal.set(2019, 1, 18, 0, 0);//--> from date 
+		fromDate = cal.getTime();
+		
+		cal.set(2019, 11, 26, 23, 40);//--> to date 
+		toDate = cal.getTime();
+		
+		
+		System.out.println("Filter  with those types : \n"  + eventTypes +  " \nand those areas : \n" + areas
+				+  "\n and those jew level  : \n" + jewLvls 
+				+ "\n within this range : " + fromAge + " to " + toAge
+				+"\n in the dates : " + fromDate + " to " + toDate);
+		
+		
+		System.out.println("First with just the multi props : ");
+		resultEvents = socialEventRepository.filter10(eventTypes, areas, jewLvls);
+		displayEventsShort(resultEvents);
+		
+		System.out.println("Then with all : (ages and dates  ) ");
+		resultEvents = socialEventRepository.filter16(eventTypes, areas, jewLvls, fromAge, toAge, fromDate, toDate);
+		displayEventsShort(resultEvents);
+
+		System.out.println("not work well -AGAIN - WITH DATES!! \n now it works.");
+				
+		/*
+		resultEvents = socialEventRepository.filter15( fromDate, toDate);
+		displayEventsShort(resultEvents);
+		*/
+		
+		
+		
+		
+		///END TEST
 		
 
 		

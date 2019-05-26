@@ -119,7 +119,7 @@ AND
 			+ "where( "
 			+ "m in ?1"
 			+ " AND   c in ?2 "
-			+ "AND a in ?3)")//--- work ? 
+			+ "AND a in ?3)")//--- Yeah - works 
 	List<SocialEvent> filter10(List <MultiPropValue> eventTypes, List <MultiPropValue> areas, List <MultiPropValue> jewLvlKeep);
 		
 	
@@ -148,13 +148,20 @@ AND
 			+ "WHERE e.fromAge BETWEEN ?1 AND ?2")//--- work ? 
 	List<SocialEvent> filter13(int from , int to);
 	
-	//Filter with checking overlap range - real need
+	//Filter with checking overlap range - real need - ? WORK ? 
 	@Query("SELECT DISTINCT e from SocialEvent e "
 			
 			+ "WHERE (e.fromAge BETWEEN ?1 AND ?2) "
 			+ "OR (e.toAge BETWEEN ?1 AND ?2)")//--- work ? 
 	List<SocialEvent> filter14(int from , int to);
 	
+	//Filter with checking overlap range - real need - ? WORK ? - fixed think that yeah
+	@Query("SELECT DISTINCT e from SocialEvent e "
+			
+			+ "WHERE (e.fromAge BETWEEN ?1 AND ?2) "
+			+ "OR (e.toAge BETWEEN ?1 AND ?2 ) "
+			+ "OR (?1 BETWEEN e.fromAge AND e.toAge )")//--- work ? 
+	List<SocialEvent> filter141(int from , int to);
 	//Filter with date between - works - it include, but checking the time also . 
 	//U need to make sure that the pars have sent in the start or end of the day, and the creating of the time is at the middle of the day. 
 	
@@ -162,7 +169,31 @@ AND
 			
 			+ "WHERE (e.date BETWEEN ?1 AND ?2) ")
 			
-	List<SocialEvent> filter15(Date from , Date to);
+	List<SocialEvent> filter15(Date from , Date to); //WORKS !(SHOULD WORK) 
+	
+	//Here I will mix the things by all the filters. 
+	//Filter with three parameters + between ages 
+	@Query("SELECT DISTINCT e from SocialEvent e "
+			+ "join e.multiPropsValuesSet m "
+			+ "join e.multiPropsValuesSet c "
+			+ "join e.multiPropsValuesSet a "
+			+ "WHERE ( "
+			+ "m in ?1"
+			+ " AND   c in ?2 "
+			+ "AND a in ?3) "
+			+ "AND "
+			+ "((e.fromAge BETWEEN ?4 AND ?5) "
+			+ "OR (e.toAge BETWEEN ?4 AND ?5)"
+			+ "OR (?4 BETWEEN e.fromAge AND e.toAge )) "
+			+ "AND (e.date BETWEEN ?6 AND ?7) "
+			+ "ORDER BY e.date ASC")//--- work ? 
+	List<SocialEvent> filter16(
+			List <MultiPropValue> eventTypes,
+			List <MultiPropValue> areas, List <MultiPropValue> jewLvlKeep,
+			int fromAge, int toAge,
+			Date from , Date to);
+	
+	
 	
 	
 }
