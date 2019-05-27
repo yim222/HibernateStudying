@@ -11,69 +11,8 @@ import com.lingar.SocialEvents.entities.MultiPropValue;
 import com.lingar.SocialEvents.entities.SinglePropValue;
 import com.lingar.SocialEvents.entities.SocialEvent;
 
-public interface SocialEventRepository extends PagingAndSortingRepository<SocialEvent, Long>{
+public interface SocialEventRepositoryBeforeClean extends PagingAndSortingRepository<SocialEvent, Long>{
 	
-	
-	/***
-	
-	MAIN QUERIES 
-	
-	***/
-	
-	
-	/**
-	 * 
-	 * Description : 
-	 * The main filter method.
-	 * U need pass three List of MultiProps, two ints of age ranges, and two date. 
-	 * 
-	 * Note to pass the date at the edge of the day (start and end) in hours aspect, for not miss things. 
-	 * 
-	 * 
-	 * @param eventTypes - ALL EVENT TYPES 
-	 * @param areas
-	 * @param jewLvlKeep
-	 * @param fromAge
-	 * @param toAge
-	 * @param from
-	 * @param to
-	 * @return
-	 */
-	@Query("SELECT DISTINCT e from SocialEvent e "
-			+ "join e.multiPropsValuesSet m "
-			+ "join e.multiPropsValuesSet c "
-			+ "join e.multiPropsValuesSet a "
-			+ "WHERE ( "
-			+ "m in ?1"
-			+ " AND   c in ?2 "
-			+ "AND a in ?3) "
-			+ "AND "
-			+ "((e.fromAge BETWEEN ?4 AND ?5) "
-			+ "OR (e.toAge BETWEEN ?4 AND ?5)"
-			+ "OR (?4 BETWEEN e.fromAge AND e.toAge )) "
-			+ "AND (e.date BETWEEN ?6 AND ?7) "
-			+ "ORDER BY e.date ASC")//--- work ? 
-	List<SocialEvent> filter16Main(
-			List <MultiPropValue> eventTypes,
-			List <MultiPropValue> areas, List <MultiPropValue> jewLvlKeep,
-			int fromAge, int toAge,
-			Date from , Date to);
-	
-	//Find all greater than or equal for today --- >> U need to pass the hours reset for not lose the events that have earlier hour. 
-	List<SocialEvent> findByDateGreaterThanEqualOrderByDateAsc(Date date);
-		
-	
-	
-	
-	/***
-	 * STUDYING QUERIES 
-	
-	 */
-	
-	
-	
-	
-
 	//find by on of multi props values
 	//multiPropsValuesSet
 	List<SocialEvent> findByMultiPropsValuesSetIn(MultiPropValue m);
@@ -181,7 +120,7 @@ AND
 			+ "m in ?1"
 			+ " AND   c in ?2 "
 			+ "AND a in ?3)")//--- Yeah - works 
-	List<SocialEvent> filter10ByMultiProps(List <MultiPropValue> eventTypes, List <MultiPropValue> areas, List <MultiPropValue> jewLvlKeep);
+	List<SocialEvent> filter10(List <MultiPropValue> eventTypes, List <MultiPropValue> areas, List <MultiPropValue> jewLvlKeep);
 		
 	
 	//@Query("select p from Person p left join p.qualifications q where q.experienceInMonths > ?1 and q.experienceInMonths < ?2 and q.name = ?3")
@@ -213,7 +152,7 @@ AND
 	@Query("SELECT DISTINCT e from SocialEvent e "
 			
 			+ "WHERE (e.fromAge BETWEEN ?1 AND ?2) "
-			+ "OR (e.toAge BETWEEN ?1 AND ?2)")//--- work not see 141 ? 
+			+ "OR (e.toAge BETWEEN ?1 AND ?2)")//--- work ? 
 	List<SocialEvent> filter14(int from , int to);
 	
 	//Filter with checking overlap range - real need - ? WORK ? - fixed think that yeah
@@ -222,7 +161,7 @@ AND
 			+ "WHERE (e.fromAge BETWEEN ?1 AND ?2) "
 			+ "OR (e.toAge BETWEEN ?1 AND ?2 ) "
 			+ "OR (?1 BETWEEN e.fromAge AND e.toAge )")//--- work ? 
-	List<SocialEvent> filter141ByOverlapRange(int from , int to);
+	List<SocialEvent> filter141(int from , int to);
 	//Filter with date between - works - it include, but checking the time also . 
 	//U need to make sure that the pars have sent in the start or end of the day, and the creating of the time is at the middle of the day. 
 	
@@ -230,8 +169,32 @@ AND
 			
 			+ "WHERE (e.date BETWEEN ?1 AND ?2) ")
 			
-	List<SocialEvent> filter15BetweenDate(Date from , Date to); //WORKS !(SHOULD WORK) 
+	List<SocialEvent> filter15(Date from , Date to); //WORKS !(SHOULD WORK) 
 	
+	//Here I will mix the things by all the filters. 
+	//Filter with three parameters + between ages 
+	@Query("SELECT DISTINCT e from SocialEvent e "
+			+ "join e.multiPropsValuesSet m "
+			+ "join e.multiPropsValuesSet c "
+			+ "join e.multiPropsValuesSet a "
+			+ "WHERE ( "
+			+ "m in ?1"
+			+ " AND   c in ?2 "
+			+ "AND a in ?3) "
+			+ "AND "
+			+ "((e.fromAge BETWEEN ?4 AND ?5) "
+			+ "OR (e.toAge BETWEEN ?4 AND ?5)"
+			+ "OR (?4 BETWEEN e.fromAge AND e.toAge )) "
+			+ "AND (e.date BETWEEN ?6 AND ?7) "
+			+ "ORDER BY e.date ASC")//--- work ? 
+	List<SocialEvent> filter16(
+			List <MultiPropValue> eventTypes,
+			List <MultiPropValue> areas, List <MultiPropValue> jewLvlKeep,
+			int fromAge, int toAge,
+			Date from , Date to);
+	
+	//Find all greater than or equal for today --- >> U need to pass the hours reset for not lose the events that have earlier hour. 
+	List<SocialEvent> findByDateGreaterThanEqualOrderByDateAsc(Date date);
 	
 	
 	
