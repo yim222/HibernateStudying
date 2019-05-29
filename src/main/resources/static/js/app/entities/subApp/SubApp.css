@@ -1,0 +1,124 @@
+html{
+  direction: rtl;
+
+}
+body{
+  background-color: blue;
+}
+
+
+.a:nth-child(odd){
+
+  background-color:yellow;
+}
+.a:nth-child(even){
+  background: purple;
+
+}
+div{
+  text-align: right;
+}
+
+body{
+  background-color: azure;
+  font-size: 10px;
+
+}
+h3{
+  font-size: 14px;
+  font-weight: bold;
+}
+h4{
+  font-size: 100%;
+}
+/* Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+  body{
+    background-color: azure;
+  }
+
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 13px;
+  }
+  h3{
+    font-size: initial;
+  }
+
+ }
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+}
+
+/*custom style */
+.picture{
+  background-color: pink;
+}
+.hidden{
+  display:none;
+}
+.col{
+  /*border: solid black 0.5px;*/
+}
+
+.left-align{
+  text-align: left;
+}
+.item-label{
+  font-weight:bold;
+}
+
+.event-item{
+  border-radius: 5px;
+  border: solid black 1px;
+}
+.open-close{
+  border: solid black 1px;
+  background-color: black;
+  color: white;
+
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.items-data-row{
+  padding-right: 5px;
+}
+.items-data-row:nth-child(odd){
+
+  color:purple;
+}
+
+.items-data-row:nth-child(even){
+
+  color:black;
+}
+img {
+  width: 100px;;
+  float: right;
+  object-fit: cover;
+}
+.mobile-view img {
+  width: 100px;;
+  float: left;
+  object-fit: cover;
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 15px;
+  }
+}
+.filter{
+  background-image: linear-gradient(to right, #eaade6 , #ef09e0);
+}
+.yellow-font{
+  color:yellow;
+}

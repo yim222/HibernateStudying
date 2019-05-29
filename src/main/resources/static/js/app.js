@@ -4,7 +4,7 @@ import MainRouter from './app/routing/AppRouter'
 //const MainMenu = require('./app/views/MainMenu')
 import MainMenu from './app/views/MainMenu'
 import {BrowserRouter as Router} from 'react-router-dom';
-
+import SubApp from './app/entities/subApp/SubApp.js'
 
 const React = require('react');
 const ReactDOM = require('react-dom');

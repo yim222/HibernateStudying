@@ -696,7 +696,7 @@ public class EntitiesService {
 		System.out.println(m3);
 
 		MultiPropValue m2 = new MultiPropValue();
-		System.out.println("TRYING -2  with set of values \n" + socialEventRepository.findByMultiPropsValuesSetIn(m3));
+		//System.out.println("TRYING -2  with set of values \n" + socialEventRepository.findByMultiPropsValuesSetIn(m3));
 		System.out.println("Should return 23,28,32 only ");
 		System.out.println("But it's work with or so it's return each element that contain one of them. ");
 	}
@@ -741,13 +741,13 @@ public class EntitiesService {
 		
 		//System.out.println(socialEventRepository.filterOne(list2));
 		//System.out.println(socialEventRepository.filterTwo(list3.get(0)));
-		List <SocialEvent> eventsList = socialEventRepository.findByMultiPropsValuesSetIn(list2);
+		List <SocialEvent> eventsList = socialEventRepository.findByMultiPropsValuesSetIn(new MultiPropValue());
 		System.out.println("Call to the derived method  : \n" 
 		); 
 		
 		displayEventsShort(eventsList);
 		
-		//TRYING filter 3 
+		//TRYING filter 3  
 		eventsList = socialEventRepository.filter3(list3.get(0));
 		System.out.println("filter 3 - \n" );
 		displayEventsShort(eventsList);

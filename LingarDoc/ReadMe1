@@ -16,3 +16,8 @@ Crud and paging are also interface. U need to implement them, and make the metho
 But in fact we just extends this inteface too, and use it in the spring. 
 The difference between paging to the regular CRUD interface, that in the paging u can ask the page size by ?size=3 for example. 
 http://localhost:8080/api/socialEvents?size=2
+
+
+The project built based on that tutrial : 
+
+https://spring.io/guides/tutorials/react-and-spring-data-rest/
