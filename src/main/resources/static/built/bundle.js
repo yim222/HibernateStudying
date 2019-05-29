@@ -33433,6 +33433,151 @@ ReactDOM.render(React.createElement(App, null), document.getElementById('react')
 
 /***/ }),
 
+/***/ "./src/main/resources/static/js/app/entities/components/ChessSquare.js":
+/*!*****************************************************************************!*\
+  !*** ./src/main/resources/static/js/app/entities/components/ChessSquare.js ***!
+  \*****************************************************************************/
+/*! exports provided: ChessSquare */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChessSquare", function() { return ChessSquare; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../client */ "./src/main/resources/static/js/client.js");
+/* harmony import */ var _client__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_client__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _follow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../follow */ "./src/main/resources/static/js/follow.js");
+/* harmony import */ var _follow__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_follow__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+ //import {loadFromServer} from '../services/GetData'
+
+
+
+
+var when = __webpack_require__(/*! when */ "./node_modules/when/when.js");
+
+var root = '/api';
+var ChessSquare =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ChessSquare, _React$Component);
+
+  function ChessSquare(props) {
+    var _this;
+
+    _classCallCheck(this, ChessSquare);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ChessSquare).call(this));
+    _this.state = {
+      chessSquare2s: []
+    };
+    return _this;
+  }
+
+  _createClass(ChessSquare, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      /*
+      loadFromServer(2, "chessSquare2s")
+       .then(entityResponsePromises => {
+         return when.all(entityResponsePromises);
+       }).done(entityResponses => {
+         this.setState({
+           chessSquare2s: "entityResponses222",
+           attributes: Object.keys(this.schema.properties),
+           pageSize: 2, 
+           links: this.links
+         });
+       });
+       */
+      this.loadFromServer(5);
+      console.log(this.state.chessSquare2s, "this.state.chessSquare2s");
+    } //tag::follow-2[]
+
+  }, {
+    key: "loadFromServer",
+    value: function loadFromServer(pageSize) {
+      var _this2 = this;
+
+      _follow__WEBPACK_IMPORTED_MODULE_2___default()(_client__WEBPACK_IMPORTED_MODULE_1___default.a, root, [{
+        rel: 'chessSquare2s',
+        params: {
+          size: pageSize
+        }
+      }]).then(function (chessSquare2Collection) {
+        return _client__WEBPACK_IMPORTED_MODULE_1___default()({
+          method: 'GET',
+          path: chessSquare2Collection.entity._links.profile.href,
+          headers: {
+            'Accept': 'application/schema+json'
+          }
+        }).then(function (schema) {
+          _this2.schema = schema.entity;
+          _this2.links = chessSquare2Collection.entity._links;
+          return chessSquare2Collection;
+        });
+      }).then(function (chessSquare2Collection) {
+        return chessSquare2Collection.entity._embedded.chessSquare2s.map(function (chessSquare2) {
+          return _client__WEBPACK_IMPORTED_MODULE_1___default()({
+            method: 'GET',
+            path: chessSquare2._links.self.href
+          });
+        });
+      }).then(function (chessSquare2Promises) {
+        return when.all(chessSquare2Promises);
+      }).done(function (chessSquare2s) {
+        _this2.setState({
+          chessSquare2s: chessSquare2s,
+          attributes: Object.keys(_this2.schema.properties),
+          pageSize: pageSize,
+          links: _this2.links
+        });
+      });
+    } // end::follow-2[]
+
+  }, {
+    key: "render",
+    value: function render() {
+      console.log("Some playing - updated");
+
+      var rest = __webpack_require__(/*! rest */ "./node_modules/rest/browser.js");
+
+      rest('/').then(function (response) {
+        console.log('response: ', response); //http://localhost:8080/api/socialEvents
+      });
+      rest('http://localhost:8080/api/socialEvents/').then(function (response) {
+        console.log('response: ', response);
+      });
+      var chessSquaresArray = this.state.chessSquare2s.map(function (chessSquare) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, chessSquare.entity.tool, ", ", chessSquare.entity.squareSign);
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Try1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "I am ChessSquare"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "ChessSquares Arrays "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, chessSquaresArray));
+    }
+  }]);
+
+  return ChessSquare;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/***/ }),
+
 /***/ "./src/main/resources/static/js/app/entities/subApp/SubApp.js":
 /*!********************************************************************!*\
   !*** ./src/main/resources/static/js/app/entities/subApp/SubApp.js ***!
@@ -33709,7 +33854,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Screen1", function() { return Screen1; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../entities/components/ChessSquare'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _entities_components_ChessSquare__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../entities/components/ChessSquare */ "./src/main/resources/static/js/app/entities/components/ChessSquare.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33744,7 +33889,7 @@ function (_React$Component) {
   _createClass(Screen1, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello I am Screen1 + 2222"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Some words + sss"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module '../entities/components/ChessSquare'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), null));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello I am Screen1 + 2222"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Some words + sss"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_entities_components_ChessSquare__WEBPACK_IMPORTED_MODULE_1__["ChessSquare"], null));
     }
   }]);
 

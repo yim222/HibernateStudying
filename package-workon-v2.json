@@ -19,6 +19,7 @@
     "url": "https://github.com/spring-guides/tut-react-and-spring-data-rest/issues"
   },
   "homepage": "https://github.com/spring-guides/tut-react-and-spring-data-rest",
+  
   "scripts": {
     "watch": "webpack --watch -d",
     "start": "set PORT=3006 && react-scripts start",
