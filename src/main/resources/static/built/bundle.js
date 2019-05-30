@@ -99786,6 +99786,890 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./src/main/resources/static/js/app/entities/subApp/app/entities/category/Mocks.js":
+/*!*****************************************************************************************!*\
+  !*** ./src/main/resources/static/js/app/entities/subApp/app/entities/category/Mocks.js ***!
+  \*****************************************************************************************/
+/*! exports provided: CATEGORIES_MOCK */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CATEGORIES_MOCK", function() { return CATEGORIES_MOCK; });
+var CATEGORIES_MOCK = new Map([["1", "HaGolan (Initial data )"], ["2", "Europe (Initial data )"], ["3", "Middle Easy (Initial data )"]]);
+
+/***/ }),
+
+/***/ "./src/main/resources/static/js/app/entities/subApp/app/entities/category/components/Category.js":
+/*!*******************************************************************************************************!*\
+  !*** ./src/main/resources/static/js/app/entities/subApp/app/entities/category/components/Category.js ***!
+  \*******************************************************************************************************/
+/*! exports provided: Category */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Category", function() { return Category; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+ //import { Link, Router } from 'react-router-dom'
+
+var Category =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Category, _React$Component);
+
+  function Category(props) {
+    _classCallCheck(this, Category);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Category).call(this));
+  }
+
+  _createClass(Category, [{
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: this.props.onClick1 == null ? function (e) {
+          return e.preventDefault();
+        } : function () {
+          return _this.props.onClick1(_this.props.data.id);
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Category - ", this.props.data.name, " "));
+    }
+  }]);
+
+  return Category;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/***/ }),
+
+/***/ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/DBServices.js":
+/*!****************************************************************************************************!*\
+  !*** ./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/DBServices.js ***!
+  \****************************************************************************************************/
+/*! exports provided: DBServices */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DBServices", function() { return DBServices; });
+/* harmony import */ var _LocalStorageServices__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LocalStorageServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/LocalStorageServices.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+//import React from 'react';
+
+var DBServices = function DBServices() {
+  _classCallCheck(this, DBServices);
+
+  var dbService = new _LocalStorageServices__WEBPACK_IMPORTED_MODULE_0__["LocalStorageServices"](); //If you want to change the service type (to an actual DB -  for example - just change here ...)
+
+  this.getData = function (dataName) {
+    return dbService.getData(dataName);
+  };
+
+  this.saveData = function (dataName, dataArr) {
+    dbService.saveData(dataName, dataArr);
+  };
+};
+
+/***/ }),
+
+/***/ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/EntitiesServices.js":
+/*!**********************************************************************************************************!*\
+  !*** ./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/EntitiesServices.js ***!
+  \**********************************************************************************************************/
+/*! exports provided: EntitiesServices */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EntitiesServices", function() { return EntitiesServices; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _category_components_Category__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../category/components/Category */ "./src/main/resources/static/js/app/entities/subApp/app/entities/category/components/Category.js");
+/* harmony import */ var _GetDataServices__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GetDataServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/GetDataServices.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var EntitiesServices =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(EntitiesServices, _React$Component);
+
+  function EntitiesServices(props) {
+    var _this;
+
+    _classCallCheck(this, EntitiesServices);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(EntitiesServices).call(this)); //console.log("EntitiesServices");
+
+    _this.iDsToCategories = _this.iDsToCategories.bind(_assertThisInitialized(_this));
+    _this.dao = new _GetDataServices__WEBPACK_IMPORTED_MODULE_2__["GetDataServices"]();
+    _this.arr = [];
+    return _this;
+  } //convert id's array into categories components array(assuming the values are updated...)
+
+
+  _createClass(EntitiesServices, [{
+    key: "iDsToCategories",
+    value: function iDsToCategories(ids) {
+      //check if ids is iterable.
+      if (ids == null) {
+        return "cateroeis id's values are error";
+      } //console.log("ids to categories");
+
+
+      var categoriesList = this.dao.getCategories().map;
+      var categoriesComponents = [];
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = ids[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var id = _step.value;
+
+          if (categoriesList.get(id) != null) {
+            categoriesComponents.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_category_components_Category__WEBPACK_IMPORTED_MODULE_1__["Category"], {
+              key: id,
+              data: {
+                name: categoriesList.get(id),
+                id: id
+              }
+            }));
+          }
+        } //console.log("categoriesComponents",categoriesComponents[0].props.data.name);
+
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      var sortedList = categoriesComponents.sort(function (a, b) {
+        var elA = a.props.data.name.toUpperCase();
+        var elB = b.props.data.name.toUpperCase();
+
+        if (elA > elB) {
+          return 1;
+        } else if (elA < elB) {
+          return -1;
+        }
+
+        ;
+        return 0;
+      }); //console.log("categoriesComponents", categoriesComponents);
+
+      return sortedList;
+    }
+  }]);
+
+  return EntitiesServices;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/***/ }),
+
+/***/ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/GetDataServices.js":
+/*!*********************************************************************************************************!*\
+  !*** ./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/GetDataServices.js ***!
+  \*********************************************************************************************************/
+/*! exports provided: GetDataServices */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetDataServices", function() { return GetDataServices; });
+/* harmony import */ var _category_Mocks_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../category/Mocks.js */ "./src/main/resources/static/js/app/entities/subApp/app/entities/category/Mocks.js");
+/* harmony import */ var _location_Mocks_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../location/Mocks.js */ "./src/main/resources/static/js/app/entities/subApp/app/entities/location/Mocks.js");
+/* harmony import */ var _socialEvent_Mocks_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../socialEvent/Mocks.js */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/Mocks.js");
+/* harmony import */ var _socialEvent_events_mock_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../socialEvent/events-mock.js */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/events-mock.js");
+/* harmony import */ var _DBServices__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DBServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/DBServices.js");
+/* harmony import */ var _location_services_LocationServices__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../location/services/LocationServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/location/services/LocationServices.js");
+/* harmony import */ var _socialEvent_defaults_values_mock_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../socialEvent/defaults-values-mock.js */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/defaults-values-mock.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+//import React from 'react'
+
+
+
+
+
+
+
+var GetDataServices =
+/*#__PURE__*/
+function () {
+  function GetDataServices() {
+    var _this = this;
+
+    _classCallCheck(this, GetDataServices);
+
+    this.dbServices = new _DBServices__WEBPACK_IMPORTED_MODULE_4__["DBServices"]();
+    this.locationServices = new _location_services_LocationServices__WEBPACK_IMPORTED_MODULE_5__["LocationServices"]();
+
+    this.getCategories = function () {
+      //Array that contain all data of categories
+      var categoriesData = {};
+      var dataName = "categories"; //DB Service Object
+
+      var dbService = new _DBServices__WEBPACK_IMPORTED_MODULE_4__["DBServices"](); //if storgae null - getting initial data
+
+      if (dbService.getData(dataName) == null) {
+        console.log("Categoreis Storgae Empty - set an initial Data ");
+        categoriesData = Array.from(_category_Mocks_js__WEBPACK_IMPORTED_MODULE_0__["CATEGORIES_MOCK"]);
+
+        _this.dbServices.saveData(dataName, categoriesData);
+      } //get data from the storgae
+      else {
+          console.log("Categoreis Storgae Not null"); //convert Array to Map object before getting from the localStorage
+          //(alot implementation here is by Map functions...)
+        }
+
+      var categoriesDataArr = dbService.getData(dataName); //Adding deleted/default Category
+
+      categoriesDataArr.push([_this.locationServices.defaultId, "Default/Deleted Category"]);
+      var categoriesDataMap = new Map(categoriesDataArr);
+      return {
+        arr: categoriesDataArr,
+        map: categoriesDataMap
+      };
+    }; //Get location and filter it well
+
+
+    this.getLocations = function () {
+      //Array that contain all data of categories
+      var locationsDataArr = {};
+      var dataName = "locations"; //get the data of current categories for comparing the location assigned categories.
+
+      var categoriesData = _this.getCategories(); //DB Service Object
+
+
+      var dbService = new _DBServices__WEBPACK_IMPORTED_MODULE_4__["DBServices"](); //if storgae null - getting initial data
+
+      if (dbService.getData(dataName) == null) {
+        console.log("Locations Storgae Empty - set an initial Data ");
+        locationsDataArr = Array.from(_location_Mocks_js__WEBPACK_IMPORTED_MODULE_1__["LOCATIONS_MOCK"]);
+
+        _this.dbServices.saveData(dataName, locationsDataArr);
+      } //get data from the storgae
+      else {
+          console.log("Locations Storgae Not null");
+        } //get the updated data
+
+
+      locationsDataArr = dbService.getData(dataName); //Filter the null catergories ID's (for case the cateory has removed)
+
+      locationsDataArr = _this.locationServices.cleanNullCategories(categoriesData.map, locationsDataArr); //Save the filtered data
+
+      _this.dbServices.saveData(dataName, locationsDataArr); //create map from the array
+
+
+      var locationsDataMap = new Map(locationsDataArr); //return them both for the prefared using.
+
+      return {
+        arr: locationsDataArr,
+        map: locationsDataMap
+      };
+    };
+
+    this.getSocialEvents = function () {
+      //Array that contain all data of categories
+      var socialEventsData = {};
+      var dataName = "socialEvents";
+      /*
+      //DB Service Object
+      let dbService = new DBServices();
+        //if storgae null - getting initial data
+      if (dbService.getData(dataName) == null){
+        console.log("Categoreis Storgae Empty - set an initial Data ");
+          categoriesData = Array.from(CATEGORIES_MOCK);
+        this.dbServices.saveData(dataName,categoriesData );
+        }
+        //get data from the storgae
+      else{
+        console.log("Categoreis Storgae Not null");
+          //convert Array to Map object before getting from the localStorage
+        //(alot implementation here is by Map functions...)
+        }
+      */
+      //const socialEventsDataArr = Array.from(SOCIAL_EVENTS_MOCK);//dbService.getData(dataName);
+
+      var socialEventsDataArr = Array.from(_socialEvent_events_mock_js__WEBPACK_IMPORTED_MODULE_3__["SOCIAL_EVENTS_MOCK2"]); //Adding deleted/default Category
+      //socialEventsDataArr.push([this.locationServices.defaultId,"Default/Deleted Category"]);
+
+      var socialEventsDataMap = new Map(socialEventsDataArr);
+      return {
+        arr: socialEventsDataArr,
+        map: socialEventsDataMap
+      };
+    };
+
+    this.getFakeData2 = function (dataName) {
+      var obj = {
+        name: "xxx",
+        a: "ad"
+      };
+      /*
+      if (dataName === 'DEFAULT_EVENT_PROPERTIES')
+      obj = DEFAULTS_VALUES_MOCK;
+      */
+      //return  LOCATIONS_MOCK ;
+
+      return _socialEvent_defaults_values_mock_js__WEBPACK_IMPORTED_MODULE_6__["DEFAULTS_VALUES_MOCK"];
+    };
+  }
+
+  _createClass(GetDataServices, null, [{
+    key: "getFakeData",
+    value: function getFakeData(dataName) {
+      if (dataName === 'DEFAULT_EVENT_PROPERTIES') return _socialEvent_defaults_values_mock_js__WEBPACK_IMPORTED_MODULE_6__["DEFAULTS_VALUES_MOCK"];
+    }
+  }]);
+
+  return GetDataServices;
+}();
+
+/***/ }),
+
+/***/ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/LocalStorageServices.js":
+/*!**************************************************************************************************************!*\
+  !*** ./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/LocalStorageServices.js ***!
+  \**************************************************************************************************************/
+/*! exports provided: LocalStorageServices */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LocalStorageServices", function() { return LocalStorageServices; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+//import React from 'react';
+var LocalStorageServices =
+/*#__PURE__*/
+function () {
+  function LocalStorageServices() {
+    _classCallCheck(this, LocalStorageServices);
+  }
+
+  _createClass(LocalStorageServices, [{
+    key: "getData",
+    ///get data
+    value: function getData(dataName) {
+      var dataArr = JSON.parse(localStorage.getItem(dataName));
+      return dataArr;
+    } //save data
+
+  }, {
+    key: "saveData",
+    value: function saveData(dataName, dataArr) {
+      localStorage.setItem(dataName, JSON.stringify(dataArr));
+    }
+  }]);
+
+  return LocalStorageServices;
+}();
+
+/***/ }),
+
+/***/ "./src/main/resources/static/js/app/entities/subApp/app/entities/location/Mocks.js":
+/*!*****************************************************************************************!*\
+  !*** ./src/main/resources/static/js/app/entities/subApp/app/entities/location/Mocks.js ***!
+  \*****************************************************************************************/
+/*! exports provided: LOCATIONS_MOCK, LOCATIONS_MOCK_2, testData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOCATIONS_MOCK", function() { return LOCATIONS_MOCK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOCATIONS_MOCK_2", function() { return LOCATIONS_MOCK_2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "testData", function() { return testData; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _category_components_Category__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../category/components/Category */ "./src/main/resources/static/js/app/entities/subApp/app/entities/category/components/Category.js");
+
+
+var LOCATIONS_MOCK = new Map([["1", {
+  name: "usa (Initial data )",
+  address: "America",
+  coordinates: {
+    lat: 37.090240,
+    lng: -55.712891
+  },
+  categoriesIDs: ["1", "3"]
+}], ["2", {
+  name: "London (Initial data )",
+  address: "England",
+  coordinates: {
+    lat: 32,
+    lng: -9
+  },
+  categoriesIDs: ["2", "3"]
+}], ["3", {
+  name: "Western Wall (Initial data )",
+  address: "Jerusalem",
+  coordinates: {
+    lat: 66,
+    lng: 15
+  },
+  categoriesIDs: ["1"]
+}]]);
+var LOCATIONS_MOCK_2 = new Map([["1", "usa (Initial data )"], ["2", "Europe (Initial data )"], ["3", "Middle Easy (Initial data )"]]);
+var testData = {
+  name: "Izhar",
+  address: " ok ",
+  coordinates: {
+    lat: 3,
+    lng: 4
+  },
+  categories: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_category_components_Category__WEBPACK_IMPORTED_MODULE_1__["Category"], {
+    data: {
+      name: "innerCategory"
+    }
+  })
+};
+
+/***/ }),
+
+/***/ "./src/main/resources/static/js/app/entities/subApp/app/entities/location/components/Location.js":
+/*!*******************************************************************************************************!*\
+  !*** ./src/main/resources/static/js/app/entities/subApp/app/entities/location/components/Location.js ***!
+  \*******************************************************************************************************/
+/*! exports provided: Location */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Location", function() { return Location; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _globalServices_EntitiesServices__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../globalServices/EntitiesServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/EntitiesServices.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Location =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Location, _React$Component);
+
+  function Location(props) {
+    var _this;
+
+    _classCallCheck(this, Location);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Location).call(this));
+    _this.service = new _globalServices_EntitiesServices__WEBPACK_IMPORTED_MODULE_1__["EntitiesServices"]();
+    return _this;
+  }
+
+  _createClass(Location, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: this.props.onClick1 == null ? function (e) {
+          return e.preventDefault();
+        } : function () {
+          return _this2.props.onClick1(_this2.props.id);
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "label1"
+      }, "Location :"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "value1"
+      }, this.props.data.name, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "label1"
+      }, "Addres :"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "value1"
+      }, this.props.data.address, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "label1"
+      }, "Coordinates: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "label1"
+      }, "Latitude : "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "value1"
+      }, this.props.data.coordinates.lat, " ")), "&", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "label1"
+      }, " Longitude : "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "value1"
+      }, this.props.data.coordinates.lng, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "label1"
+      }, "Categories:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "littleItem1"
+      }, this.service.iDsToCategories(this.props.data.categoriesIDs)));
+    }
+  }]);
+
+  return Location;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/***/ }),
+
+/***/ "./src/main/resources/static/js/app/entities/subApp/app/entities/location/services/LocationServices.js":
+/*!*************************************************************************************************************!*\
+  !*** ./src/main/resources/static/js/app/entities/subApp/app/entities/location/services/LocationServices.js ***!
+  \*************************************************************************************************************/
+/*! exports provided: LocationServices */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LocationServices", function() { return LocationServices; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_Location__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Location */ "./src/main/resources/static/js/app/entities/subApp/app/entities/location/components/Location.js");
+/* harmony import */ var _globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../globalServices/GetDataServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/GetDataServices.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+
+var LocationServices = function LocationServices() {
+  var _this = this;
+
+  _classCallCheck(this, LocationServices);
+
+  //global locations configurations
+  this.defaultId = "000A"; // const dao2 = new GetDataServices(); // u can't do it right now because this service is using this class. That's the problem of doing non-static service memebers.
+  //let categoriesData = dao.getCategories();
+  //sort the data alphabetically
+
+  /*
+  categoriesData.arr.sort(function(a, b){
+      let elA = a[1].toUpperCase();
+    let elB = b[1].toUpperCase();
+      if (elA > elB){return 1;}
+    else if (elA < elB ){return -1};
+    return 0 ;
+  });
+  */
+  //Clean null categories - for case that the assigned categories have deleted, and if does, insert
+  //default category ID once.
+
+  this.cleanNullCategories = function (updatedCategoriesList, locationsList) {
+    //get the updatedCategoriesList as Map object
+    //console.log("locationsList before filtering", locationsList );
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = locationsList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var location = _step.value;
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+          for (var _iterator2 = location[1].categoriesIDs[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var id = _step2.value;
+
+            //if default value already exist - not need to add another one
+            if (location[1].categoriesIDs.includes(_this.defaultId)) {
+              break;
+            } //check if one of the id's doesn't exist in the array
+
+
+            if (updatedCategoriesList.get(id) == null) {
+              //console.log(id + "is missing");//
+              //Insert once the default id for assigning instead
+              location[1].categoriesIDs.push(_this.defaultId);
+              break;
+            }
+          } //clean the don't exist categories id's
+
+        } catch (err) {
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+              _iterator2.return();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
+            }
+          }
+        }
+
+        location[1].categoriesIDs = location[1].categoriesIDs.filter(function (id) {
+          return updatedCategoriesList.get(id) != null || id === _this.defaultId;
+        });
+      } //console.log("locationsList after filtering ", locationsList);
+
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    return locationsList;
+  }; //Get categories data for use in the class
+  //Function that sort the array of locations by name.
+
+
+  this.sortListAlphabetically = function (locationList) {
+    //Sorting the array by alphabetically order. I keep the original array as is, for future possible using.
+    var sortedList = locationList.slice(0); //console.log(sortedList);
+    //sort the data alphabetically
+
+    sortedList.sort(function (a, b) {
+      var elA = a[1].name.toUpperCase();
+      var elB = b[1].name.toUpperCase();
+
+      if (elA > elB) {
+        return 1;
+      } else if (elA < elB) {
+        return -1;
+      }
+
+      ;
+      return 0;
+    });
+    var obj1 = [{
+      a: "1"
+    }, {
+      b: "2"
+    }]; //let view = <div>;
+
+    obj1.map(function (item) {
+      console.log(Object.keys(item)[0]); //find the key of item = {a : "1"}
+    });
+    console.log("sortedList", sortedList);
+    return sortedList;
+  }; //filter the list by group or ungroup
+  //Maybe should sorting the data but right now prefere not to touch in the original data that arrived from the DB.
+
+
+  this.generateGroupedList = function (byGroup, locationList) {
+    //get Categories by abc
+    var dao = new _globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_2__["GetDataServices"]();
+    var categoriesData = dao.getCategories();
+    var organizedData = []; //sort the data alphabetically
+
+    categoriesData.arr.sort(function (a, b) {
+      var elA = a[1].toUpperCase();
+      var elB = b[1].toUpperCase();
+
+      if (elA > elB) {
+        return 1;
+      } else if (elA < elB) {
+        return -1;
+      }
+
+      ;
+      return 0;
+    }); //console.log("categoriesData.arr", categoriesData.arr);
+    //make array object of each category's id  with its assigned locations
+
+    var _iteratorNormalCompletion3 = true;
+    var _didIteratorError3 = false;
+    var _iteratorError3 = undefined;
+
+    try {
+      for (var _iterator3 = categoriesData.arr[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+        var category = _step3.value;
+        organizedData.push(_defineProperty({}, category[0], _this.getLocationsByCategory(category[0], locationList)));
+      } //console.log("organizedData", organizedData);
+
+    } catch (err) {
+      _didIteratorError3 = true;
+      _iteratorError3 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+          _iterator3.return();
+        }
+      } finally {
+        if (_didIteratorError3) {
+          throw _iteratorError3;
+        }
+      }
+    }
+
+    return organizedData;
+  };
+
+  this.getLocationsByCategory = function (categoryId, locationsList) {
+    var dataArr = [];
+    var _iteratorNormalCompletion4 = true;
+    var _didIteratorError4 = false;
+    var _iteratorError4 = undefined;
+
+    try {
+      for (var _iterator4 = locationsList[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+        var location = _step4.value;
+
+        if (location[1].categoriesIDs.includes(categoryId)) {
+          dataArr.push(location);
+        }
+      }
+    } catch (err) {
+      _didIteratorError4 = true;
+      _iteratorError4 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion4 && _iterator4.return != null) {
+          _iterator4.return();
+        }
+      } finally {
+        if (_didIteratorError4) {
+          throw _iteratorError4;
+        }
+      }
+    }
+
+    return dataArr;
+  };
+
+  this.filterAndGenerateList = function (settings, list, byGroup) {
+    //filterAndGenerateList should be called
+    //sort the list
+    list = _this.sortListAlphabetically(list);
+    console.log("settings", settings.state.currentId); //If not filtered by group return the sorted list .
+
+    if (!byGroup) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LocationsList, {
+        list: list,
+        settings: settings
+      });
+    }
+
+    var groupedList = _this.generateGroupedList(true, list);
+
+    var view = groupedList.map(function (item, index) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: index
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CategorySection, {
+        group: item,
+        settings: settings
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+    });
+    return view;
+  };
+} //Constructor end.
+; //Locations List Component:
+
+function LocationsList(props) {
+  var view = props.list.map(function (item) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: item[0],
+      className: "itemStyle1",
+      style: props.settings.state.currentId === item[0] ? props.settings.styles.choosed1 : null
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Location__WEBPACK_IMPORTED_MODULE_1__["Location"], {
+      data: item[1],
+      id: item[0],
+      onClick1: props.settings.onLocationClick
+    })));
+  });
+  return view;
+} //Category with its locations component
+
+
+function CategorySection(props) {
+  //Going to get item of {categoryName: [[locationId , {locationData}]...]} - nmae = group
+  //get the categories list
+  var dao = new _globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_2__["GetDataServices"](); // u can't do it right now because this service is using this class. That's the problem of doing non-static service memebers.
+
+  var categoriesDataMap = dao.getCategories().map; //sort the data alphabetically
+  // to do all the below vars assigned from the props here in the method.
+  //then get the organzied (as above ) and deliver it to this function at the main render.
+
+  var categoryId = Object.keys(props.group)[0];
+  var categoryName = categoriesDataMap.get(categoryId);
+  var locationsList = props.group[categoryId],
+      settings = props.settings; //console.log(Object.keys(item)[0]);//find the key of item = {a : "1"}
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, categoryName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LocationsList, {
+    list: locationsList,
+    settings: settings
+  }));
+}
+
+/***/ }),
+
 /***/ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/Mocks.js":
 /*!********************************************************************************************!*\
   !*** ./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/Mocks.js ***!
@@ -99800,7 +100684,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "testData", function() { return testData; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../category/components/Category'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _category_components_Category__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../category/components/Category */ "./src/main/resources/static/js/app/entities/subApp/app/entities/category/components/Category.js");
 
 
 var SOCIAL_EVENTS_MOCK = new Map([["1", {
@@ -99836,7 +100720,7 @@ var testData = {
     lat: 3,
     lng: 4
   },
-  categories: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module '../category/components/Category'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+  categories: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_category_components_Category__WEBPACK_IMPORTED_MODULE_1__["Category"], {
     data: {
       name: "innerCategory"
     }
@@ -100097,7 +100981,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_select__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_select__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.esm.js");
 /* harmony import */ var _InputsTypes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./InputsTypes */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/components/InputsTypes.js");
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/GetDataServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../globalServices/GetDataServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/GetDataServices.js");
 /* harmony import */ var _services_SocialEventServices__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/SocialEventServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/services/SocialEventServices.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
@@ -100205,7 +101089,7 @@ function (_React$Component) {
     });
 
     console.log('DEFAULT_EVENT_PROPERTIES:');
-    console.log(!(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/GetDataServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).getFakeData('DEFAULT_EVENT_PROPERTIES')); //this.state = GetDataServices.getFakeData('DEFAULT_EVENT_PROPERTIES');
+    console.log(_globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_6__["GetDataServices"].getFakeData('DEFAULT_EVENT_PROPERTIES')); //this.state = GetDataServices.getFakeData('DEFAULT_EVENT_PROPERTIES');
 
     console.log(_this.state, "\nthis.state");
     var obj = {
@@ -100230,7 +101114,7 @@ function (_React$Component) {
       //eventType : ['1','2']
 
     };
-    var initialData = !(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/GetDataServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).getFakeData('DEFAULT_EVENT_PROPERTIES');
+    var initialData = _globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_6__["GetDataServices"].getFakeData('DEFAULT_EVENT_PROPERTIES');
     var defaultsValues = lodash_cloneDeep__WEBPACK_IMPORTED_MODULE_9___default()(initialData);
     var emptyValues = lodash_cloneDeep__WEBPACK_IMPORTED_MODULE_9___default()(initialData);
     emptyValues = _services_SocialEventServices__WEBPACK_IMPORTED_MODULE_7__["SocialEventServices"].cleanValues(emptyValues);
@@ -100791,7 +101675,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_select__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_select__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.esm.js");
 /* harmony import */ var _InputsTypes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./InputsTypes */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/components/InputsTypes.js");
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/GetDataServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../globalServices/GetDataServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/GetDataServices.js");
 /* harmony import */ var _services_SocialEventServices__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/SocialEventServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/services/SocialEventServices.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
@@ -100899,7 +101783,7 @@ function (_React$Component) {
     });
 
     console.log('DEFAULT_EVENT_PROPERTIES:');
-    console.log(!(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/GetDataServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).getFakeData('DEFAULT_EVENT_PROPERTIES')); //this.state = GetDataServices.getFakeData('DEFAULT_EVENT_PROPERTIES');
+    console.log(_globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_6__["GetDataServices"].getFakeData('DEFAULT_EVENT_PROPERTIES')); //this.state = GetDataServices.getFakeData('DEFAULT_EVENT_PROPERTIES');
 
     console.log(_this.state, "\nthis.state");
     var obj = {
@@ -100924,7 +101808,7 @@ function (_React$Component) {
       //eventType : ['1','2']
 
     };
-    var initialData = !(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/GetDataServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).getFakeData('DEFAULT_EVENT_PROPERTIES');
+    var initialData = _globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_6__["GetDataServices"].getFakeData('DEFAULT_EVENT_PROPERTIES');
     var defaultsValues = lodash_cloneDeep__WEBPACK_IMPORTED_MODULE_9___default()(initialData);
     var emptyValues = lodash_cloneDeep__WEBPACK_IMPORTED_MODULE_9___default()(initialData);
     emptyValues = _services_SocialEventServices__WEBPACK_IMPORTED_MODULE_7__["SocialEventServices"].cleanValues(emptyValues);
@@ -101634,7 +102518,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SocialEvent", function() { return SocialEvent; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/EntitiesServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _globalServices_EntitiesServices__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../globalServices/EntitiesServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/EntitiesServices.js");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -101922,13 +102806,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _SocialEvent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SocialEvent */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/components/SocialEvent.js");
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../category/components/Category'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _category_components_Category__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../category/components/Category */ "./src/main/resources/static/js/app/entities/subApp/app/entities/category/components/Category.js");
 /* harmony import */ var _InputsView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./InputsView */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/components/InputsView.js");
 /* harmony import */ var _Mocks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Mocks */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/Mocks.js");
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/DBServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _SocialEventHeader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../SocialEventHeader */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/SocialEventHeader.js");
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/GetDataServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _services_SocialEventServices__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/SocialEventServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/services/SocialEventServices.js");
+/* harmony import */ var _globalServices_DBServices__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../globalServices/DBServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/DBServices.js");
+/* harmony import */ var _SocialEventHeader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../SocialEventHeader */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/SocialEventHeader.js");
+/* harmony import */ var _globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../globalServices/GetDataServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/GetDataServices.js");
+/* harmony import */ var _services_SocialEventServices__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/SocialEventServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/services/SocialEventServices.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102033,8 +102917,8 @@ function (_React$Component) {
       socialEventCategoriesIDs: [],
       filterByGroups: false
     };
-    _this.socialEventServices = new _services_SocialEventServices__WEBPACK_IMPORTED_MODULE_6__["SocialEventServices"]();
-    var dao = new !(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/GetDataServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(); //Get the categories data for using in the cateories choice
+    _this.socialEventServices = new _services_SocialEventServices__WEBPACK_IMPORTED_MODULE_8__["SocialEventServices"]();
+    var dao = new _globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_7__["GetDataServices"](); //Get the categories data for using in the cateories choice
 
     var categoriesData = dao.getCategories(); //for use it as parameter. TODO - change all the local categoriesData to this.
 
@@ -102098,7 +102982,7 @@ function (_React$Component) {
 
     _this.socialEventsData = {}; //DB Service Object
 
-    _this.dbService = new !(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/DBServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(); //if storgae null - getting initial data
+    _this.dbService = new _globalServices_DBServices__WEBPACK_IMPORTED_MODULE_5__["DBServices"](); //if storgae null - getting initial data
 
     if (_this.dbService.getData(_this.dataName) == null) {
       console.log("Storgae Empty - set an initial Data ");
@@ -102379,7 +103263,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "navbar-brand",
         href: "#"
-      }, "SocialEvents List")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SocialEventHeader__WEBPACK_IMPORTED_MODULE_5__["SocialEventHeader"], {
+      }, "SocialEvents List")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SocialEventHeader__WEBPACK_IMPORTED_MODULE_6__["SocialEventHeader"], {
         onChoose: this.chooseOption
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
@@ -102401,6 +103285,218 @@ function (_React$Component) {
 
   return SocialEvents;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/***/ }),
+
+/***/ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/defaults-values-mock.js":
+/*!***********************************************************************************************************!*\
+  !*** ./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/defaults-values-mock.js ***!
+  \***********************************************************************************************************/
+/*! exports provided: DEFAULTS_VALUES_MOCK */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULTS_VALUES_MOCK", function() { return DEFAULTS_VALUES_MOCK; });
+//Mock of three events
+var DEFAULTS_VALUES_MOCK = {
+  name: "NA",
+  isOrganizer: false,
+  //true or false,
+  publisherName: "NA",
+  date: new Date(),
+  //new Date('2019-4-19'),
+  time: [20, 30],
+  // [20,30],//[hour, minutes]
+  contactDetails: ["NA", "NA", "NA"],
+  //name, tel,email - must one
+  jewLvlKeep: ["רוצים לשמור שבת", "פחות רוצים לשמור שבת"],
+  // could be both or one of them
+  agesRange: [0, 120],
+  //from to
+  eventType: ["מפגש ", "שיעור תורה", "הרצאה", "טיול יומי", "ערב משחקים", "מסיבה", "מאטצ'-אפ", "סדנה", "נופש", "סופש", "ספידייט", "הופעה"],
+  lowSelection: ["NA"],
+  //arbitrary  - can be by phone by look - open variable for discusting people
+  shortDescription: "NA",
+  //-restricted to 180 char - must
+  longDescription: "NA",
+  //not must maybe to do it with collapse and default values
+  matchingIdea: ["ספונטנית", "דרך גורם מקשר", "יתבצע רישום אצל אחראי", "מפגשים אישיים בפעילות"],
+  eventLink: "NA",
+  imgUrl: "NA",
+  area: ["ירושלים", "המרכז", "הצפון הרחוק", "הצפון הקרוב", "השפלה", "הדרום", "יהודה ושומרון ובקעת הירדן"],
+  //constant
+  address: "NA",
+  //address +  horaot hagaaa(not need array for now - regular input
+  price: 0,
+  //need to be or number (0 is free ) or null - didn't provided
+  datesRange: [new Date(), new Date("2020-04-04")]
+};
+/*
+שם האירוע
+האם ממארגני האירוע
+שם המפרסם
+תאריך
+שעה
+פרטים ליצירת קשר – מייל ו/או טל'
+רמת שמירת יהדות
+סוג האירוע
+גילאים
+איזור בארץ
+כתובת
+סלקציות אם יש
+תיאור קצר עד 180 תווים
+הדרך/הרעיון/הפורמט של הערב - הדרך ליצירת הכירוות בערב במשפט אחד
+תיאור ארוך
+לינק לפרטים או הרשמה
+תמונה
+מחיר
+
+*/
+
+/***/ }),
+
+/***/ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/events-mock.js":
+/*!**************************************************************************************************!*\
+  !*** ./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/events-mock.js ***!
+  \**************************************************************************************************/
+/*! exports provided: SOCIAL_EVENTS_MOCK2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SOCIAL_EVENTS_MOCK2", function() { return SOCIAL_EVENTS_MOCK2; });
+//Mock of three events
+var SOCIAL_EVENTS_MOCK2 = new Map([["1", {
+  name: "המפגש של לינגר",
+  isOrganizer: true,
+  publisherName: "Lingar",
+  date: new Date('2019-4-19'),
+  time: [20, 30],
+  //[hour, minutes]
+  contactDetails: ["שרה", "0547-477-637", "lingar@lin.gar"],
+  //tel,email - must one
+  jewLvlKeep: ["רוצים לשמור שבת", "לא רוצים לשמור שבת"],
+  // could be both or one of them
+  agesRange: [20, 30],
+  //from to
+  eventType: ["טיול "],
+  lowSelection: ["רק אנשים שלא התקלחו שבועיים"],
+  //arbitrary - can be by phone by look - open variable for discusting people
+  shortDescription: "אחת המטרות של הגוף היא לענג אותנו ולשמור על איזון" + "וריפוי באופן מתמיד. מה שפוגע בגוף ומונע ממנו ריפוי" + " זה מנגנון ההדחקה הרגשי של האגו. ",
+  longDescription: "bla bla bla ",
+  //not must maybe to do it with collapse and default values
+  matchingIdea: ["ספונטני", "גורם מקשר", "רישום פרטים אצל אחראי "],
+  eventLink: "google.com",
+  imgUrl: "./images/party2-lights.jpg",
+  area: "המרכז",
+  //constant
+  address: "האצל 32 תל גיבורים",
+  //address +  horaot hagaaa(not need array for now ? )
+  price: 70
+}], ["2", {
+  name: "המפגש של לינגר 222",
+  isOrganizer: false,
+  publisherName: "Lingar2",
+  date: new Date('2019-02-3'),
+  time: [19, 45],
+  //[hour, minutes]
+  contactDetails: ["lingar", "0547-477-637", "lingar@lin.gar"],
+  //tel,email - must one
+  jewLvlKeep: ["רוצים לשמור שבת", "לא רוצים לשמור שבת"],
+  // could be both or one of them
+  agesRange: [26, 35],
+  //from to
+  eventType: ["מפגש ", "ערב משחקים"],
+  lowSelection: ["רק ישיבת ברזילי"],
+  //arbitrary - can be by phone by look - open variable for discusting people
+  shortDescription: "אחת המטרות של הגוף היא לענג אותנו ולשמור על איזון" + "וריפוי באופן מתמיד. מה שפוגע בגוף ומונע ממנו ריפוי" + " זה מנגנון ההדחקה הרגשי של האגו. ",
+  longDescription: "bla bla bla ",
+  //not must maybe to do it with collapse and default values
+  matchingIdea: ["ספונטני", "גורם מקשר", "רישום פרטים אצל אחראי "],
+  eventLink: "https://www.google.com/",
+  imgUrl: "./images/party2-lights.jpg",
+  area: "המרכז",
+  //constant
+  address: "פתח תקווה, עמל 8 , ללכת בשביל 90 קמ ",
+  //address, horaot hagaaa
+  price: 70
+}], ["3", {
+  name: "טיו בהרים",
+  isOrganizer: true,
+  publisherName: "Mister",
+  date: new Date('2013-9-25'),
+  time: [16, 33],
+  //[hour, minutes]
+  contactDetails: ["Hagay", "0547-477-637", "lingar@lin.gar"],
+  //tel,email - must one
+  jewLvlKeep: ["לא שומרי שבת"],
+  // could be both or one of them
+  agesRange: [20, 30],
+  //from to
+  eventType: ["מאטצ'אפ' ", "שיעור"],
+  lowSelection: ["רק יוצאי יחידת קה\"ס (קשיי הסתגלות )"],
+  //arbitrary - can be by phone by look - open variable for discusting people
+  shortDescription: "אחת המטרות של הגוף היא לענג אותנו ולשמור על איזון" + "וריפוי באופן מתמיד. מה שפוגע בגוף ומונע ממנו ריפוי" + " זה מנגנון ההדחקה הרגשי של האגו. ",
+  longDescription: "bla bla bla ",
+  //not must maybe to do it with collapse and default values
+  matchingIdea: ["ספונטני", "גורם מקשר", "רישום פרטים אצל ", "כוס בירה"],
+  eventLink: "https://www.yahoo.com/",
+  imgUrl: "./images/party1-beers.jpg",
+  area: "המרכז",
+  //constant
+  address: "כתובת כתובתית ביותר ",
+  //address, horaot hagaaa
+  price: 0
+}], ["4", {
+  name: "מאטצ'-אפ",
+  isOrganizer: false,
+  publisherName: "Mister2",
+  date: new Date('2019-6-11'),
+  time: [22, 30],
+  //[hour, minutes]
+  contactDetails: ["Idan", "0547-477-637", "lingar@lin.gar"],
+  //tel,email - must one
+  jewLvlKeep: ["רוצים לשמור שבת"],
+  // could be both or one of them
+  agesRange: [20, 30],
+  //from to
+  eventType: ["שיעור תורה ", "ספידייט"],
+  lowSelection: ["אין"],
+  //arbitrary - can be by phone by look - open variable for discusting people
+  shortDescription: " מצעים חיצוניים העשויים לעורר שמחה הם למשל מוזיקה, ריקודים, שמיעת בדיחות, ארוחה טובה, מסע קניות, קבלת ",
+  longDescription: "bla bla bla ",
+  //not must maybe to do it with collapse and default values
+  matchingIdea: ["ספונטני", "גורם מקשר", "רישום פרטים אצל ", "כוס בירה"],
+  eventLink: "https://www.nba.com/",
+  imgUrl: "./images/friends.jpg",
+  area: "המרכז",
+  //constant
+  address: " איפשהו בכדור הארץ  ",
+  //address, horaot hagaaa
+  price: 0
+}]]);
+/*
+שם האירוע
+האם ממארגני האירוע
+שם המפרסם
+תאריך
+שעה
+פרטים ליצירת קשר – מייל ו/או טל'
+רמת שמירת יהדות
+סוג האירוע
+גילאים
+איזור בארץ
+כתובת
+סלקציות אם יש
+תיאור קצר עד 180 תווים
+הדרך/הרעיון/הפורמט של הערב - הדרך ליצירת הכירוות בערב במשפט אחד
+תיאור ארוך
+לינק לפרטים או הרשמה
+תמונה
+מחיר
+
+*/
 
 /***/ }),
 
@@ -102519,7 +103615,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_SocialEvent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/SocialEvent */ "./src/main/resources/static/js/app/entities/subApp/app/entities/socialEvent/components/SocialEvent.js");
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/GetDataServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../globalServices/GetDataServices */ "./src/main/resources/static/js/app/entities/subApp/app/entities/globalServices/GetDataServices.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102713,7 +103809,7 @@ function () {
 
     this.generateGroupedList = function (byGroup, locationList) {
       //get Categories by abc
-      var dao = new !(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/GetDataServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())();
+      var dao = new _globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_2__["GetDataServices"]();
       var categoriesData = dao.getCategories();
       var organizedData = []; //sort the data alphabetically
 
@@ -102842,7 +103938,7 @@ function SocialEventsList(props) {
 function CategorySection(props) {
   //Going to get item of {categoryName: [[locationId , {locationData}]...]} - nmae = group
   //get the categories list
-  var dao = new !(function webpackMissingModule() { var e = new Error("Cannot find module '../../globalServices/GetDataServices'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(); // u can't do it right now because this service is using this class. That's the problem of doing non-static service memebers.
+  var dao = new _globalServices_GetDataServices__WEBPACK_IMPORTED_MODULE_2__["GetDataServices"](); // u can't do it right now because this service is using this class. That's the problem of doing non-static service memebers.
 
   var categoriesDataMap = dao.getCategories().map; //sort the data alphabetically
   // to do all the below vars assigned from the props here in the method.
