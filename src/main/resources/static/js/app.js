@@ -250,8 +250,8 @@ class UpdateDialog extends React.Component {
 	}
 
 	render() {
-		const inputs = this.props.attributes.map(attribute =>
-			<p key={this.props.socialEvent.entity[attribute]}>
+		const inputs = this.props.attributes.map((attribute, idx) =>
+			<p key={idx}>
 				<input type="text" placeholder={attribute}
 					   defaultValue={this.props.socialEvent.entity[attribute]}
 					   ref={attribute} className="field"/>

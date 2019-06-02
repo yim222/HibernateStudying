@@ -203,7 +203,7 @@ export class CrudBoard extends React.Component{
 
     let showArray = (array) => {
       array.map(el =>{
-        console.log(el.value + ", ")
+        console.log(el.value + ", " + el.key)
       })
     }
 
@@ -433,7 +433,7 @@ export class CrudBoard extends React.Component{
                       <Form.Label for="validationTooltip02">פרטי קשר:</Form.Label><br/>
 
                         {stateData.contactDetails.map((e, index) =>
-                          <div>
+                          <div key = {index}>
                             <Form.Label>
                               {switchContactLabel(index)}
                             </Form.Label><br/>
@@ -445,7 +445,7 @@ export class CrudBoard extends React.Component{
                               }}
 
                               name = "contactDetails"
-                              key = {index}
+                              
 
                             />
 

@@ -99387,9 +99387,9 @@ function (_React$Component3) {
     value: function render() {
       var _this11 = this;
 
-      var inputs = this.props.attributes.map(function (attribute) {
+      var inputs = this.props.attributes.map(function (attribute, idx) {
         return React.createElement("p", {
-          key: _this11.props.socialEvent.entity[attribute]
+          key: idx
         }, React.createElement("input", {
           type: "text",
           placeholder: attribute,
@@ -101213,7 +101213,7 @@ function (_React$Component) {
 
       var showArray = function showArray(array) {
         array.map(function (el) {
-          console.log(el.value + ", ");
+          console.log(el.value + ", " + el.key);
         });
       }; //alert(choosedValues.length );
 
@@ -101411,15 +101411,16 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, {
         for: "validationTooltip02"
       }, "\u05E4\u05E8\u05D8\u05D9 \u05E7\u05E9\u05E8:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), stateData.contactDetails.map(function (e, index) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, switchContactLabel(index)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: index
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Label, null, switchContactLabel(index)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Control, {
           type: "text",
           placeholder: switchContactLabel(index),
           value: e,
           onChange: function onChange(ev) {
             _this2.onNumbersChange(ev, index);
           },
-          name: "contactDetails",
-          key: index
+          name: "contactDetails"
         }));
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Form"].Row, {
         className: ""
