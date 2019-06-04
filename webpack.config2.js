@@ -11,13 +11,6 @@ module.exports = {
     },
     module: {
         rules: [
-                
-                {
-                    test: /\.(js|jsx)$/,
-                    exclude: /node_modules/,
-                    use: ["babel-loader"],            
-                  },
-                  
             {
                 test: path.join(__dirname, '.'),
                 exclude: /(node_modules)/,
@@ -37,8 +30,12 @@ module.exports = {
             {
             	test: /\.css$/,
             	use: [ 'style-loader', 'css-loader' ]
-        	}//other rule
-           
+        	},//other rule
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: ["babel-loader"],            
+              }
         ]//ends of rules
     }
               

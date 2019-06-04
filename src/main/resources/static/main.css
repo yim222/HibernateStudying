@@ -1,70 +1,124 @@
-table {
-    border-collapse: collapse;
+html{
+  direction: rtl;
+
+}
+body{
+  background-color: blue;
 }
 
-td, th {
-    border: 1px solid #999;
-    padding: 0.5rem;
-    text-align: left;
+
+.a:nth-child(odd){
+
+  background-color:yellow;
+}
+.a:nth-child(even){
+  background: purple;
+
+}
+div{
+  text-align: right;
 }
 
+body{
+  background-color: azure;
+  font-size: 10px;
 
-/*Classes for creating dialogs*/
+}
+h3{
+  font-size: 14px;
+  font-weight: bold;
+}
+h4{
+  font-size: 100%;
+}
+/* Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+  body{
+    background-color: azure;
+  }
 
-.modalDialog {
-    position: fixed;
-    font-family: Arial, Helvetica, sans-serif;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(0,0,0,0.8);
-    z-index: 99999;
-    opacity:0;
-    -webkit-transition: opacity 400ms ease-in;
-    -moz-transition: opacity 400ms ease-in;
-    transition: opacity 400ms ease-in;
-    pointer-events: none;
 }
 
-.modalDialog:target {
-    opacity:1;
-    pointer-events: auto;
+@media (min-width: 768px) {
+  body {
+    font-size: 13px;
+  }
+  h3{
+    font-size: initial;
+  }
+
+ }
+
+@media (min-width: 992px) {
+
 }
 
-.modalDialog > div {
-    width: 400px;
-    position: relative;
-    margin: 10% auto;
-    padding: 5px 20px 13px 20px;
-    border-radius: 10px;
-    background: #fff;
-    background: -moz-linear-gradient(#fff, #999);
-    background: -webkit-linear-gradient(#fff, #999);
-    background: -o-linear-gradient(#fff, #999);
+@media (min-width: 1200px) {
+
 }
 
-.close {
-    background: #606061;
-    color: #FFFFFF;
-    line-height: 25px;
-    position: absolute;
-    right: -12px;
-    text-align: center;
-    top: -10px;
-    width: 24px;
-    text-decoration: none;
-    font-weight: bold;
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
-    border-radius: 12px;
-    -moz-box-shadow: 1px 1px 3px #000;
-    -webkit-box-shadow: 1px 1px 3px #000;
-    box-shadow: 1px 1px 3px #000;
+/*custom style */
+.picture{
+  background-color: pink;
+}
+.hidden{
+  display:none;
+}
+.col{
+  /*border: solid black 0.5px;*/
 }
 
-.close:hover { background: #00d9ff; }
+.left-align{
+  text-align: left;
+}
+.item-label{
+  font-weight:bold;
+}
 
-.mainArea1{
-  border: 2px solid blue;
+.event-item{
+  border-radius: 5px;
+  border: solid black 1px;
+}
+.open-close{
+  border: solid black 1px;
+  background-color: black;
+  color: white;
+
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.items-data-row{
+  padding-right: 5px;
+}
+.items-data-row:nth-child(odd){
+
+  color:purple;
+}
+
+.items-data-row:nth-child(even){
+
+  color:black;
+}
+img {
+  width: 100px;;
+  float: right;
+  object-fit: cover;
+}
+.mobile-view img {
+  width: 100px;;
+  float: left;
+  object-fit: cover;
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 15px;
+  }
+}
+.filter{
+  background-image: linear-gradient(to right, #eaade6 , #ef09e0);
+}
+.yellow-font{
+  color:yellow;
 }
