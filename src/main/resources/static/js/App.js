@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+
 //import logo from './logo.svg';
-import './App.css';
+//import './App.css';
 import {MainView} from './app/views/MainView.js';
 import {BrowserRouter as Router} from 'react-router-dom';
 
@@ -24,3 +26,8 @@ class App extends Component {
 }
 
 export default App;
+
+ReactDOM.render(
+		<App />,
+		document.getElementById('react')
+	)
