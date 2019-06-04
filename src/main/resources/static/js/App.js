@@ -2,19 +2,25 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import {MainView} from './app/views/MainView.js';
-//import {BrowserRouter as Router} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 
-class SubApp extends Component {
+class App extends Component {
   render() {
     return (
 
       <div>
-      <p>I am sub app XXX </p>
+
+        <Router>
+          <div>
+            <MainView/>
+
+          </div>
+        </Router>
 
       </div>
     );
   }
 }
 
-export default SubApp;
+export default App;

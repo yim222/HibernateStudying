@@ -2,7 +2,7 @@
 export const SOCIAL_EVENTS_MOCK2 = new Map ([
 
       ["1",{
-        name: "המפגש של לינגר",
+        name: "n=sasגש של לינגר",
         isOrganizer : true,
         publisherName: "Lingar",
         date: new Date('2019-4-19'),
