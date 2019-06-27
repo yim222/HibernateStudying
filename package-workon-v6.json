@@ -1,0 +1,65 @@
+{
+  "name": "social-events-trying1",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Trying to build the primary structure of the App + Spring Data REST",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:spring-guides/tut-react-and-spring-data-rest.git"
+  },
+  "keywords": [
+    "rest",
+    "hateoas",
+    "spring",
+    "data",
+    "react"
+  ],
+  "author": "Lingar",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/spring-guides/tut-react-and-spring-data-rest/issues"
+  },
+  "homepage": "https://github.com/spring-guides/tut-react-and-spring-data-rest",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "bootstrap-select": "^1.13.7",
+    "google-maps-react": "^2.0.2",
+    "lodash": "^4.17.11",
+    "react": "next",
+    "react-bootstrap": "^1.0.0-beta.9",
+    "react-dom": "next",
+    "react-google-maps": "^9.4.5",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^3.0.1",
+    "react-select": "^2.4.2",
+    "rest": "^1.3.1",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^6.26.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-env": "^1.6.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^7.1.4",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "scripts": {
+    "watch": "webpack --watch -d",
+    "start": "set PORT=3006 && react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "main": "index.js"
+}

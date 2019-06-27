@@ -22,7 +22,7 @@ public interface SocialEventRepository extends PagingAndSortingRepository<Social
 	
 	
 	/**
-	 * 
+	 * WORKING - TEST BY Izhar - 25/6/2019 etc
 	 * Description : 
 	 * The main filter method.
 	 * U need pass three List of MultiProps, two ints of age ranges, and two date. 
@@ -77,7 +77,7 @@ public interface SocialEventRepository extends PagingAndSortingRepository<Social
 	//find by on of multi props values
 	//multiPropsValuesSet
 	List<SocialEvent> findByMultiPropsValuesSetIn(MultiPropValue m);
-	List<SocialEvent> findByMultiPropsValuesSetIn(Set<MultiPropValue> m);
+	//List<SocialEvent> findByMultiPropsValuesSetIn(Set<MultiPropValue> m);
 	
 	//select b.fname, b.lname from Users b JOIN b.groups c where c.groupName = :groupName 
 	//@Query("select u from Car u where u.owner like %?1")//if the %before the par it's take the end. and if before check if stating with. Why ? 
