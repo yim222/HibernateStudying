@@ -26,12 +26,12 @@ public class WebServices {
 	
 	@RequestMapping("/getEvents")
 	//http://localhost:8080/ws/getEvents
-	//Get all events that greater or equal then today 
+	//Get all events that greater or equal then today  
 	public List<SocialEvent> getEvents(){
 		
 		Date date;
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.HOUR_OF_DAY, 0);//set time to 00:00 - the day beginning
 		cal.set(Calendar.MINUTE, 0);
 		date = cal.getTime();
 		List<SocialEvent> events = socialEventRepo.findByDateGreaterThanEqualOrderByDateAsc(date);
