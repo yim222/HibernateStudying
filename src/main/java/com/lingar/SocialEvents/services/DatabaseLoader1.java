@@ -59,8 +59,8 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		entitiesService.displayEventsShort((List<SocialEvent>)socialEventRepository.findAll());
 		//entitiesService.draftTrying();
 		//entitiesService.tryingFilter();
-		entitiesService.tryingFilter2();//u here
-		
+		//entitiesService.tryingFilter2();//u here
+		entitiesService.cleanTestFilter();
 		
 		
 		if(true)return;//Stop the running - comment it if u want to ignore it

@@ -1018,6 +1018,17 @@ public class EntitiesService {
 		cal.set(2019, 11, 26, 23, 40);//--> to date 
 		toDate = cal.getTime();
 		
+
+		System.out.println("cal ? + \n" + cal.get(1));
+		cal =Calendar .getInstance();
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		Date currentDate = cal.getTime();
+		resultEvents = socialEventRepository.findByDateGreaterThanEqualOrderByDateAsc(currentDate);
+		displayEventsShort(resultEvents);
+		
+		
+		System.out.println("****************************LAST AND ACCURATE TEST : \n***************************");
 		
 		System.out.println("Filter  with those types : \n"  + eventTypes +  " \nand those areas : \n" + areas
 				+  "\n and those jew level  : \n" + jewLvls 
@@ -1040,13 +1051,6 @@ public class EntitiesService {
 		displayEventsShort(resultEvents);
 		*/
 		
-		System.out.println("cal ? + \n" + cal.get(1));
-		cal =Calendar .getInstance();
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		cal.set(Calendar.MINUTE, 0);
-		Date currentDate = cal.getTime();
-		resultEvents = socialEventRepository.findByDateGreaterThanEqualOrderByDateAsc(currentDate);
-		displayEventsShort(resultEvents);
 
 		
 		
@@ -1077,5 +1081,133 @@ public class EntitiesService {
 		
 		
 	}
+	
+	
+	public void cleanTestFilter(){
 
+		System.out.println("*******************TRYING filter 2 *****************************");
+		List<SocialEvent> allEvents = (List<SocialEvent>)socialEventRepository.findAll();
+		//get the initial Multi props as 3 maps
+		//copy the lists and pass them as Map
+		
+		//on event type : 
+		List<String> work = MULTI_PROPS_VALUES.get("eventType");
+		Map<String, List<String>> mapWork = new TreeMap<>();
+		mapWork.put("eventType", work);
+		List<MultiPropValue> eventTypeInitial = new ArrayList<>(generateMultiValuesList(mapWork));
+		
+		//on jewLvlKeep: 
+		 work = MULTI_PROPS_VALUES.get("jewLvlKeep");
+		mapWork = new TreeMap<>();
+		mapWork.put("jewLvlKeep", work);
+		List<MultiPropValue> jewLvlKeepInitial =  new ArrayList<>(generateMultiValuesList(mapWork));
+		
+		//on area: 
+		 work = MULTI_PROPS_VALUES.get("area");
+		mapWork = new TreeMap<>();
+		mapWork.put("area", work);
+		List<MultiPropValue> areaInitial =  new ArrayList<>(generateMultiValuesList(mapWork));
+		
+		System.out.println("The initial Lists : \nEvent type =  " + eventTypeInitial  
+				+ "\nJew Level Keep -  " + jewLvlKeepInitial 
+				+"\nAreas - " + areaInitial);
+		
+		//generate 3 list to work with and they can get initials always : 
+		List <MultiPropValue> eventTypes, jewLvls, areas;
+		List <SocialEvent> resultEvents;
+		
+	
+		
+		
+		//START TEST 4
+		//Those steps need to be done in each test . 
+		System.out.println("Test 4 NOW with JewLvlKeep :  same as before but filter also by jew Level keep");
+		eventTypes = new ArrayList<>(eventTypeInitial); jewLvls = new ArrayList<>(jewLvlKeepInitial); areas= new ArrayList<>(areaInitial);
+		
+		//eventType = [meeting, vaacation, speedate, games]
+		//jewLvlKeep = [shabbat, noShabbat]
+		//area = [jerusalem, north, south, center]
+
+		System.out.println("all events : \n" );
+		displayEventsShort(allEvents);
+		eventTypes.remove(2);//eventTypes.remove(0);
+		areas.remove(3);areas.remove(0);//areas.remove(0);
+		jewLvls.remove(0);
+		
+		
+		
+		
+		
+		int from = 55; int to = 70;
+		
+		
+		System.out.println("TRYING to choose the with overlap range of  " + from + " to " + to);
+		resultEvents = socialEventRepository.filter14(from, to);
+		displayEventsShort(resultEvents);
+		
+		//creating dates to test
+		Date fromDate = new Date();
+		Date toDate = new Date ();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(2019, 5, 18, 0, 0);//--> from date 
+		fromDate = cal.getTime();
+		
+		cal.set(2019, 11, 26, 23, 40);//--> to date 
+		toDate = cal.getTime();
+		
+		
+		
+		
+		//START TEST  4
+		//Those steps need to be done in each test . 
+		System.out.println("Test last now I am tryng to filter with all together . .  ");
+		eventTypes = new ArrayList<>(eventTypeInitial); jewLvls = new ArrayList<>(jewLvlKeepInitial); areas= new ArrayList<>(areaInitial);
+		
+		//eventType = [meeting, vaacation, speedate, games]
+		//jewLvlKeep = [shabbat, noShabbat]
+		//area = [jerusalem, north, south, center]
+
+		//eventTypes.remove(2);eventTypes.remove(1);eventTypes.remove(0);//->other test  - GAMES ONLY
+
+		
+		eventTypes.remove(3);//eventTypes.remove(1);//eventTypes.remove(1);//main test
+		//areas.remove(3);areas.remove(1);areas.remove(0);
+		//jewLvls.remove(1);
+		
+		int fromAge = 33 ; int toAge = 40;
+		cal.set(2019, 1, 18, 0, 0);//--> from date 
+		fromDate = cal.getTime();
+		
+		cal.set(2019, 11, 26, 23, 40);//--> to date 
+		toDate = cal.getTime();
+		
+
+		System.out.println("cal ? + \n" + cal.get(1));
+		cal =Calendar .getInstance();
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		Date currentDate = cal.getTime();
+		resultEvents = socialEventRepository.findByDateGreaterThanEqualOrderByDateAsc(currentDate);
+		displayEventsShort(resultEvents);
+		
+		
+		System.out.println("****************************LAST AND ACCURATE TEST :(filter 16 main) \n***************************");
+		
+		System.out.println("Filter  with those types : \n"  + eventTypes +  " \nand those areas : \n" + areas
+				+  "\n and those jew level  : \n" + jewLvls 
+				+ "\n within this range : " + fromAge + " to " + toAge
+				+"\n in the dates : " + fromDate + " to " + toDate);
+		
+		
+		
+		System.out.println("Then with all : (ages and dates  ) ");
+		resultEvents = socialEventRepository.filter16Main(eventTypes, areas, jewLvls, fromAge, toAge, fromDate, toDate);
+		displayEventsShort(resultEvents);
+
+		///END TEST
+		
+		if(true)return;
+		
+	}
 }
