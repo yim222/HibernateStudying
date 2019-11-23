@@ -43,6 +43,8 @@ public class EntitiesServiceHelper {
 		singleValues.put("eventLink", "gg.com");
 		singleValues.put("imgUrl", "img1.jpg");
 		singleValues.put("price", "50");
+		singleValues.put("address", "Amal 66");
+
 		
 		//creating Multiprops (by removing from the default values )
 		//Map<String, List<String>> passedMultiValues = EntitiesService.MULTI_PROPS_VALUES;
@@ -81,7 +83,7 @@ public class EntitiesServiceHelper {
 		int[] agesRange = {24, 60};
 		int[] time = {1	, 30};
 		Calendar cal = Calendar.getInstance();
-		cal.set(2019, 5, 26);
+		cal.set(2020, 5, 26);
 		Date date = cal.getTime();
 		
 		
@@ -106,6 +108,8 @@ public class EntitiesServiceHelper {
 		singleValues.put("eventLink", "gg.com");
 		singleValues.put("imgUrl", "img1.jpg");
 		singleValues.put("price", "150");
+		singleValues.put("address", "Soko 66");
+
 		//System.out.println("EntitiesService.MULTI_PROPS_VALUES =\n" + EntitiesService.MULTI_PROPS_VALUES);
 		
 		//reset Multiprops to defaults (by removing from the default values )
@@ -165,6 +169,8 @@ public class EntitiesServiceHelper {
 		singleValues.put("eventLink", "gg.com");
 		singleValues.put("imgUrl", "img1.jpg");
 		singleValues.put("price", "200");
+		singleValues.put("address", "Neverland 66");
+
 		//System.out.println("EntitiesService.MULTI_PROPS_VALUES =\n" + EntitiesService.MULTI_PROPS_VALUES);
 		
 		//reset Multiprops to defaults (by removing from the default values )
@@ -198,7 +204,7 @@ public class EntitiesServiceHelper {
 		agesRange = new int[]{20, 35};//from to 
 		time = new int[] {20, 30}; //hour, minute
 		
-		cal.set(2019, 3, 26); // y-m-d
+		cal.set(2020, 3, 26); // y-m-d
 		date = cal.getTime();
 		
 		
@@ -223,6 +229,8 @@ public class EntitiesServiceHelper {
 		singleValues.put("eventLink", "gg.com");
 		singleValues.put("imgUrl", "img1.jpg");
 		singleValues.put("price", "25");
+		singleValues.put("address", "Hezel 66");
+
 		//System.out.println("EntitiesService.MULTI_PROPS_VALUES =\n" + EntitiesService.MULTI_PROPS_VALUES);
 		
 		//reset Multiprops to defaults (by removing from the default values )
@@ -281,6 +289,8 @@ public class EntitiesServiceHelper {
 		singleValues.put("eventLink", "gg.com");
 		singleValues.put("imgUrl", "img1.jpg");
 		singleValues.put("price", "35");
+		singleValues.put("address", "nizana 66");
+
 		//System.out.println("EntitiesService.MULTI_PROPS_VALUES =\n" + EntitiesService.MULTI_PROPS_VALUES);
 		
 		//reset Multiprops to defaults (by removing from the default values )
@@ -317,7 +327,7 @@ public class EntitiesServiceHelper {
 		agesRange = new int[]{19, 28};//from to 
 		time = new int[] {20, 30}; //hour, minute
 		
-		cal.set(2019, 6, 01); // y-m-d
+		cal.set(2020, 6, 01); // y-m-d
 		date = cal.getTime();
 		
 		
@@ -344,6 +354,8 @@ public class EntitiesServiceHelper {
 		singleValues.put("eventLink", "gg.com");
 		singleValues.put("imgUrl", "img1.jpg");
 		singleValues.put("price", "free");
+		singleValues.put("address", "Savion 66");
+
 		//System.out.println("EntitiesService.MULTI_PROPS_VALUES =\n" + EntitiesService.MULTI_PROPS_VALUES);
 		
 		//reset Multiprops to defaults (by removing from the default values )
