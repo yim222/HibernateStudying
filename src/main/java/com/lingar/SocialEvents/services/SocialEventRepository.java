@@ -24,7 +24,7 @@ public interface SocialEventRepository extends PagingAndSortingRepository<Social
 	/**
 	 * WORKING - TEST BY Izhar - 25/6/2019 etc
 	 * Description : 
-	 * The main filter method.
+	 * The MAIN FILTER method.
 	 * U need pass three List of MultiProps, two ints of age ranges, and two date. 
 	 * 
 	 * Note to pass the date at the edge of the day (start and end) in hours aspect, for not miss things. 
