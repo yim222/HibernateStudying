@@ -139,6 +139,7 @@ public class WebServices {
 		areaValues.put("area" , area);
 		Set<MultiPropValue> areaMap = entitiesService.generateMultiValuesList(areaValues);//TODO future - why it's return set ? is the filter get it ? 
 		System.out.println(areaMap );
+		System.out.println("Original area = "+ area);
 		
 		
 		
