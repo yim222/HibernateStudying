@@ -1,0 +1,24 @@
+SELECT * FROM hibernate_lesson6.single_props_values #-ok
+INNER JOIN hibernate_lesson6.social_events_single_props_values #-ok
+ ON hibernate_lesson6.social_events_single_props_values.single_props_values_list_id = hibernate_lesson6.single_props_values.id ##-ok
+AND 
+
+hibernate_lesson6.social_events_single_props_values .social_event_id = 51;
+
+
+This query is getting all the singles props with the values. THe question is why it’s so complicated, 
+but in other side trust your self, because U did planning on that. It’s easier to search on filter I think 
+
+
+
+SELECT * FROM hibernate_lesson6.single_props_values #-ok
+
+INNER JOIN hibernate_lesson6.social_events_single_props_values #-ok
+ ON hibernate_lesson6.social_events_single_props_values.single_props_values_list_id = hibernate_lesson6.single_props_values.id ##-ok
+AND 
+
+hibernate_lesson6.social_events_single_props_values .social_event_id = 51
+
+JOIN hibernate_lesson6.single_props_names ON hibernate_lesson6.single_props_names.id = 
+hibernate_lesson6.single_props_values. single_prop_name_id;
+;
