@@ -25,7 +25,7 @@ import com.lingar.SocialEvents.systemConstants.DataConstants;
 
 @Service
 public class EntitiesService {
-	private final SocialEventRepository socialEventRepository;
+	public final SocialEventRepository socialEventRepository;
 	private final SinglePropNameRepository singlePropNameRepository;
 	private final SinglePropValueRepository singlePropValueRepository;
 	private final MultiPropNameRepository multiPropNameRepository;
@@ -35,6 +35,10 @@ public class EntitiesService {
 	//List of the constant properties
 	public static final String[] SINGLE_PROPS_VALUES = DataConstants.SINGLE_PROPS_VALUES;
 	public static final Map <String, List<String>> MULTI_PROPS_VALUES = DataConstants.MULTI_PROPS_VALUES ;
+	
+	public void test1(){
+		System.out.println("I am test of entity service. ");
+	}
 
 	
 	@Autowired //The default of what's happen when this is created. 
@@ -1204,8 +1208,11 @@ public class EntitiesService {
 		System.out.println("Then with all : (ages and dates  ) ");
 		resultEvents = socialEventRepository.filter16Main(eventTypes, areas, jewLvls, fromAge, toAge, fromDate, toDate);
 		displayEventsShort(resultEvents);
+//		System.out.println("resultEvents = " + resultEvents);
 
 		///END TEST
+		System.out.println("lingar test temp ");
+		System.out.println(socialEventRepository.tryQuery2("eventName", 51));
 		
 		if(true)return;
 		

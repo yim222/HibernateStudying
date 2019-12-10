@@ -63,7 +63,7 @@ public interface SocialEventRepository extends PagingAndSortingRepository<Social
 	List<SocialEvent> findByDateGreaterThanEqualOrderByDateAsc(Date date);
 		
 	
-	
+
 	
 	/***
 	 * STUDYING QUERIES 
@@ -76,8 +76,7 @@ public interface SocialEventRepository extends PagingAndSortingRepository<Social
 
 	//find by on of multi props values
 	//multiPropsValuesSet
-	List<SocialEvent> findByMultiPropsValuesSetIn(MultiPropValue m);
-	//List<SocialEvent> findByMultiPropsValuesSetIn(Set<MultiPropValue> m);
+	List<SocialEvent> findByMultiPropsValuesSetIn(MultiPropValue m); 	//List<SocialEvent> findByMultiPropsValuesSetIn(Set<MultiPropValue> m);
 	
 	//select b.fname, b.lname from Users b JOIN b.groups c where c.groupName = :groupName 
 	//@Query("select u from Car u where u.owner like %?1")//if the %before the par it's take the end. and if before check if stating with. Why ? 
@@ -86,6 +85,9 @@ public interface SocialEventRepository extends PagingAndSortingRepository<Social
 	//Not like in derived with capitalize but with dot. i.k
 	List<SinglePropValue>tryQuery(String propName);
 	
+	
+	//lingar - TODO  - first do it on one simple method below  - find and do simple WS . Then do it on the above filter.  U have something at getEvents at the WS / 
+	//Do on this - U need to pass a singePropVlaidName, and id of valid event and it should return list of the events it's exist
 	@Query("select a.singlePropsValuesList from SocialEvent a JOIN a.singlePropsValuesList b where b.singlePropName.propName = ?1 and  a.id = ?2")//See how u access the inner field.
 	//Not like in derived with capitalize but with dot. i.k
 	//See how in the select x - the x is define what the returned values could be value. 

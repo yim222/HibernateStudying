@@ -1,0 +1,49 @@
+
+URL's For the url :http://localhost:8080/ws/filter-try1
+
+path with empty values 
+eventType=מפגש+&eventType=ערב+משחקים&jewLvlKeep=רוצים+לשמור+שבת&area=&agesRange=0&agesRange=120&datesRange=2019-12-03&datesRange=2019-12-27
+
+
+path with all values : (if u want that it won't generate converted string - copy without the URL )
+http://localhost:3006/filter?eventType=%D7%A9%D7%99%D7%A2%D7%95%D7%A8+%D7%AA%D7%95%D7%A8%D7%94&eventType=%D7%9E%D7%A4%D7%92%D7%A9+&jewLvlKeep=%D7%A8%D7%95%D7%A6%D7%99%D7%9D+%D7%9C%D7%A9%D7%9E%D7%95%D7%A8+%D7%A9%D7%91%D7%AA&area=%D7%94%D7%A6%D7%A4%D7%95%D7%9F+%D7%94%D7%A8%D7%97%D7%95%D7%A7&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2019-12-07
+
+
+eventType=שיעור+תורה&eventType=מפגש+&jewLvlKeep=רוצים+לשמור+שבת&area=הצפון+הרחוק&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange
+
+all events : 
+42	2020-06-26 22:24:22	24	1	Mock-1	30	60	0
+51	2020-06-16 22:24:22	30	20	Mock - 2	30	44	0
+60	2020-04-26 22:24:22	20	20	Mock - 3	30	35	0
+69	2019-07-26 22:24:22	40	20	Mock - 4	30	64	0
+78	2020-07-01 22:24:22	19	20	Mock - 5	30	28	0
+87	2019-10-21 22:24:22	19	50	Mock - 6	70	28	0
+							
+							
+							
+							
+eventType=meeting&eventType=games&jewLvlKeep=shabbat&area=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+
+This working well
+http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=games&jewLvlKeep=shabbat&area=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+
+
+that's get two events 
+
+http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&area=north&area=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+
+let's get one more 
+
+
+http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=vaacation&eventType=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&area=north&area=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+
+
+Let's check with area empty 
+
+
+
+http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=vaacation&eventType=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&area=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+
+Happen an error because the inner working U are doing. 
+
+
