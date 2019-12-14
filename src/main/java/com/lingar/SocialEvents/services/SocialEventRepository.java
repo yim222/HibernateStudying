@@ -41,11 +41,7 @@ public interface SocialEventRepository extends PagingAndSortingRepository<Social
 	 * @param to
 	 * @return
 	 */
-	/*
-	 * SELECT t1 FROM Table1 t1, Table2 t2
-WHERE t1.t2 = t2 AND
-t1.field1 = (CASE WHEN t2.field1 is null THEN NULL ELSE t2.field1 END)
-	 */
+	
 	@Query("SELECT DISTINCT e from SocialEvent e "
 			+ "join e.multiPropsValuesSet m "
 			+ "join e.multiPropsValuesSet c "
@@ -53,30 +49,8 @@ t1.field1 = (CASE WHEN t2.field1 is null THEN NULL ELSE t2.field1 END)
 			+ "WHERE ( "
 			+ "m in ?1"
 //			+ " AND   c in ?2 "//the good - if the paramter empty throw 500.. and about the gap 
-//			+ " AND  ( (c in ?2) AND (?2 IS NOT   NULL)) "
-//			+ " AND  (NULL in ?2  OR c in ?2 ) "//Work but don't generate wanted result on empty list - even after fixing the mistake
-//			+ " AND  ('all' in ?2  OR c in ?2 ) "//with adding flag
-//			+ " AND  (?2 is null  OR c in ?2 ) "// in the table -- not working too at COMPILING - Caused by: org.hibernate.hql.internal.ast.QuerySyntaxException: unexpected AST node: {vector} [SELECT DISTINCT e from com.lingar.SocialEvents.entities.SocialEvent e join e.multiPropsValuesSet m join e.multiPropsValuesSet c join e.multiPropsValuesSet a WHERE ( m in (?1, ?8, ?9) AND  (?2, ?11, ?12, ?13 is null  OR c in (?2, ?11, ?12, ?13) )  AND  a in (?3, ?10)) AND ((e.fromAge BETWEEN ?4 AND ?5) OR (e.toAge BETWEEN ?4 AND ?5)OR (?4 BETWEEN e.fromAge AND e.toAge )) AND (e.date BETWEEN ?6 AND ?7) ORDER BY e.date ASC]
-//			+ " AND  ('all' in ?2  OR c in ?2 ) "//with adding flag
-//			+ " AND  ( 'south' in ?2  OR c in ?2 ) "// in the table 
-
-			+" AND  (COALESCE(?2, NULL) is null  OR c in ?2 ) "// in the table -- maybe will -WORK! - only that working. 
-			//(COALESCE(:placeHolderName,NULL) IS NULL OR Column_Name in (:placeHolderName))
-
-
-
-//			+ " AND  ( c in ?2 AND ?2 IS NOT EMPTY) " //throw: caused by: org.hibernate.hql.internal.ast.QuerySyntaxException: ??? is not mapped
-//			+ " AND  ( (c in ?2) OR (?2 IS EMPTY)) " // Don't work - don't compile
-
-//			+ " AND (case ?3 =  null THEN NULL ELSE a in ?3)" U here - U need to do it work - start with 2?. 
-			//See at the docs direction
-			+ " AND  a in ?3"
-			//+ "AND CASE Where ?3 IS NULL END"//SELECT CASE ps.open WHEN true THEN 'OPEN' else 'CLOSED' END, CASE
-			//ps.full WHEN true THEN 'FULL' else 'FREE' END, ps.availableCapacity FROM ParkingState as ps
-			//TODO - solution : to understand how to access the param - ?2.propValue = all. And to pass it with the parameter 
-			//If it's not possible - to pass to all events a global field that can be checked  and pass it when necessary to exclude the 
-			//clause. It's called "Positional Parameters"
-			// And check it 
+			+" AND  (COALESCE(?2, NULL) is null  OR c in ?2 ) "// TODO the solution - change all the quries to such			
+			+ " AND  a in ?3"			
 			+ ") "
 			+ "AND "
 			+ "((e.fromAge BETWEEN ?4 AND ?5) "

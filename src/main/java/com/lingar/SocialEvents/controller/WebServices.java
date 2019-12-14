@@ -162,6 +162,23 @@ public class WebServices {
 		
 		System.out.println("areaParams before sending " +areaParams );
 		
+		/*
+		 * TODO
+		 * 1- Make handling to eventTypes and Areas and JewLvl
+		 * 2- Make excepted logs : 
+		 * Getting filter query : 
+		 * Event type: the list
+		 * Jew Level Keeping: The list
+		 * Areas: The list 
+		 * From To ages : 1 to 120
+		 * From date : ...
+		 * To date : 
+		 * 
+		 * The Results : with display short. 
+		 * 
+		 */
+		 /*TODO FUTUTRE -  make handling empty values by the query. See the doc that saved. at archive - empty-values-query
+		
 		
 		
 		
