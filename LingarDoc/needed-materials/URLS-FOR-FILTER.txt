@@ -47,3 +47,11 @@ http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=vaacation&event
 Happen an error because the inner working U are doing. 
 
 
+
+http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&area=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+
+
+
+//this only with vaacation
+
+http://localhost:8080/ws/filter-try1?eventType=vaacation&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&area=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08

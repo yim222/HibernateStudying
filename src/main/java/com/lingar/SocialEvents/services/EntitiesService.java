@@ -1208,11 +1208,21 @@ public class EntitiesService {
 		System.out.println("Then with all : (ages and dates  ) ");
 		resultEvents = socialEventRepository.filter16Main(eventTypes, areas, jewLvls, fromAge, toAge, fromDate, toDate);
 		displayEventsShort(resultEvents);
+		System.out.println("resultEvents = " + resultEvents);
 //		System.out.println("resultEvents = " + resultEvents);
 
 		///END TEST
 		System.out.println("lingar test temp ");
-		System.out.println(socialEventRepository.tryQuery2("eventName", 51));
+//		System.out.println(socialEventRepository.tryQuery2("eventName", 51));
+		
+		System.out.println("Like Test last above just now areas will be null   ");
+//		eventTypes = new ArrayList<>(eventTypeInitial); jewLvls = new ArrayList<>(jewLvlKeepInitial); areas= new ArrayList<>(areaInitial);
+		resultEvents = socialEventRepository.filter16Main(eventTypes, null, jewLvls, fromAge, toAge, fromDate, toDate);
+		displayEventsShort(resultEvents);
+		System.out.println("resultEvents = " + resultEvents);
+
+
+
 		
 		if(true)return;
 		

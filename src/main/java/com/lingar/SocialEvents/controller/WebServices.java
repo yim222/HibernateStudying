@@ -139,16 +139,35 @@ public class WebServices {
 		areaValues.put("area" , area);
 		Set<MultiPropValue> areaMap = entitiesService.generateMultiValuesList(areaValues);//TODO future - why it's return set ? is the filter get it ? 
 		System.out.println(areaMap );
-		System.out.println("Original area = "+ area);
+		System.out.println("Original area = "+ area + " size? " + area.size());
+		
+		List<MultiPropValue> areaParams = new ArrayList<>(areaMap);
+		System.out.println("area.size ? " +area.size() );
+
+		if(area.size()<1){
+			//areaParams.add("");
+			System.out.println("make params null" );
+//			areaParams = null;
+			areaParams.add(null);
+//			System.out.println("make params with flag" );
+//
+//			areaParams.add("all");
+
+		}
+		List<MultiPropValue> eventTypeParams = new ArrayList<>(eventTypeMap);
+		
+		System.out.println("eventTypeParams before sending = " + eventTypeParams);
+
 		
 		
+		System.out.println("areaParams before sending " +areaParams );
 		
 		
 		
 		
 		List <SocialEvent> resultEvents = entitiesService.socialEventRepository.filter16Main(
-				new ArrayList<>(eventTypeMap),
-				new ArrayList<>(areaMap),
+				eventTypeParams,
+				areaParams,
 				new ArrayList<>(jewLvlKeepMap),				
 				agesRange[0], agesRange[1],
 				datesRange[0], datesRange[1]);

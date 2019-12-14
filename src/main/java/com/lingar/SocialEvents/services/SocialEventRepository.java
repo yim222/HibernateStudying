@@ -18,6 +18,8 @@ public interface SocialEventRepository extends PagingAndSortingRepository<Social
 	
 	MAIN QUERIES 
 	
+	
+	reference : https://docs.jboss.org/hibernate/core/3.3/reference/en/html/queryhql.html
 	***/
 	
 	
@@ -39,14 +41,43 @@ public interface SocialEventRepository extends PagingAndSortingRepository<Social
 	 * @param to
 	 * @return
 	 */
+	/*
+	 * SELECT t1 FROM Table1 t1, Table2 t2
+WHERE t1.t2 = t2 AND
+t1.field1 = (CASE WHEN t2.field1 is null THEN NULL ELSE t2.field1 END)
+	 */
 	@Query("SELECT DISTINCT e from SocialEvent e "
 			+ "join e.multiPropsValuesSet m "
 			+ "join e.multiPropsValuesSet c "
 			+ "join e.multiPropsValuesSet a "
 			+ "WHERE ( "
 			+ "m in ?1"
-			+ " AND   c in ?2 "
-			+ "AND a in ?3) "
+//			+ " AND   c in ?2 "//the good
+//			+ " AND  ( (c in ?2) AND (?2 IS NOT   NULL)) "
+//			+ " AND  (NULL in ?2  OR c in ?2 ) "//Work but don't generate wanted result on empty list 
+//			+ " AND  ('all' in ?2  OR c in ?2 ) "//with adding flag
+//			+ " AND  (?2 is null  OR c in ?2 ) "// in the table -- not working too 
+//			+ " AND  ('all' in ?2  OR c in ?2 ) "//with adding flag
+//			+ " AND  ( 'south' in ?2  OR c in ?2 ) "// in the table 
+
+			+" AND  (COALESCE(?2, NULL) is null  OR c in ?2 ) "// in the table -- maybe will 
+			//(COALESCE(:placeHolderName,NULL) IS NULL OR Column_Name in (:placeHolderName))
+
+
+
+//			+ " AND  ( (c in ?2) OR (?2 IS EMPTY)) "
+//			+ " AND  ( (c in ?2) OR (?2 IS EMPTY)) "
+
+//			+ " AND (case ?3 =  null THEN NULL ELSE a in ?3)" U here - U need to do it work - start with 2?. 
+			//See at the docs direction
+			+ " AND  a in ?3"
+			//+ "AND CASE Where ?3 IS NULL END"//SELECT CASE ps.open WHEN true THEN 'OPEN' else 'CLOSED' END, CASE
+			//ps.full WHEN true THEN 'FULL' else 'FREE' END, ps.availableCapacity FROM ParkingState as ps
+			//TODO - solution : to understand how to access the param - ?2.propValue = all. And to pass it with the parameter 
+			//If it's not possible - to pass to all events a global field that can be checked  and pass it when necessary to exclude the 
+			//clause. It's called "Positional Parameters"
+			// And check it 
+			+ ") "
 			+ "AND "
 			+ "((e.fromAge BETWEEN ?4 AND ?5) "
 			+ "OR (e.toAge BETWEEN ?4 AND ?5)"

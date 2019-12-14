@@ -207,6 +207,15 @@ public interface CarRepository extends PagingAndSortingRepository<Car, UUID>{
 	@Transactional
 	void deleteByPrice(int price);
 	
+	
+	/**
+	 * TRYING AND PRACTICE 
+	 */
+	
+	
+	//I want to make case use inside the query . 
+	@Query("select u from Car u where u.price >= ?1")
+	List<Car> draftTry1(int price);
 
 
 }
