@@ -124,15 +124,24 @@ public class WebServices {
 		
 		//convert eventTypes to List of MultiValues 
 		Map <String, List<String> > eventTypeValues = new TreeMap<String, List<String>>();
+//		if(eventType.size()<1){//TODO - that's one direction - with adding global value. This value will be need to assign to all event so it is not so good.
+////			eventTypeParams.add(null);	
+//			eventType.add("all");
+//			
+//		}
 		eventTypeValues.put("eventType" , eventType);
 		Set<MultiPropValue> eventTypeMap = entitiesService.generateMultiValuesList(eventTypeValues);//TODO future - why it's return set ? is the filter get it ? 
 		System.out.println(eventTypeMap );
-		
-		//convert jewLvlKeeps to List of MultiValues 
-		Map <String, List<String> > jewLvlKeepValues = new TreeMap<String, List<String>>();
-		jewLvlKeepValues.put("jewLvlKeep" , jewLvlKeep);
-		Set<MultiPropValue> jewLvlKeepMap = entitiesService.generateMultiValuesList(jewLvlKeepValues);//TODO future - why it's return set ? is the filter get it ? 
-		System.out.println(jewLvlKeepMap );
+		//Convert Set to List Prepare the values to MultiPropValue List - for pass to the filter
+		List<MultiPropValue> eventTypeParams = new ArrayList<>(eventTypeMap);
+		//checking if it empty 
+		if(eventType.size()<1){
+//			eventTypeParams.add(null);	
+			MultiPropValue m = new MultiPropValue("xx", "xxx");
+			eventTypeParams.add(null);
+			eventTypeParams = null;
+			
+		}
 		
 		//convert areas to List of MultiValues 
 		Map <String, List<String> > areaValues = new TreeMap<String, List<String>>();
@@ -147,17 +156,30 @@ public class WebServices {
 		if(area.size()<1){
 			//areaParams.add("");
 			System.out.println("make params null" );
-//			areaParams = null;
+//					areaParams = null;
 			areaParams.add(null);
-//			System.out.println("make params with flag" );
+			
+//					System.out.println("make params with flag" );
 //
-//			areaParams.add("all");
+//					areaParams.add("all");
 
 		}
-		List<MultiPropValue> eventTypeParams = new ArrayList<>(eventTypeMap);
+		
+		//convert jewLvlKeeps to List of MultiValues 
+		Map <String, List<String> > jewLvlKeepValues = new TreeMap<String, List<String>>();
+		jewLvlKeepValues.put("jewLvlKeep" , jewLvlKeep);
+		Set<MultiPropValue> jewLvlKeepMap = entitiesService.generateMultiValuesList(jewLvlKeepValues);//TODO future - why it's return set ? is the filter get it ? 
+		System.out.println(jewLvlKeepMap );
+		List<MultiPropValue> jewLvlKeepParams = new ArrayList<>(eventTypeMap);
+		//checking if it empty 
+		if(jewLvlKeep.size()<1){
+			jewLvlKeepParams.add(null);	
+		}
+		
+		
 		
 		System.out.println("eventTypeParams before sending = " + eventTypeParams);
-
+		
 		
 		
 		System.out.println("areaParams before sending " +areaParams );
@@ -176,8 +198,10 @@ public class WebServices {
 		 * 
 		 * The Results : with display short. 
 		 * 
+		 * U NEED TO TEST ALL THIS 
+		 * 
 		 */
-		 /*TODO FUTUTRE -  make handling empty values by the query. See the doc that saved. at archive - empty-values-query
+		 /*TODO FUTUTRE -  make handling empty values by the query. See the doc that saved. at archive - empty-values-query*/
 		
 		
 		
@@ -185,7 +209,7 @@ public class WebServices {
 		List <SocialEvent> resultEvents = entitiesService.socialEventRepository.filter16Main(
 				eventTypeParams,
 				areaParams,
-				new ArrayList<>(jewLvlKeepMap),				
+				jewLvlKeepParams,				
 				agesRange[0], agesRange[1],
 				datesRange[0], datesRange[1]);
 		System.out.println("resultEvents  = \n" +  resultEvents);//U made socialEventRepo public maybe it's not right. Do something else . 

@@ -1220,7 +1220,18 @@ public class EntitiesService {
 		resultEvents = socialEventRepository.filter16Main(eventTypes, null, jewLvls, fromAge, toAge, fromDate, toDate);
 		displayEventsShort(resultEvents);
 		System.out.println("resultEvents = " + resultEvents);
+		
+		
+		//Demonstration of the problem :
+		System.out.println("This will work: ");
+		List <SocialEvent>  resultEvents2 = socialEventRepository.filter16Main(eventTypes, null, jewLvls, fromAge, toAge, fromDate, toDate);
+		System.out.println("resultEvents2 = " + resultEvents2);
 
+		System.out.println("This shouldn't work, but does work: ");//When I do on web service - it's generate error 
+		resultEvents2 = socialEventRepository.filter16Main(null, areas, jewLvls, fromAge, toAge, fromDate, toDate);
+		System.out.println("resultEvents2 = " + resultEvents2);
+
+		
 
 
 		
