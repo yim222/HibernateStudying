@@ -604,7 +604,7 @@ public class EntitiesService {
 		innerValues.add("simple trip");
 		innerValues.add("lecture");
 				
-		multiValues.put("EventTypeMulti", innerValues);
+		multiValues.put("Multi", innerValues);
 		
 		//adding some props of "matchingIdea"
 		innerValues = new ArrayList<>();

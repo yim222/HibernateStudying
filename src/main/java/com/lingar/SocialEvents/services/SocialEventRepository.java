@@ -70,6 +70,37 @@ public interface SocialEventRepository extends PagingAndSortingRepository<Social
 			int fromAge, int toAge,
 			Date from , Date to);
 	
+	//FILTER 17//
+	@Query(value =  "SELECT DISTINCT e from SocialEvent e "
+			+ "join e.multiPropsValuesSet m "
+			+ "join e.multiPropsValuesSet c "
+			+ "join e.multiPropsValuesSet a "
+			+ "WHERE (  "
+//			+"e IS NOT NULL AND"//trying to add condition - NOT HELP
+			+ "(m in ?1 OR ?8 > 0)"
+//			+ "(COALESCE( ?1, NULL) is null  OR   m in ?1)"		//Prblem - this don't working but the other 
+//			+ "((COALESCE( ?1, null) is null  OR   m in ?2))AND"		
+//			+"  (COALESCE(?1) is null  OR m in ?1 )"//won't working too 
+//			+ " AND   c in ?2 "//the good - if the parameter empty throw 500.. and about the gap 
+			+" AND  (COALESCE(?2, NULL) is null  OR c in ?2 ) "//work
+//			+" AND   c in ?2 ) "//
+			+ "AND  (COALESCE(?3, NULL) is null  OR a in ?3 ) "// TODO the solution - change all the quries to such			
+//			+ " AND  a in ?3"			
+			+ ") "
+			+ "AND "
+			+ "((e.fromAge BETWEEN ?4 AND ?5) "
+			+ "OR (e.toAge BETWEEN ?4 AND ?5)"
+			+ "OR (?4 BETWEEN e.fromAge AND e.toAge )) "
+			+ "AND (e.date BETWEEN ?6 AND ?7) "
+			+ "ORDER BY e.date ASC"   /*, nativeQuery=true - cause errror*/)//--- work ? 
+	List<SocialEvent> filter17Try(
+			List <MultiPropValue> eventTypes,
+			List <MultiPropValue> areas, List <MultiPropValue> jewLvlKeep,
+			int fromAge, int toAge,
+			Date from , Date to, int eventTypesMissing);
+
+	
+	
 	/*
 	 
 	 List<SocialEvent> filter16Main(

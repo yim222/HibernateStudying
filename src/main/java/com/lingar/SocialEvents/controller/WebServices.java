@@ -225,6 +225,135 @@ public class WebServices {
 		 */
 	}
 	
+	
+	@RequestMapping("/filter-try2")//passing arrays - https://medium.com/@AADota/spring-passing-list-and-array-of-values-as-url-parameters-1ed9bbdf0cb2
+//	public String filterTry1(@RequestParam  String[] eventType){//The names must be equals at the path param and Java param
+	public  List <SocialEvent> filterTry2(@RequestParam  List<String> eventTypes,
+			@RequestParam  List<String> jewLvlKeep,
+			@RequestParam  List<String> areas,
+			@RequestParam  int[] agesRange,
+			@RequestParam  @DateTimeFormat(pattern = "yyyy-MM-dd") Date[] datesRange 
+			){//The names must be equals at the path param and Java param
+		//U can pass those who is in the file of the URL calls 
+		int eventTypesMissing = 0;
+		entitiesService.test1();
+		
+		//comment from the filter : Note to pass the date at the edge of the day (start and end) in hours aspect, for not miss things.  
+		//But maybe u can tell it in the query (that betwenn include the day but apparently it's not looking on the 
+		//day but on the hour. SO u need to define "to" with 59. Or that the hours doesn't includes, but I thing that does . Let's look  -
+		//TODO - Answer - currently it's take the hour of the creating time - so when U will work on the creating, 
+		// U will define it to be at 23:59. Or maybe the accurate hour. - TODO in the future. 
+		
+		
+		
+		//convert eventTypes to List of MultiValues 
+		Map <String, List<String> > eventTypeValues = new TreeMap<String, List<String>>();
+		if(eventTypes.size()<1){//TODO - that's one direction - with adding global value. This value will be need to assign to all event so it is not so good.
+////			eventTypeParams.add(null);	
+			eventTypes.add("all");
+			eventTypesMissing = 1;
+//			
+		}
+		eventTypeValues.put("eventType" , eventTypes);
+		Set<MultiPropValue> eventTypeMap = entitiesService.generateMultiValuesList(eventTypeValues);//TODO future - why it's return set ? is the filter get it ? 
+		System.out.println(eventTypeMap );
+		//Convert Set to List Prepare the values to MultiPropValue List - for pass to the filter
+		List<MultiPropValue> eventTypeParams = new ArrayList<>(eventTypeMap);
+		//checking if it empty 
+		if(eventTypes.size()<1){
+//			eventTypeParams.add(null);	
+			MultiPropValue m = new MultiPropValue("xx", "xxx");
+			eventTypeParams.add(null);
+//			eventTypeParams = null;
+			
+		}
+		
+		//convert areas to List of MultiValues 
+		Map <String, List<String> > areaValues = new TreeMap<String, List<String>>();
+		areaValues.put("area" , areas);
+		Set<MultiPropValue> areaMap = entitiesService.generateMultiValuesList(areaValues);//TODO future - why it's return set ? is the filter get it ? 
+		System.out.println(areaMap );
+		System.out.println("Original area = "+ areas + " size? " + areas.size());
+		
+		List<MultiPropValue> areaParams = new ArrayList<>(areaMap);
+		System.out.println("area.size ? " +areas.size() );
+
+		if(areas.size()<1){
+			//areaParams.add("");
+			System.out.println("make params null" );
+//					areaParams = null;
+			areaParams.add(null);
+			
+//					System.out.println("make params with flag" );
+//
+//					areaParams.add("all");
+
+		}
+		
+		//convert jewLvlKeeps to List of MultiValues 
+		Map <String, List<String> > jewLvlKeepValues = new TreeMap<String, List<String>>();
+		jewLvlKeepValues.put("jewLvlKeep" , jewLvlKeep);
+		Set<MultiPropValue> jewLvlKeepMap = entitiesService.generateMultiValuesList(jewLvlKeepValues);//TODO future - why it's return set ? is the filter get it ? 
+		System.out.println(jewLvlKeepMap );
+		List<MultiPropValue> jewLvlKeepParams = new ArrayList<>(eventTypeMap);
+		//checking if it empty 
+		if(jewLvlKeep.size()<1){
+			jewLvlKeepParams.add(null);	
+		}
+		
+		
+		
+		System.out.println("eventTypeParams before sending = " + eventTypeParams);
+		
+		System.out.println("jewLvl before sending = " + jewLvlKeepParams);
+
+		
+		System.out.println("areaParams before sending " +areaParams );
+		
+		/*
+		 * TODO
+		 * 1- Make handling to eventTypes and Areas and JewLvl
+		 * 2- Make excepted logs : 
+		 * Getting filter query : 
+		 * Event type: the list
+		 * Jew Level Keeping: The list
+		 * Areas: The list 
+		 * From To ages : 1 to 120
+		 * From date : ...
+		 * To date : 
+		 * 
+		 * The Results : with display short. 
+		 * 
+		 * U NEED TO TEST ALL THIS 
+		 * 
+		 */
+		 /*TODO FUTUTRE -  make handling empty values by the query. See the doc that saved. at archive - empty-values-query*/
+		
+		
+		System.out.println("eventTypesMissing ?  " + eventTypesMissing);
+		System.out.println("The filter:");
+		List <SocialEvent> resultEvents = entitiesService.socialEventRepository.filter17Try(
+				eventTypeParams,
+				areaParams,
+				jewLvlKeepParams,				
+				agesRange[0], agesRange[1],
+				datesRange[0], datesRange[1],
+				eventTypesMissing);
+		System.out.println("resultEvents  = \n" +  resultEvents);//U made socialEventRepo public maybe it's not right. Do something else . 
+		
+		entitiesService.displayEventsShort(resultEvents);
+		return resultEvents;
+		/*
+		 * List<SocialEvent> filter16Main(
+			List <MultiPropValue> eventTypes,
+			List <MultiPropValue> areas, List <MultiPropValue> jewLvlKeep,
+			int fromAge, int toAge,
+			Date from , Date to);
+		 */
+	}
+
+	
+	
 	@RequestMapping("/simpleString")//passing arrays - https://medium.com/@AADota/spring-passing-list-and-array-of-values-as-url-parameters-1ed9bbdf0cb2
 	public String testPathParams(@RequestParam 
 			@PathParam("x")  String x){

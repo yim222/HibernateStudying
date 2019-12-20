@@ -2,14 +2,14 @@
 URL's For the url :http://localhost:8080/ws/filter-try1
 
 path with empty values 
-eventType=מפגש+&eventType=ערב+משחקים&jewLvlKeep=רוצים+לשמור+שבת&area=&agesRange=0&agesRange=120&datesRange=2019-12-03&datesRange=2019-12-27
+eventTypes=מפגש+&eventTypes=ערב+משחקים&jewLvlKeep=רוצים+לשמור+שבת&areas=&agesRange=0&agesRange=120&datesRange=2019-12-03&datesRange=2019-12-27
 
 
 path with all values : (if u want that it won't generate converted string - copy without the URL )
-http://localhost:3006/filter?eventType=%D7%A9%D7%99%D7%A2%D7%95%D7%A8+%D7%AA%D7%95%D7%A8%D7%94&eventType=%D7%9E%D7%A4%D7%92%D7%A9+&jewLvlKeep=%D7%A8%D7%95%D7%A6%D7%99%D7%9D+%D7%9C%D7%A9%D7%9E%D7%95%D7%A8+%D7%A9%D7%91%D7%AA&area=%D7%94%D7%A6%D7%A4%D7%95%D7%9F+%D7%94%D7%A8%D7%97%D7%95%D7%A7&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2019-12-07
+http://localhost:3006/filter?eventTypes=%D7%A9%D7%99%D7%A2%D7%95%D7%A8+%D7%AA%D7%95%D7%A8%D7%94&eventTypes=%D7%9E%D7%A4%D7%92%D7%A9+&jewLvlKeep=%D7%A8%D7%95%D7%A6%D7%99%D7%9D+%D7%9C%D7%A9%D7%9E%D7%95%D7%A8+%D7%A9%D7%91%D7%AA&areas=%D7%94%D7%A6%D7%A4%D7%95%D7%9F+%D7%94%D7%A8%D7%97%D7%95%D7%A7&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2019-12-07
 
 
-eventType=שיעור+תורה&eventType=מפגש+&jewLvlKeep=רוצים+לשמור+שבת&area=הצפון+הרחוק&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange
+eventTypes=שיעור+תורה&eventTypes=מפגש+&jewLvlKeep=רוצים+לשמור+שבת&areas=הצפון+הרחוק&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange
 
 all events : 
 42	2020-06-26 22:24:22	24	1	Mock-1	30	60	0
@@ -24,70 +24,95 @@ all events :
 							
 							
 Good query - 1
-http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=games&jewLvlKeep=shabbat&area=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+http://localhost:8080/ws/filter-try1?eventTypes=meeting&eventTypes=games&jewLvlKeep=shabbat&areas=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
 
-Query with empty area 
+Query with empty areas 
 
-http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=vaacation&eventType=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&area=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+http://localhost:8080/ws/filter-try1?eventTypes=meeting&eventTypes=vaacation&eventTypes=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&areas=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
 
 
-Query with empy eventType:(Not working ) 
+Query with empy eventTypes:(Not working ) 
 
 from the client request
 
-http://localhost:8080/ws/filter-try1??eventType=&jewLvlKeep=פחות+רוצים+לשמור+שבת&area=המרכז&agesRange=0&agesRange=120&datesRange=2019-12-18&datesRange=2020-11-03
+http://localhost:8080/ws/filter-try1??eventTypes=&jewLvlKeep=פחות+רוצים+לשמור+שבת&areas=המרכז&agesRange=0&agesRange=120&datesRange=2019-12-18&datesRange=2020-11-03
 
 
-http://localhost:8080/ws/filter-try1?eventType=&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&area=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+http://localhost:8080/ws/filter-try1?eventTypes=&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&areas=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
 
 
 ***draft 
 When u want to copy the params, and there is an engilsh - (at the url) copy it not from start - like that : 
 							
-eventType=meeting&eventType=games&jewLvlKeep=shabbat&area=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+eventTypes=meeting&eventTypes=games&jewLvlKeep=shabbat&areas=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
 
 This working well
-http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=games&jewLvlKeep=shabbat&area=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+http://localhost:8080/ws/filter-try1?eventTypes=meeting&eventTypes=games&jewLvlKeep=shabbat&areas=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
 
 
 that's get two events 
 
-http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&area=north&area=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+http://localhost:8080/ws/filter-try1?eventTypes=meeting&eventTypes=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&areas=north&areas=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
 
 let's get one more 
 
 
-http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=vaacation&eventType=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&area=north&area=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+http://localhost:8080/ws/filter-try1?eventTypes=meeting&eventTypes=vaacation&eventTypes=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&areas=north&areas=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
 
 
-Let's check with area empty 
+Let's check with areas empty 
 
 
 
-http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=vaacation&eventType=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&area=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+http://localhost:8080/ws/filter-try1?eventTypes=meeting&eventTypes=vaacation&eventTypes=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&areas=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
 
 Happen an error because the inner working U are doing. 
 
 
 
-http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&area=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+http://localhost:8080/ws/filter-try1?eventTypes=meeting&eventTypes=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&areas=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
 
 
 
 //this only with vaacation
 
-http://localhost:8080/ws/filter-try1?eventType=vaacation&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&area=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+http://localhost:8080/ws/filter-try1?eventTypes=vaacation&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&areas=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
 
 
 
 
 more empty mayb corrupted. generate goods
 
-http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=games&jewLvlKeep=&area=north&area=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+http://localhost:8080/ws/filter-try1?eventTypes=meeting&eventTypes=games&jewLvlKeep=&areas=north&areas=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
 
-http://localhost:8080/ws/filter-try1?area=&eventType=meeting&eventType=vaacation&eventType=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
-
-
+http://localhost:8080/ws/filter-try1?areas=&eventTypes=meeting&eventTypes=vaacation&eventTypes=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
 
 
-http://localhost:8080/ws/filter-try1??eventType=&jewLvlKeep=פחות+רוצים+לשמור+שבת&area=המרכז&agesRange=0&agesRange=120&datesRange=2019-12-18&datesRange=2020-11-03
+
+
+http://localhost:8080/ws/filter-try1??eventTypes=&jewLvlKeep=פחות+רוצים+לשמור+שבת&areas=המרכז&agesRange=0&agesRange=120&datesRange=2019-12-18&datesRange=2020-11-03
+
+
+FILTER 2
+							
+Good query - 1
+http://localhost:8080/ws/filter-try2?eventTypes=meeting&eventTypes=games&jewLvlKeep=shabbat&areas=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+
+Query with empty areas 
+
+http://localhost:8080/ws/filter-try2?eventTypes=meeting&eventTypes=vaacation&eventTypes=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&areas=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+
+
+Query with empy eventTypes:(Not working ) 
+
+from the client request
+
+http://localhost:8080/ws/filter-try2?eventTypes=&jewLvlKeep=פחות+רוצים+לשמור+שבת&areas=המרכז&agesRange=0&agesRange=120&datesRange=2019-12-18&datesRange=2020-11-03
+
+
+http://localhost:8080/ws/filter-try2?eventTypes=&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&areas=&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08
+
+
+More one from the client request
+
+?eventTypes=&jewLvlKeep=פחות+רוצים+לשמור+שבת&areas=המרכז&agesRange=0&agesRange=120&datesRange=2019-12-01&datesRange=2019-12-27
