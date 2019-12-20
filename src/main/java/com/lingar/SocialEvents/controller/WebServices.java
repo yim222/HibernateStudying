@@ -246,7 +246,7 @@ public class WebServices {
 		
 		
 		
-		//convert eventTypes to List of MultiValues 
+		//convert eventTypes to List of MultiValues lingar work here
 		Map <String, List<String> > eventTypeValues = new TreeMap<String, List<String>>();
 		if(eventTypes.size()<1){//TODO - that's one direction - with adding global value. This value will be need to assign to all event so it is not so good.
 ////			eventTypeParams.add(null);	
@@ -259,14 +259,14 @@ public class WebServices {
 		System.out.println(eventTypeMap );
 		//Convert Set to List Prepare the values to MultiPropValue List - for pass to the filter
 		List<MultiPropValue> eventTypeParams = new ArrayList<>(eventTypeMap);
-		//checking if it empty 
-		if(eventTypes.size()<1){
-//			eventTypeParams.add(null);	
-			MultiPropValue m = new MultiPropValue("xx", "xxx");
-			eventTypeParams.add(null);
-//			eventTypeParams = null;
-			
-		}
+		//checking if it empty handling with null... Not suppose to affect but... 
+//		if(eventTypes.size()<1){
+////			eventTypeParams.add(null);	
+//			MultiPropValue m = new MultiPropValue("xx", "xxx");
+//			eventTypeParams.add(null);
+////			eventTypeParams = null;
+//			
+//		}
 		
 		//convert areas to List of MultiValues 
 		Map <String, List<String> > areaValues = new TreeMap<String, List<String>>();
