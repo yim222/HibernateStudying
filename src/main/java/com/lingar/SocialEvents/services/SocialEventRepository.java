@@ -75,19 +75,22 @@ public interface SocialEventRepository extends PagingAndSortingRepository<Social
 			+ "join e.multiPropsValuesSet m "
 			+ "join e.multiPropsValuesSet c "
 			+ "join e.multiPropsValuesSet a "
-			+ "WHERE (  ((?8) = 0) "
+//			+ "WHERE ( "			
+			+ "WHERE (  ((?8) = 0) "// -->check it
 //			+ "WHERE ( ( (?8) = 1  ) "
 //			+ "WHERE ( ( ?8 like 1   OR m in ?1) "//(COALESCE( ?1, NULL) is null  OR   m in ?1) And
 //			+"e IS NOT NULL AND"//trying to add condition - NOT HELP
 //			+ "(    OR m in ?1)" // -X
 //			+ "( ?8 like 1   OR m in ?1)"// - X
-//			+ "( ?8 = 1   OR m in ?1)"// - X
-			+" AND "	
-			+ "(COALESCE( ?1, NULL) is null  OR   m in ?1)"		//Prblem - this don't working but the other 
+//			+ "( (?8) = 0 OR m in ?1) "// - X
+//			+" AND "	
+//			+ "(COALESCE( ?1, NULL) is null  OR   m in ?1)"		//Problem - this don't working but the other 
 //			+ "((COALESCE( ?1, null) is null  OR   m in ?2))AND"		
 //			+"  (COALESCE(?1) is null  OR m in ?1 )"//won't working too 
 //			+ " AND   c in ?2 "//the good - if the parameter empty throw 500.. and about the gap 
-			+" AND "
+
+			+" AND m in ?1 "
+			+ " AND "
 //			+ " ?1 EXISTS"
 			+ " (COALESCE(?2, NULL) is null  OR c in ?2 ) "//work
 //			+" AND   c in ?2 ) "//
@@ -105,6 +108,36 @@ public interface SocialEventRepository extends PagingAndSortingRepository<Social
 			List <MultiPropValue> areas, List <MultiPropValue> jewLvlKeep,
 			int fromAge, int toAge,
 			Date from , Date to, int eventTypesMissing);
+
+	
+	
+	
+	
+	//Filter 18 - trying to reorganize the query 
+	@Query(value =  " SELECT DISTINCT e from SocialEvent e "
+			+ " join e.multiPropsValuesSet m "
+			+ " join e.multiPropsValuesSet c "
+			+ " join e.multiPropsValuesSet a "
+			+ "WHERE ( (COALESCE(?1, NULL) is null  OR m in ?1 ) "//Condition 1
+			+" AND "
+			+ " (COALESCE(?2, NULL) is null  OR c in ?2 ) "//Condition 2
+			+ "AND  "
+			+ "(COALESCE(?3, NULL) is null  OR a in ?3 ) "//Condition 3			
+			+ "AND " 
+			+ " ( "//Condition 4 start 
+			+ "(e.fromAge BETWEEN ?4 AND ?5) " 
+			+ "OR"
+			+ " (e.toAge BETWEEN ?4 AND ?5) "
+			+ " ) "//Condition 4 end 			
+//			+ "OR (?4 BETWEEN e.fromAge AND e.toAge ) )" //seems unnecessary  but check it 
+			+ "AND (e.date BETWEEN ?6 AND ?7) "// condition 5 
+			+ " ) "//End of the whole query 
+			+ " ORDER BY e.date ASC " )//--- work ? 
+	List<SocialEvent> filter18Try(
+			List <MultiPropValue> eventTypes,
+			List <MultiPropValue> areas, List <MultiPropValue> jewLvlKeep,
+			int fromAge, int toAge,
+			Date from , Date to);
 
 	
 	

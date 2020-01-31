@@ -33,3 +33,12 @@ For make my tutorial running :
 
 
 See at the main running class about that 
+
+
+****
+
+
+About the creation and the running of the server : 
+
+*** important -  from data loader U can avoid all the creating – I comment it – search for lingar at the code. U need to change the app.prop
+accordingly d

@@ -116,3 +116,9 @@ http://localhost:8080/ws/filter-try2?eventTypes=&jewLvlKeep=shabbat&jewLvlKeep=n
 More one from the client request
 
 ?eventTypes=&jewLvlKeep=פחות+רוצים+לשמור+שבת&areas=המרכז&agesRange=0&agesRange=120&datesRange=2019-12-01&datesRange=2019-12-27
+
+
+
+filter 3 
+
+http://localhost:8080/ws/filter-try3?eventType=meeting&eventType=vaacation&eventType=games&jewLvlKeep=shabbat&jewLvlKeep=noShabbat&area=north&area=south&agesRange=0&agesRange=120&datesRange=2019-12-07&datesRange=2020-09-08

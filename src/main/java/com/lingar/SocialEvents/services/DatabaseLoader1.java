@@ -51,11 +51,11 @@ public class DatabaseLoader1 implements CommandLineRunner {
 			entitiesService.createInitialData();
 		}
 		*/
-		entitiesService.createInitialData();
-		
+//		entitiesService.createInitialData(); // lingarImportant - Comment this and make app.props - update - for not creating again and again each time 
+		//lingarImportant - from here U define what methods of EntityService will Run. 
 		//comment - if u want
-		System.out.println("Stop the running for now... dataloader");
-		entitiesService.create10EventsMock();
+		System.out.println("// lingar - Comment this and make app.props - update - for not creating again and again each time - see dataLoader");
+//		entitiesService.create10EventsMock();
 		entitiesService.displayEventsShort((List<SocialEvent>)socialEventRepository.findAll());
 		//entitiesService.draftTrying();
 		//entitiesService.tryingFilter();
