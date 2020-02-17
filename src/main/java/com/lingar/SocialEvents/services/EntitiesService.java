@@ -1238,4 +1238,240 @@ public class EntitiesService {
 		if(true)return;
 		
 	}
+	
+	public void testOfBugs(){
+		System.out.println("This is new testing for the problem of the not refer to jewLvl.. need to do.");
+
+		System.out.println("*******************TRYING filter 2 *****************************");
+		List<SocialEvent> allEvents = (List<SocialEvent>)socialEventRepository.findAll();
+		
+		
+		//get the initial Multi props as 3 maps
+		//copy the lists and pass them as Map
+		
+		//on event type : 
+		List<String> work = MULTI_PROPS_VALUES.get("eventType");
+		Map<String, List<String>> mapWork = new TreeMap<>();
+		mapWork.put("eventType", work);
+		List<MultiPropValue> eventTypeInitial = new ArrayList<>(generateMultiValuesList(mapWork));
+		
+		//on jewLvlKeep: 
+		 work = MULTI_PROPS_VALUES.get("jewLvlKeep");
+		mapWork = new TreeMap<>();
+		mapWork.put("jewLvlKeep", work);
+		List<MultiPropValue> jewLvlKeepInitial =  new ArrayList<>(generateMultiValuesList(mapWork));
+		
+		//on area: 
+		 work = MULTI_PROPS_VALUES.get("area");
+		mapWork = new TreeMap<>();
+		mapWork.put("area", work);
+		List<MultiPropValue> areaInitial =  new ArrayList<>(generateMultiValuesList(mapWork));
+		
+		System.out.println("The initial Lists : \nEvent type =  " + eventTypeInitial  
+				+ "\nJew Level Keep -  " + jewLvlKeepInitial 
+				+"\nAreas - " + areaInitial);
+		
+		//generate 3 list to work with and they can get initials always : 
+		List <MultiPropValue> eventTypes, jewLvls, areas;
+		List <SocialEvent> resultEvents;
+		
+	
+		
+		
+		//START TEST 4
+		//Those steps need to be done in each test . 
+		System.out.println("Test 4 NOW with JewLvlKeep :  same as before but filter also by jew Level keep");
+		eventTypes = new ArrayList<>(eventTypeInitial); jewLvls = new ArrayList<>(jewLvlKeepInitial); areas= new ArrayList<>(areaInitial);
+		
+		//eventType = [meeting, vaacation, speedate, games]
+		//jewLvlKeep = [shabbat, noShabbat]
+		//area = [jerusalem, north, south, center]
+
+		System.out.println("all events : \n" );
+		displayEventsShort(allEvents);
+		eventTypes.remove(2);//eventTypes.remove(0);
+		areas.remove(3);areas.remove(0);//areas.remove(0);
+		jewLvls.remove(0);
+		
+		
+		
+		
+		
+		int from = 55; int to = 70;
+		
+		
+		System.out.println("TRYING to choose the with overlap range of  " + from + " to " + to);
+		resultEvents = socialEventRepository.filter14(from, to);
+		displayEventsShort(resultEvents);
+		
+		//creating dates to test
+		Date fromDate = new Date();
+		Date toDate = new Date ();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(2019, 5, 18, 0, 0);//--> from date 
+		fromDate = cal.getTime();
+		
+		cal.set(2019, 11, 26, 23, 40);//--> to date 
+		toDate = cal.getTime();
+		
+		
+		
+		
+		//START TEST  4
+		//Those steps need to be done in each test . 
+		System.out.println("Test last now I am tryng to filter with all together . .  ");
+		//define list of string with names 
+//		List <String >work2 = new ArrayList<String>();
+//		
+//		//eventType
+//		work2.add("meeting");
+//		work2.add("games");
+//
+//		mapWork = new TreeMap<>();
+//		mapWork.put("eventType", work2);
+//		List<MultiPropValue> eventTypeTest =  new ArrayList<>(generateMultiValuesList(mapWork));
+//		
+//		
+//		//keep level
+//		work2 = new ArrayList<String>();//reset teh values
+////		work2.add("shabbat");
+//		work2.add("noShabbat");
+//
+//		mapWork = new TreeMap<>();
+//		mapWork.put("jewLvlKeep", work2);
+//		List<MultiPropValue> jewLvlKeepTest =  new ArrayList<>(generateMultiValuesList(mapWork));
+//		
+//		//area
+//		work2 = new ArrayList<String>();
+//		work2.add("south");
+////		work2.add("noShabbat");
+//
+//		mapWork = new TreeMap<>();
+//		mapWork.put("area", work2);
+//		List<MultiPropValue> areaTest =  new ArrayList<>(generateMultiValuesList(mapWork));
+//		
+//		eventTypes = new ArrayList<>(eventTypeTest); jewLvls = new ArrayList<>(jewLvlKeepTest); areas= new ArrayList<>(areaTest);
+//		
+//		//eventType = [meeting, vaacation, speedate, games]
+//		//jewLvlKeep = [shabbat, noShabbat]
+//		//area = [jerusalem, north, south, center]
+//
+//		
+//		
+//		int fromAge = 3 ; int toAge = 120;
+//		cal.set(2016, 1, 18, 0, 0);//--> from date 
+//		fromDate = cal.getTime();
+//		
+//		cal.set(2022, 11, 26, 23, 40);//--> to date 
+//		toDate = cal.getTime();
+//		
+//
+//		System.out.println("cal ? + \n" + cal.get(1));
+//		cal =Calendar .getInstance();
+//		cal.set(Calendar.HOUR_OF_DAY, 0);
+//		cal.set(Calendar.MINUTE, 0);
+//		Date currentDate = cal.getTime();
+//		resultEvents = socialEventRepository.findByDateGreaterThanEqualOrderByDateAsc(currentDate);
+//		displayEventsShort(resultEvents);
+		
+		/*
+		 * http://localhost:8080/ws/filter-try1?eventType=meeting&eventType=games&jewLvlKeep=noShabbat&area=south&agesRange=2&agesRange=120&datesRange=2018-12-07&datesRange=2025-09-08
+		 */
+		System.out.println("****************************LAST AND ACCURATE TEST :(filter 16 main) \n***************************");//workhere
+		
+		List <String >work2 = new ArrayList<String>();
+		
+		//eventType
+		work2.add("meeting");
+		work2.add("games");
+
+		mapWork = new TreeMap<>();
+		mapWork.put("eventType", work2);
+		List<MultiPropValue> eventTypeTest =  new ArrayList<>(generateMultiValuesList(mapWork));
+		
+		
+		//keep level
+		work2 = new ArrayList<String>();//reset teh values
+//		work2.add("shabbat");
+		work2.add("noShabbat");
+		
+
+		mapWork = new TreeMap<>();
+		mapWork.put("jewLvlKeep", work2);
+		List<MultiPropValue> jewLvlKeepTest =  new ArrayList<>(generateMultiValuesList(mapWork));
+		
+		//area
+		work2 = new ArrayList<String>();
+		work2.add("south3");
+//		work2.add("noShabbat");
+
+		mapWork = new TreeMap<>();
+		mapWork.put("area", work2);
+		List<MultiPropValue> areaTest =  new ArrayList<>(generateMultiValuesList(mapWork));
+		
+		eventTypes = new ArrayList<>(eventTypeTest); jewLvls = new ArrayList<>(jewLvlKeepTest); areas= new ArrayList<>(areaTest);
+		
+		//eventType = [meeting, vaacation, speedate, games]
+		//jewLvlKeep = [shabbat, noShabbat]
+		//area = [jerusalem, north, south, center]
+
+		
+		
+		int fromAge = 3 ; int toAge = 120;
+		cal.set(2016, 1, 18, 0, 0);//--> from date 
+		fromDate = cal.getTime();
+		
+		cal.set(2022, 11, 26, 23, 40);//--> to date 
+		toDate = cal.getTime();
+		
+
+		System.out.println("cal ? + \n" + cal.get(1));
+		cal =Calendar .getInstance();
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		
+		System.out.println("Filter last lingar  with those types : \n"  + eventTypes +  " \nand those areas : \n" + areas
+				+  "\n and those jew level  : \n" + jewLvls 
+				+ "\n within this range : " + fromAge + " to " + toAge
+				+"\n in the dates : " + fromDate + " to " + toDate);
+		resultEvents = socialEventRepository.filter16Main(eventTypes, areas, jewLvls, fromAge, toAge, fromDate, toDate);
+		System.out.println("Events : ");
+		displayEventsShort(resultEvents);
+/*
+		
+		System.out.println("Then with all : (ages and dates  ) ");
+		resultEvents = socialEventRepository.filter16Main(eventTypes, areas, jewLvls, fromAge, toAge, fromDate, toDate);
+		displayEventsShort(resultEvents);
+		System.out.println("resultEvents = " + resultEvents);
+//		System.out.println("resultEvents = " + resultEvents);
+
+		///END TEST
+		System.out.println("lingar test temp ");
+//		System.out.println(socialEventRepository.tryQuery2("eventName", 51));
+		
+		System.out.println("Like Test last above just now areas will be null   ");
+//		eventTypes = new ArrayList<>(eventTypeInitial); jewLvls = new ArrayList<>(jewLvlKeepInitial); areas= new ArrayList<>(areaInitial);
+		resultEvents = socialEventRepository.filter16Main(eventTypes, null, jewLvls, fromAge, toAge, fromDate, toDate);
+		displayEventsShort(resultEvents);
+		System.out.println("resultEvents = " + resultEvents);
+		
+		
+		//Demonstration of the problem :
+		System.out.println("This will work: ");
+		List <SocialEvent>  resultEvents2 = socialEventRepository.filter16Main(eventTypes, null, jewLvls, fromAge, toAge, fromDate, toDate);
+		System.out.println("resultEvents2 = " + resultEvents2);
+
+		System.out.println("This shouldn't work, but does work: ");//When I do on web service - it's generate error 
+		resultEvents2 = socialEventRepository.filter16Main(null, areas, jewLvls, fromAge, toAge, fromDate, toDate);
+		System.out.println("resultEvents2 = " + resultEvents2);
+*/
+		
+
+
+		
+		if(true)return;
+		
+	}
+
 }

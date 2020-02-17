@@ -170,7 +170,8 @@ public class WebServices {
 		jewLvlKeepValues.put("jewLvlKeep" , jewLvlKeep);
 		Set<MultiPropValue> jewLvlKeepMap = entitiesService.generateMultiValuesList(jewLvlKeepValues);//TODO future - why it's return set ? is the filter get it ? 
 		System.out.println(jewLvlKeepMap );
-		List<MultiPropValue> jewLvlKeepParams = new ArrayList<>(eventTypeMap);
+//		List<MultiPropValue> jewLvlKeepParams = new ArrayList<>(eventTypeMap);//this was the mistake. With simple log U can find it
+		List<MultiPropValue> jewLvlKeepParams = new ArrayList<>(jewLvlKeepMap);
 		//checking if it empty 
 		if(jewLvlKeep.size()<1){
 			jewLvlKeepParams.add(null);	
@@ -179,6 +180,9 @@ public class WebServices {
 		
 		
 		System.out.println("eventTypeParams before sending = " + eventTypeParams);
+		
+		System.out.println("Keeplvl before sending = " + jewLvlKeepParams);
+
 		
 		
 		

@@ -60,7 +60,8 @@ public class DatabaseLoader1 implements CommandLineRunner {
 		//entitiesService.draftTrying();
 		//entitiesService.tryingFilter();
 		//entitiesService.tryingFilter2();//u here
-		entitiesService.cleanTestFilter();
+//		entitiesService.cleanTestFilter();
+		entitiesService.testOfBugs();
 		
 		
 		if(true)return;//Stop the running - comment it if u want to ignore it
