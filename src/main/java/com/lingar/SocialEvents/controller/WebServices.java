@@ -12,10 +12,15 @@ import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lingar.SocialEvents.dataObjects.SocialEventData;
+import com.lingar.SocialEvents.dataObjects.TestData;
 import com.lingar.SocialEvents.entities.MultiPropValue;
 import com.lingar.SocialEvents.entities.SocialEvent;
 import com.lingar.SocialEvents.services.EntitiesService;
@@ -111,7 +116,6 @@ public class WebServices {
 			@RequestParam  @DateTimeFormat(pattern = "yyyy-MM-dd") Date[] datesRange 
 			){//The names must be equals at the path param and Java param
 		//U can pass those who is in the file of the URL calls 
-		
 		entitiesService.test1();
 		
 		//comment from the filter : Note to pass the date at the edge of the day (start and end) in hours aspect, for not miss things.  
@@ -424,6 +428,48 @@ public class WebServices {
 		
 		entitiesService.displayEventsShort(resultEvents);
 		return resultEvents;		
+	}
+	/**
+	 * OLD
+	 * @param str
+	 * @return
+	 */
+	@RequestMapping(value = "/createSocialEventold1", method = RequestMethod.POST,
+			consumes = MediaType.TEXT_PLAIN_VALUE)
+	public boolean createSocialEventOld1(@RequestBody String str){
+		System.out.println("Data = " + str);
+		
+		return true;
+	}
+	
+	
+	@RequestMapping(value = "/createSocialEvent", method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
+			 )
+	public boolean createSocialEvent(@RequestBody SocialEventData data){//was List<String>
+		System.out.println("Data = " + data);
+		System.out.println(data.getMultiValues().get("eventType"));
+//		System.out.println(data.get("c"));
+		
+		//entitiesService.createSocialEvent(data.getSingleValues(), data.getMultiValues(), data.getComment());
+		entitiesService.createSocialEvent(data.getSingleValues(), data.getMultiValues() , data.getComment(), data.getDate(),
+				data.getTime(), data.getAgesRange());
+
+		
+		
+		return true;
+	}
+	
+	@RequestMapping(value = "/testPost", method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
+			 )
+	public boolean testPost(@RequestBody TestData data){
+		System.out.println("Data = " + data);
+		System.out.println("Data nested  = " + data.getMyvalues().get("key1") ) ;
+		
+		
+		
+		return true;
 	}
 	
 	

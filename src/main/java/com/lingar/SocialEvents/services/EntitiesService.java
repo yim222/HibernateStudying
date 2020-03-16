@@ -322,7 +322,8 @@ public class EntitiesService {
 	public void createSocialEvent(Map<String, String> singleValues,
 			Map<String, List<String>> multiValues,
 			String comment, 
-			Date date, int[] time,
+			Date date, 
+			int[] time,
 			int[] agesRange){
 		
 		List<SinglePropValue> singlePropValues = generateSingleValuesList(singleValues);

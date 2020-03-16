@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
+/*
+ * TODO in the future - Should be with Enums of strings (but U had constraints I think so check it ) 
+ */
 public class DataConstants {
 	//List of the contant properties
 	public static final String[] SINGLE_PROPS_VALUES = {

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-@Data
+@Data//Of lombok
 @Entity
 //@Embeddable
 @Table(name = "multi_props_names")
