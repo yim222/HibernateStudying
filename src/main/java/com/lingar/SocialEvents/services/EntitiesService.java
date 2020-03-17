@@ -330,6 +330,7 @@ public class EntitiesService {
 		Set<MultiPropValue> multiPropValues = generateMultiValuesList( multiValues);
 
 		SocialEvent socialEvent = new SocialEvent();
+		System.out.println("Test lingar- " + singlePropValues);
 		socialEvent.setSinglePropsValuesList(singlePropValues);
 		socialEvent.setMultiPropsValuesSet(multiPropValues);
 		socialEvent.setLingarComment(comment);
