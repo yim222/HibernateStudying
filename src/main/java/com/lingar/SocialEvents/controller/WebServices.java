@@ -13,6 +13,7 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +32,7 @@ import com.lingar.SocialEvents.services.SocialEventRepository;
  *
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/ws")
 public class WebServices {
 	
@@ -45,13 +47,24 @@ public class WebServices {
 	//http://localhost:8080/ws/getEvents
 	//Get all events that greater or equal then today  
 	public List<SocialEvent> getEvents(){
-		
+		System.out.println("Get events greater then today");
 		Date date;
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.HOUR_OF_DAY, 0);//set time to 00:00 - the day beginning
 		cal.set(Calendar.MINUTE, 0);
 		date = cal.getTime();
-		List<SocialEvent> events = socialEventRepo.findByDateGreaterThanEqualOrderByDateAsc(date);
+		List<SocialEvent> events; //= socialEventRepo.findByDateGreaterThanEqualOrderByDateAsc(date);
+
+
+		try {
+			events = socialEventRepo.findByDateGreaterThanEqualOrderByDateAsc(date);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("There is error getevents - " + e.getMessage());
+			return null;
+		}
+		System.out.println("Events = ");
+		entitiesService.displayEventsShort(events);
 
 		return events;
 	}
@@ -120,7 +133,7 @@ public class WebServices {
 		
 		//comment from the filter : Note to pass the date at the edge of the day (start and end) in hours aspect, for not miss things.  
 		//But maybe u can tell it in the query (that betwenn include the day but apparently it's not looking on the 
-		//day but on the hour. SO u need to define "to" with 59. Or that the hours doesn't includes, but I thing that does . Let's look  -
+		//day but on the hour. SO u need to define "to" with 59. Or that the hours doesn't includes, but I think that does . Let's look  -
 		//TODO - Answer - currently it's take the hour of the creating time - so when U will work on the creating, 
 		// U will define it to be at 23:59. Or maybe the accurate hour. - TODO in the future. 
 		

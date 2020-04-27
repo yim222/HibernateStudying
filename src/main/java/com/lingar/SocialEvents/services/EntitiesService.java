@@ -1,6 +1,7 @@
 package com.lingar.SocialEvents.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -325,6 +326,22 @@ public class EntitiesService {
 			Date date, 
 			int[] time,
 			int[] agesRange){
+		int x = 2;
+		Set <String> providedSingleProps = singleValues.keySet();
+
+		List<String> singleRequireProps = Arrays.asList(SINGLE_PROPS_VALUES);
+		System.out.println("Is singles contain all ? " + providedSingleProps.containsAll(singleRequireProps));
+		System.out.println("v = " +  providedSingleProps);
+		
+		Set<String> multiProvidedProps = multiValues.keySet();
+		System.out.println("Multi provided : " + multiProvidedProps);
+		Set<String> multiRequiredProps = MULTI_PROPS_VALUES.keySet();
+		System.out.println("Is muties contain all ? " + multiProvidedProps.containsAll(multiRequiredProps));
+		
+		
+		if(x > 3){
+			throw new IllegalArgumentException("prblem");
+		}
 		
 		List<SinglePropValue> singlePropValues = generateSingleValuesList(singleValues);
 		Set<MultiPropValue> multiPropValues = generateMultiValuesList( multiValues);

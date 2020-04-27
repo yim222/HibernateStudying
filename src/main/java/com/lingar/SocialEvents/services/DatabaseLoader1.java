@@ -51,7 +51,7 @@ public class DatabaseLoader1 implements CommandLineRunner {
 			entitiesService.createInitialData();
 		}
 		*/
-//		entitiesService.createInitialData(); // lingarImportant - Comment this and make app.props - update - for not creating again and again each time 
+		entitiesService.createInitialData(); // lingarImportant - Comment this and make app.props - update - for not creating again and again each time 
 		//lingarImportant - from here U define what methods of EntityService will Run. 
 		//comment - if u want
 		System.out.println("// lingar - Comment this and make app.props - update - for not creating again and again each time - see dataLoader");
