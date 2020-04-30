@@ -83,7 +83,7 @@ public class EntitiesService {
             
             
             //Assign it to the TreeMap
-            singlePropsMapList.put(singlePropName.getPropName(), singlePropName);
+            singlePropsMapList.put(singlePropName.getPropName(), singlePropName); 
             
          }
 		
@@ -108,7 +108,7 @@ public class EntitiesService {
 		    singleValuesList.add(singlePropValue);
 		    
 		    
-		}
+		} 
 		
 		System.out.println("singleValuesList:\n" + singleValuesList);
 		

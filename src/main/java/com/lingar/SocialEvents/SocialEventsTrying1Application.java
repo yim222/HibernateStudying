@@ -14,6 +14,10 @@ import com.lingar.SocialEvents.tutorial.services.TutorialRunning;
 public class SocialEventsTrying1Application {
 
 	public static void main(String[] args) {
+		System.out.println("Don't forget to start up the mysql-server... ");
+		System.out.println("U have some info comment on dataLoader for managing the data creation. Serach for lingarImportant ");
+
+
 		System.out.println("new words22");
 		SpringApplication.run(SocialEventsTrying1Application.class, args);
 		System.out.println("new words3");

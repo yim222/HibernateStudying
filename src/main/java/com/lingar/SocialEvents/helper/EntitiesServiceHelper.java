@@ -37,6 +37,8 @@ public class EntitiesServiceHelper {
 		
 		System.out.println(singleProps);
 		singleValues.put("eventName", "1-Lingar meeting");
+		singleValues.put("isOrganizer", "true");
+
 		singleValues.put("publisherName", "Lingar");
 		singleValues.put("shortDescription", "Bla");
 		singleValues.put("longDescription", "BlaBla Bla");
@@ -102,6 +104,8 @@ public class EntitiesServiceHelper {
 		
 		System.out.println(singleProps);
 		singleValues.put("eventName", "2-Singles Gaming");
+		singleValues.put("isOrganizer", "false");
+
 		singleValues.put("publisherName", "Golan");
 		singleValues.put("shortDescription", "Bla");
 		singleValues.put("longDescription", "BlaBla Bla");
@@ -163,6 +167,8 @@ public class EntitiesServiceHelper {
 		
 		System.out.println(singleProps);
 		singleValues.put("eventName", "2-Dating Journey");
+		singleValues.put("isOrganizer", "true");
+
 		singleValues.put("publisherName", "Devora");
 		singleValues.put("shortDescription", "Bla");
 		singleValues.put("longDescription", "BlaBla Bla");
@@ -223,6 +229,8 @@ public class EntitiesServiceHelper {
 		
 		System.out.println(singleProps);
 		singleValues.put("eventName", "4-Beach Dating");
+		singleValues.put("isOrganizer", "true");
+
 		singleValues.put("publisherName", "Amir");
 		singleValues.put("shortDescription", "Bla");
 		singleValues.put("longDescription", "BlaBla Bla");
@@ -283,6 +291,8 @@ public class EntitiesServiceHelper {
 		
 		System.out.println(singleProps);
 		singleValues.put("eventName", "5-Party");
+		singleValues.put("isOrganizer", "false");
+
 		singleValues.put("publisherName", "sarit");
 		singleValues.put("shortDescription", "Bla");
 		singleValues.put("longDescription", "BlaBla Bla");
@@ -348,6 +358,8 @@ public class EntitiesServiceHelper {
 		
 		System.out.println(singleProps);
 		singleValues.put("eventName", "6-Meyzam ");
+		singleValues.put("isOrganizer", "true");
+
 		singleValues.put("publisherName", "Ehud");
 		singleValues.put("shortDescription", "Bla");
 		singleValues.put("longDescription", "BlaBla Bla");
