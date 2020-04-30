@@ -338,8 +338,13 @@ public class EntitiesService {
 		Set<String> multiRequiredProps = MULTI_PROPS_VALUES.keySet();
 		System.out.println("Is muties contain all ? " + multiProvidedProps.containsAll(multiRequiredProps));
 		
+		//check that all props are exist and data valid 
+		boolean multiPropsValid = multiProvidedProps.containsAll(multiRequiredProps);
+		boolean singlePropsValid = providedSingleProps.containsAll(singleRequireProps);
 		
-		if(x > 3){
+		
+//		if(x > 3){
+		if(!multiPropsValid || !singlePropsValid) {
 			throw new IllegalArgumentException("prblem");
 		}
 		
