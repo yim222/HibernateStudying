@@ -327,15 +327,18 @@ public class EntitiesService {
 			int[] time,
 			int[] agesRange){
 		int x = 2;
+		System.out.println("Create lingar - multies ? " + multiValues);
 		Set <String> providedSingleProps = singleValues.keySet();
 
 		List<String> singleRequireProps = Arrays.asList(SINGLE_PROPS_VALUES);
 		System.out.println("Is singles contain all ? " + providedSingleProps.containsAll(singleRequireProps));
-		System.out.println("v = " +  providedSingleProps);
+		System.out.println("v = " +  providedSingleProps + "required = " + singleRequireProps);
 		
 		Set<String> multiProvidedProps = multiValues.keySet();
-		System.out.println("Multi provided : " + multiProvidedProps);
 		Set<String> multiRequiredProps = MULTI_PROPS_VALUES.keySet();
+		
+		System.out.println("Multi provided : " + multiProvidedProps + "required = " + multiRequiredProps);
+
 		System.out.println("Is muties contain all ? " + multiProvidedProps.containsAll(multiRequiredProps));
 		
 		//check that all props are exist and data valid 
@@ -343,9 +346,10 @@ public class EntitiesService {
 		boolean singlePropsValid = providedSingleProps.containsAll(singleRequireProps);
 		
 		
-//		if(x > 3){
+//		if(x > 3){//validate that all properties exist
 		if(!multiPropsValid || !singlePropsValid) {
 			throw new IllegalArgumentException("prblem");
+//			System.out.println("Should be here error ");
 		}
 		
 		List<SinglePropValue> singlePropValues = generateSingleValuesList(singleValues);
